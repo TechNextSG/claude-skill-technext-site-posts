@@ -108,3 +108,9 @@ Topic", headline = the pain as a question (pain words in `<span class="pain">`, 
 stressed: mood wow, hands on head, sweat) vs WITH ODOO (bright, one clean flow), .lab/.vs/.note at fixed spots.
 Scenario numbers are labelled sample; the fix describes the feature, never a promised result. Done: month-end close,
 stock mismatch, re-typing orders, approvals in chat, finding documents, lost leads (examples/2026-10-08-pain-points).
+
+## Last step: update the repo (owner rule, 2026-10-11)
+Every time this skill is used, and after any lesson or rule is added to it, finish with
+`python ~/ClaudeWork/technext-claude-skills/tools/build_skills.py --push`. It mirrors this folder to its own public repo
+https://github.com/TechNextSG/claude-skill-technext-site-posts and rebuilds https://technextsg.github.io/technext-claude-skills/
+(it only commits what changed). Report the repo commit in the status, or the error if the push failed.
