@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>employee-hub</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+/* 19 · Employee Hub — "Employee sheets and the TechNext 201."
+   Fresh environment: first morning in a bright TechNext reception lobby. An HR teammate hands a new hire her welcome kit
+   while her TechNext ID prints at the front desk and glides up, glowing; her employee information sheet assembles as the
+   fields fly in from the card. The sheet's office row carries the three offices. */
+:root{--acc:#1386A8;--acc-l:#E2F3F8;--acc-d:#0D6683}
+.sheet{position:absolute;z-index:5;left:72px;top:566px;width:452px;background:#fff;border-radius:20px;padding:18px 22px 16px;
+  box-shadow:0 2px 6px rgba(31,31,61,.07),0 24px 48px -22px rgba(31,31,61,.42)}
+.sheet .hd{display:flex;align-items:center;gap:10px;font:800 15px/1 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--label)}
+.sheet .hd img{width:26px;height:26px}
+.sheet .hd small{margin-left:auto;font:600 15px/1 var(--font-body);letter-spacing:0;text-transform:none;color:#9AA0B4}
+.sheet h3{font:800 24px/1.15 var(--font-display);color:var(--ink);margin:12px 0 8px}
+.row{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1.5px solid #EEF1F6}
+.row i{flex:0 0 92px;font:600 15px/1.2 var(--font-body);font-style:normal;color:var(--label)}
+.row b{font:700 18px/1.2 var(--font-display);color:var(--ink)}
+.row.slot b{color:var(--acc-d)}
+.row.slot .gap{flex:0 0 150px;height:28px;border:2px dashed #9ED3E3;border-radius:8px;background:var(--acc-l)}
+.row.col{flex-direction:column;align-items:flex-start;gap:7px}
+.row.col i{flex:none}
+.tags{display:flex;gap:8px;white-space:nowrap}
+.tags span{font:700 15px/1 var(--font-display);padding:6px 9px;border-radius:999px;background:#F1F4F9;color:var(--label)}
+.tags span.on{background:var(--acc);color:#fff}
+.idc{position:absolute;z-index:5;left:706px;top:586px;width:262px;border-radius:20px;background:#fff;overflow:hidden;
+  box-shadow:0 0 0 6px rgba(19,134,168,.14),0 0 70px 10px rgba(19,134,168,.28),0 24px 48px -20px rgba(31,31,61,.45)}
+.idc .band{height:70px;padding-top:0;padding-bottom:10px;background:linear-gradient(135deg,#3167CA,#1386A8);display:flex;align-items:center;justify-content:center}
+.idc .band img{height:26px;filter:brightness(0) invert(1)}
+.idc .ph{width:96px;height:96px;margin:-12px auto 0;border-radius:50%;background:#EAF4F8;border:5px solid #fff;overflow:hidden;position:relative}
+.idc .ph svg{display:block}
+.idc .nm{text-align:center;font:800 23px/1.15 var(--font-display);color:var(--ink);margin-top:10px}
+.idc .rl{text-align:center;font:600 16px/1.3 var(--font-body);color:var(--label);margin-top:3px}
+.idc .no{display:flex;justify-content:space-between;align-items:center;margin:14px 16px 16px;padding-top:12px;border-top:1.5px solid #EEF1F6;font:700 15px/1 var(--font-display);color:var(--acc-d)}
+.idc .no small{font:600 15px/1 var(--font-body);color:#9AA0B4}
+.hole{position:absolute;z-index:6;left:813px;top:590px;width:48px;height:7px;border-radius:4px;background:rgba(10,40,70,.35)}
+.fly{position:absolute;z-index:6;left:534px;top:772px;background:#fff;border-radius:12px;padding:9px 13px;font:700 16px/1.15 var(--font-display);color:var(--ink);
+  box-shadow:0 0 0 3px rgba(19,134,168,.25),0 14px 28px -12px rgba(31,31,61,.45);transform:rotate(-4deg)}
+.fly i{display:block;font:600 15px/1 var(--font-body);font-style:normal;color:var(--label);margin-bottom:4px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip" data-qa="chip"><i><img src="../assets/img/odoo/hr.svg" alt=""></i>Company · <b>Employee Hub</b></div>
+  <h1 class="tp-h" data-qa="headline">Every TechNext person, <em>on file.</em></h1>
+  <p class="tp-sub" data-qa="sub">Employee sheets and the TechNext 201, <b>one ID we all wear.</b></p>
+
+  <div class="sheet" data-qa="sheet">
+    <div class="hd"><img src="../assets/img/odoo/hr.svg" alt="">Employee information sheet<small>sample</small></div>
+    <h3>Mika Reyes</h3>
+    <div class="row"><i>Role</i><b>Odoo consultant</b></div>
+    <div class="row col"><i>Office</i><div class="tags"><span>Singapore</span><span class="on">Taguig City</span><span>Ho Chi Minh City</span></div></div>
+    <div class="row"><i>ID no.</i><b>TN-0419</b></div>
+    <div class="row slot"><i>Start date</i><span class="gap"></span></div>
+  </div>
+
+  <div class="fly" data-qa="fly"><i>Start date</i>Day one</div>
+
+  <div class="idc" data-qa="idcard">
+    <div class="band"><img src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"></div>
+    <div class="ph"><svg viewBox="0 0 96 96" width="86" height="86"><rect width="96" height="96" fill="#EAF4F8"/><ellipse cx="48" cy="100" rx="34" ry="26" fill="#F2B544"/><path d="M23 52 Q23 23 48 22 Q73 23 73 52 L75 86 Q48 92 21 86 Z" fill="#231816"/><ellipse cx="48" cy="52" rx="20" ry="21" fill="#E6B48E"/><path d="M27 48 Q30 26 48 25 Q66 26 69 48 Q60 36 48 36 Q36 36 27 48Z" fill="#231816"/><circle cx="41" cy="54" r="2.4" fill="#1B1F3B"/><circle cx="55" cy="54" r="2.4" fill="#1B1F3B"/><path d="M43 62 Q48 66 53 62" stroke="#8A2B3E" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="nm">Mika Reyes</div>
+    <div class="rl">Odoo consultant · Taguig City</div>
+    <div class="no">TN-0419<small>sample</small></div>
+  </div>
+  <div class="hole" data-qa-skip></div>
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/employee-hub</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var FY = 1150;
+  // bright lobby: pale wall with tall glass entrance on the left, teal wainscot, polished floor
+  H.grad(g, 0, 0, 1080, FY, '#F3F8FB', '#E4EFF5');
+  // glass entrance panels with a garden outside
+  var gw = { x: 0, y: 900, w: 210, h: FY - 900 };
+  g.save(); g.beginPath(); g.rect(gw.x, gw.y, gw.w, gw.h); g.clip(); H.grad(g, gw.x, gw.y, gw.w, gw.h, '#BFE6F5', '#EAF7FC');
+  K.fillE(g, 60, FY - 6, 120, 40, '#9ED6A8'); K.fillE(g, 170, FY - 4, 90, 30, '#8CCB98'); g.restore();
+  g.fillStyle = '#FFFFFF'; g.fillRect(0, 892, 218, 8); g.fillRect(100, 900, 6, FY - 900); g.fillRect(210, 892, 8, FY - 892);
+  g.fillStyle = 'rgba(255,255,255,.45)'; g.beginPath(); g.moveTo(20, FY); g.lineTo(70, 900); g.lineTo(96, 900); g.lineTo(46, FY); g.fill();
+  // wall slats
+  g.fillStyle = 'rgba(19,134,168,.05)'; for (var x = 240; x < 1080; x += 72) g.fillRect(x, 540, 2, FY - 540 - 160);
+  H.grad(g, 218, FY - 160, 862, 160, '#D3E8EF', '#C6DFE8'); g.fillStyle = '#FFFFFF'; g.fillRect(218, FY - 166, 862, 7);
+  H.grad(g, 0, FY, 1080, 1440 - FY, '#EEF4F8', '#D8E4EC');
+  g.strokeStyle = 'rgba(255,255,255,.85)'; g.lineWidth = 2; g.beginPath(); for (var d = 1; d < 8; d++) { var yy = FY + Math.pow(d / 7, 1.6) * (1440 - FY); g.moveTo(0, yy); g.lineTo(1080, yy); } for (var i = -12; i <= 12; i++) { g.moveTo(540 + i * 80, FY); g.lineTo(540 + i * 210, 1440); } g.stroke();
+  // pendant lights
+  // reception desk (right) with the ID card printer and a monitor on the side
+  H.pool(g, 840, 1250, 300, 50, .45);
+  K.shadowed(g, 20, 10, .2, function () { K.fillRR(g, 700, 1080, 380, 30, 10, '#FFFFFF'); });
+  K.fillRR(g, 716, 1106, 364, 190, 12, '#1386A8'); K.fillRR(g, 716, 1106, 364, 18, 8, '#0F7290');
+  g.fillStyle = 'rgba(255,255,255,.12)'; for (var s = 0; s < 6; s++) g.fillRect(740 + s * 56, 1140, 30, 140);
+  g.fillStyle = 'rgba(255,255,255,.9)'; g.beginPath(); g.moveTo(926, 1170); g.lineTo(866, 1196); g.lineTo(884, 1202); g.lineTo(890, 1224); g.lineTo(898, 1204); g.closePath(); g.fill();
+  // monitor at the far side of the desk
+  K.fillRR(g, 990, 990, 76, 58, 6, '#2A3550'); K.fillRR(g, 996, 996, 64, 44, 3, '#EAF4F8'); K.fillRR(g, 1022, 1048, 12, 32, 3, '#9AA6BC'); K.fillRR(g, 1004, 1076, 48, 6, 3, '#9AA6BC');
+  // card printer
+  K.shadowed(g, 12, 5, .2, function () { K.fillRR(g, 790, 1018, 150, 64, 12, '#F1F5FA'); });
+  K.fillRR(g, 802, 1030, 126, 10, 5, '#2A3550'); K.fillE(g, 916, 1062, 7, 7, '#21B799'); K.fillRR(g, 806, 1056, 60, 6, 3, '#C9D3E3');
+  // a card half out of the slot, glowing
+  g.save(); g.shadowColor = 'rgba(19,134,168,.7)'; g.shadowBlur = 22; K.fillRR(g, 836, 990, 58, 40, 5, '#FFFFFF'); g.restore();
+  K.fillRR(g, 836, 990, 58, 12, 5, '#3167CA'); K.fillRR(g, 842, 1008, 12, 14, 2, '#C9D6EE'); g.fillStyle = '#AAB7CC'; g.fillRect(860, 1010, 26, 3); g.fillRect(860, 1017, 18, 3);
+  // plant by the glass
+  K.plant(g, { x: 248, y: 1215 }, '#F59A8B', '#F7AE9F');
+  // welcome kit tote on the floor by the new hire
+  K.shadowed(g, 10, 4, .16, function () { K.fillRR(g, 616, 1228, 76, 74, 8, '#FFFFFF'); });
+  g.strokeStyle = '#1386A8'; g.lineWidth = 5; g.beginPath(); g.arc(654, 1230, 18, Math.PI, 0); g.stroke();
+  K.fillRR(g, 616, 1228, 76, 12, 6, '#1386A8');
+  g.fillStyle = '#3167CA'; g.beginPath(); g.moveTo(668, 1256); g.lineTo(642, 1268); g.lineTo(650, 1271); g.lineTo(652, 1282); g.lineTo(656, 1272); g.closePath(); g.fill();
+  // people: HR teammate handing over the welcome kit, new hire (day-one grey pass; her TechNext ID is printing)
+  H.pool(g, 470, 1290, 260, 40, .5);
+  H.person(g, H.who({ x: 380, y: 1300, s: .74, ph: .4, c: { skin: '#EDC4A2', hair: '#1E1A1A', top: '#9FC4E8', top2: '#FFFFFF', low: '#2A3550', shoe: '#2A2F45' },
+    outfit: 'blazer', hairStyle: 'bun', glasses: true, idcard: '#3167CA', mood: 'happy', look: .6, talk: true, hold: 'box', hands: [[30, -190], [80, -200]] }));
+  H.person(g, H.who({ x: 590, y: 1300, s: .72, ph: 1.7, c: { skin: '#E6B48E', hair: '#231816', top: '#F2B544', top2: '#FFFFFF', low: '#3A4A6B', shoe: '#2A2F45' },
+    outfit: 'tee', hairStyle: 'long', idcard: '#3167CA', mood: 'happy', look: -.6, hands: [[-100, -196], [70, -150]] }));
+  H.vignette(g, .07);
+
+  // overlays: the print path (printer -> big card), fields flying into the sheet
+  var s = '<defs><filter id="gl" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="6"/></filter>' +
+    '<linearGradient id="beam" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1386A8" stop-opacity=".0"/><stop offset="1" stop-color="#1386A8" stop-opacity=".35"/></linearGradient></defs>';
+  // soft beam rising from the printer slot to the card
+  s += '<path d="M836 990 L894 990 L930 850 L740 850 Z" fill="url(#beam)"/>';
+  var up = 'M865 988 C 872 940, 830 900, 838 856';
+  s += '<path d="' + up + '" fill="none" stroke="#8ED0E2" stroke-width="10" opacity=".5" filter="url(#gl)"/><path d="' + up + '" fill="none" stroke="#1386A8" stroke-width="3.5" stroke-dasharray="2 10" stroke-linecap="round"/>';
+  [[846, 975], [890, 950], [902, 905], [800, 930], [918, 872], [780, 885], [812, 960]].forEach(function (p, n) { s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="' + (3 + n % 2) + '" fill="#6CC6DE" opacity=".85"/>'; });
+  // field trails: ID card -> flying chip -> empty slot on the sheet
+  var tr = 'M706 760 C 680 770, 670 790, 652 796';
+  s += '<path d="' + tr + '" fill="none" stroke="#8ED0E2" stroke-width="10" opacity=".45" filter="url(#gl)"/><path d="' + tr + '" fill="none" stroke="#1386A8" stroke-width="3.5" stroke-dasharray="2 10" stroke-linecap="round"/>';
+  // a couple of earlier fields already landed: small sparks on the filled rows
+  document.getElementById('flow').innerHTML = s;
+});
+</script>
+</body></html>

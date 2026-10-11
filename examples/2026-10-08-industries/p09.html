@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-for-fnb</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<style>
+/* 09 · F&B — a neighbourhood café with an open kitchen pass on the left: the chef plates under the heat lamp with order
+   tickets on the rail, a server carries the tray out, two guests wait at a café table in front. Card top-right. */
+.card{right:72px;top:184px;width:580px;--acc:#1F7A55}
+.r1{left:72px;top:232px;width:300px;--px:150px}
+.r2{right:72px;top:690px;width:300px;--px:180px}
+.r2{--tb:#FFF1DC;--tc:#9A5A12}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+  <div class="card" data-qa="card"><span class="k">odoo for f&amp;b</span>
+    <h1>From the table <em>to the pass, live.</em></h1>
+    <p>Table orders, kitchen tickets and stock for restaurants, cafés and central kitchens.</p>
+    <div class="apps"><span><img src="../assets/img/odoo/pos_restaurant.svg" alt="">Restaurant POS</span><span><img src="../assets/img/odoo/stock.svg" alt="">Inventory</span><span><img src="../assets/img/odoo/mrp.svg" alt="">Manufacturing</span></div>
+  </div>
+  <div class="rec r1" data-qa="rec1"><small>sample</small><div class="hd"><img src="../assets/img/odoo/stock.svg" alt="">Stock transfer</div><b>Central kitchen → Tanjong</b><span>Laksa paste 12 kg · Buns 80 pcs</span><span class="tag">Ready</span></div>
+  <div class="rec r2" data-qa="rec2"><small>sample</small><div class="hd"><img src="../assets/img/odoo/pos_restaurant.svg" alt="">Table 4 order</div><b>2 Laksa · 1 Kopi peng</b><span>Sent to kitchen · 12:41</span><span class="tag">Cooking</span></div>
+  <div class="sp-foot" style="justify-content:flex-start"><span class="sp-url soft" data-qa="url">technext.asia/industries/fnb</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var k = 1.45, sx = -150, sy = 420, F = 470;
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#F3F6EE', '#E6EEDF'], wains: ['#2F6B57', '#285C4B'], rail: '#C99A66', floor: ['#E2B889', '#C99363'],
+    base: '#1F4D3F', panelLine: 'rgba(255,255,255,.08)', floorKind: 'planks', floorLine: 'rgba(110,60,25,.18)' });
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+  // ---- open kitchen pass (left wall): opening, back tiles, hood, shelf
+  var px0 = 130, px1 = 420, py0 = 132, py1 = 345;
+  K.shadowed(g, 18, 6, .16, function () { K.fillRR(g, px0 - 12, py0 - 12, px1 - px0 + 24, py1 - py0 + 24, 12, '#C99A66'); });
+  g.save(); K.rr(g, px0, py0, px1 - px0, py1 - py0, 6); g.clip();
+  H.grad(g, px0, py0, px1 - px0, py1 - py0, '#E9F1EC', '#D8E6DE');
+  g.strokeStyle = 'rgba(40,90,70,.10)'; g.lineWidth = 1.5; g.beginPath();
+  for (var ty = py0 + 18; ty < py1; ty += 18) { g.moveTo(px0, ty); g.lineTo(px1, ty); }
+  for (var tx = px0 + 24; tx < px1; tx += 24) { g.moveTo(tx, py0); g.lineTo(tx, py1); } g.stroke();
+  // hood
+  g.fillStyle = '#C3CCD6'; g.beginPath(); g.moveTo(300, py0); g.lineTo(400, py0); g.lineTo(416, 196); g.lineTo(284, 196); g.closePath(); g.fill();
+  K.fillRR(g, 280, 192, 140, 10, 4, '#AEB8C4');
+  // shelf with pots
+  K.fillRR(g, px0 + 8, 196, 110, 6, 2, '#AEB8C4');
+  K.fillRR(g, px0 + 16, 172, 34, 24, 5, '#9AA6B6'); K.fillRR(g, px0 + 12, 168, 42, 6, 3, '#87929F');
+  K.fillRR(g, px0 + 62, 178, 44, 18, 5, '#E07A3F'); K.fillRR(g, px0 + 58, 175, 52, 5, 2, '#C4652F');
+  // steam
+  g.strokeStyle = 'rgba(255,255,255,.8)'; g.lineWidth = 4; g.lineCap = 'round';
+  [[340, 0], [362, 1]].forEach(function (s) { g.beginPath(); g.moveTo(s[0], 310); g.bezierCurveTo(s[0] - 10, 270, s[0] + 10, 255, s[0], 236); g.stroke(); });
+  // chef plating behind the pass
+  H.person(g, H.who({ x: 236, y: 470, s: .56, ph: .7, c: { skin: '#E3B089', hair: '#1E1A1A', top: '#FFFFFF', top2: '#E6ECEA', low: '#2A3550' }, outfit: 'scrubs', hairStyle: 'short', hat: 'toque',
+    feet: false, mood: 'calm', look: .5, hands: [[-30, -226], [70, -232]] }));
+  g.restore();
+  // order ticket rail across the top of the pass
+  K.fillRR(g, px0 + 10, py0 + 6, px1 - px0 - 20, 7, 3, '#B8C2CE');
+  [[290, -0.05], [326, 0.06], [362, -0.03], [140, 0.04]].forEach(function (t, i) {
+    g.save(); g.translate(t[0] + 14, py0 + 10); g.rotate(t[1]);
+    K.shadowed(g, 4, 2, .14, function () { K.fillRR(g, -14, 0, 28, 40, 2, '#FFFFFF'); });
+    K.fillRR(g, -14, 0, 28, 6, 1, i === 1 ? '#E07A3F' : '#1F7A55'); g.fillStyle = '#C9D2DC'; for (var q = 0; q < 4; q++) g.fillRect(-9, 12 + q * 6, q === 2 ? 12 : 18, 2.5);
+    g.restore(); });
+  // heat lamp
+  g.strokeStyle = '#8D97A4'; g.lineWidth = 3; g.beginPath(); g.moveTo(330, py0 + 13); g.lineTo(330, 236); g.stroke();
+  K.fillRR(g, 296, 234, 68, 14, 7, '#E07A3F');
+  g.save(); g.globalAlpha = .35; g.fillStyle = '#FFC67A'; g.beginPath(); g.moveTo(300, 248); g.lineTo(360, 248); g.lineTo(384, py1); g.lineTo(276, py1); g.closePath(); g.fill(); g.restore();
+  // pass counter
+  K.shadowed(g, 10, 4, .18, function () { K.fillRR(g, px0 - 20, py1 - 4, px1 - px0 + 40, 18, 5, '#D9E0E6'); });
+  K.fillRR(g, px0 - 20, py1 - 4, px1 - px0 + 40, 5, 3, '#F2F5F8');
+  // plates on the pass
+  [[200, '#E2553D'], [318, '#F2B544'], [362, '#7CB342']].forEach(function (p) { K.fillE(g, p[0], py1 - 4, 22, 6, '#FFFFFF'); K.fillE(g, p[0], py1 - 8, 12, 5, p[1]); });
+  // ---- café sign + menu board over the right wall (under the card is just wall)
+  // chalk menu board (left wall, above the pass)
+  K.shadowed(g, 16, 5, .18, function () { K.fillRR(g, 150, 2, 218, 96, 10, '#C99A66'); });
+  K.fillRR(g, 157, 9, 204, 82, 7, '#24493D');
+  K.text(g, 'MENU', 172, 32, 14, 800, '#F2C879'); K.fillE(g, 342, 27, 9, 9, '#F2C879'); K.fillE(g, 342, 27, 4.5, 4.5, '#24493D');
+  g.fillStyle = 'rgba(255,255,255,.55)';
+  for (var mi = 0; mi < 3; mi++) { g.fillRect(172, 46 + mi * 14, [110, 86, 98][mi], 3.5); g.fillRect(318, 46 + mi * 14, 26, 3.5); }
+  // ---- server walking out with the tray
+  H.person(g, H.who({ x: 490, y: 520, s: .62, ph: 1.9, c: { skin: '#D9A27A', hair: '#2B1D16', top: '#2F6B57', top2: '#255645', low: '#2A2F45', shoe: '#2A2F45' }, outfit: 'tee', hairStyle: 'pony',
+    apron: '#C99A66', hold: 'tray', mood: 'happy', look: .6, hands: [[-56, -300], [80, -160]] }));
+  // ---- café table with two guests (front right)
+  var TX = 710, TY = 540;
+  [[650, '#F28C5B', '#1E1A1A', 'curly', false, '#E8B48F'], [770, '#7FA8C9', '#232634', 'short', true, '#C98B63']].forEach(function (d, i) {
+    // chair back
+    g.strokeStyle = '#8A5A3B'; g.lineWidth = 7; g.lineCap = 'round'; g.beginPath(); g.moveTo(d[0] - 40, 600); g.lineTo(d[0] - 40, 420); g.quadraticCurveTo(d[0], 404, d[0] + 40, 420); g.lineTo(d[0] + 40, 600); g.stroke();
+    H.person(g, H.who({ x: d[0], y: 620, s: .6, ph: 2.4 + i, c: { skin: d[5], hair: d[2], top: d[1], top2: d[1], low: '#3D405B', shoe: '#2B1D16' }, outfit: i ? 'shirt' : 'tee', hairStyle: d[3], glasses: d[4],
+      sit: true, chair: false, sitDrop: -40, mood: i ? 'happy' : 'calm', talk: !i, look: i ? -.6 : -.3, hands: i ? [[-40, -150], [30, -150]] : [[-10, -150], [64, -170]] }));
+  });
+  // table
+  K.soft(g, TX, 640, 150, 14, .22);
+  K.fillRR(g, TX - 10, TY + 10, 20, 90, 6, '#3B3F55'); K.fillE(g, TX, 640, 46, 8, '#3B3F55');
+  K.shadowed(g, 12, 5, .2, function () { K.fillE(g, TX, TY, 150, 22, '#C99A66'); });
+  K.fillE(g, TX, TY - 3, 146, 19, '#DDB081');
+  // cups + number stand on the table
+  K.fillRR(g, 648, TY - 24, 22, 20, 5, '#FFFFFF'); K.fillE(g, 659, TY - 24, 11, 3, '#8A5A3B');
+  K.fillRR(g, 754, TY - 26, 22, 22, 5, '#FFFFFF'); K.fillE(g, 765, TY - 26, 11, 3, '#C98B4F');
+  K.fillRR(g, 702, TY - 44, 16, 32, 3, '#1F4D3F'); K.text(g, '4', 710, TY - 22, 17, 800, '#FFFFFF', 'center');
+  g.restore();
+  H.pool(g, 560, 1260, 360, 60, .4);
+  H.vignette(g, .1);
+});
+</script>
+</body></html>

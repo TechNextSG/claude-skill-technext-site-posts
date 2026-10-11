@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>ai-chatbots</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+/* 15 · AI Chatbots — "Web, WhatsApp and in-app assistants."
+   A bright hotel lobby: three guests on three channels (laptop web widget, WhatsApp on a phone, the in-app chat on a
+   tablet). Their messages travel in channel colours and converge on Nexi at the front desk, who answers a booking
+   lookup from the records; the refund request is handed over to a person at the same desk, with full context. */
+:root{--acc:#B4307A;--acc-l:#FBE6F1;--acc-d:#8A1F5B;--web:#2D6BD8;--wa:#15864A;--app:#7350CF}
+.bub.ch{color:#fff;width:250px}
+.bub.ch small{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.88)}
+.bub.ch small i{width:24px;height:24px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.bub.ch small i img{width:16px;height:16px}
+.web{left:48px;top:566px;background:var(--web)}
+.wa{left:92px;top:724px;width:252px!important;background:var(--wa)}
+.app{right:48px;top:566px;width:270px;background:var(--app);border-radius:22px 22px 6px 22px}
+.ans{left:398px;top:608px;width:254px;--px:118px}
+.ans .hd{color:var(--acc)}
+.ans .tag{--tb:#E6F7F1;--tc:#137A4A}
+.hand{right:48px;top:704px;width:280px;--px:58px}
+.hand .hd{color:var(--acc)}
+.hand .tag{--tb:var(--acc-l);--tc:var(--acc-d)}
+.nexi-png{left:420px;top:890px;width:216px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip" data-qa="chip"><i><img src="../assets/img/odoo/im_livechat.svg" alt=""></i>AI Solution · <b>AI Chatbots</b></div>
+  <h1 class="tp-h" data-qa="headline">Web, WhatsApp and <em>in&#8209;app assistants.</em></h1>
+  <p class="tp-sub" data-qa="sub">Knows your business. Knows when to <b>hand over, with full context.</b></p>
+
+  <div class="bub ch web" id="bweb" data-qa="web"><small><i><img src="../assets/img/odoo/website.svg" alt=""></i>Web chat · sample</small>Has my order SO&#8209;1187 shipped?</div>
+  <div class="bub ch wa" id="bwa" data-qa="whatsapp"><small><i><img src="../assets/img/odoo/whatsapp.svg" alt=""></i>WhatsApp · sample</small>Check-in time for BK&#8209;2041?</div>
+  <div class="bub ch app" id="bapp" data-qa="inapp"><small><i><img src="../assets/img/odoo/im_livechat.svg" alt=""></i>In-app · sample</small>Can a person help with my refund?</div>
+
+  <div class="rec ans" id="ans" data-qa="answer"><div class="hd"><img src="../assets/img/odoo/appointment.svg" alt="">Booking</div><small>sample</small>
+    <b>BK&#8209;2041 · Deluxe</b><span>14–16 Oct · check-in 2 pm</span><span class="tag">Confirmed</span></div>
+  <div class="rec hand" id="hand" data-qa="handover"><div class="hd"><img src="../assets/img/odoo/helpdesk.svg" alt="">Handed over</div><small>sample</small>
+    <b>Mia · Guest Services</b><span class="tag">Chat + booking + refund ask</span></div>
+  <img class="nexi-png" src="../assets/sp/nexi/nexi-present.png" alt="">
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/solutions/ai-chatbots</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var k = 1.6, sx = 0, sy = 500;
+  function P(x, y) { return [sx + x * k, sy + y * k]; }
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#FBF4F3', '#F5E9EA'], wains: ['#F6DDE8', '#EDCDDC'], rail: '#FFFFFF', floor: ['#EFE3D3', '#DCC8AE'], base: '#E2BCCD',
+    floorKind: 'tiles', floorLine: 'rgba(255,255,255,.7)', panelLine: 'rgba(140,40,90,.07)' });
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+  // lobby window (left) and a pendant light pool over the desk
+  var w = { x: 24, y: 150, w: 170, h: 150 };
+  K.windowFrame(g, w, 470); K.windowSky(g, w, 0, 0, '#9BD6FF', '#EAF7FF'); K.windowGlass(g, w); K.windowMullions(g, w);
+  K.plant(g, { x: 668, y: 470 }, '#F1DCE6', '#F7E8EF');
+  // web guest: seated at a cafe table, laptop with the web widget
+  H.person(g, H.who({ x: 66, y: 470, s: .48, ph: .4, c: { skin: '#E3B089', hair: '#221A18', top: '#F2C46B', top2: '#E0AE52', low: '#3A4766', shoe: '#2A2F45' },
+    outfit: 'tee', hairStyle: 'pony', sit: true, sitDrop: 40, chairCol: '#C98FAE', mood: 'happy', look: .7, hands: [[60, -170], [110, -168]] }));
+  K.shadowed(g, 16, 6, .16, function () { K.fillE(g, 150, 392, 66, 9, '#FFFFFF'); });
+  K.fillRR(g, 145, 398, 10, 66, 4, '#D7C6CF'); K.fillE(g, 150, 466, 30, 5, '#D7C6CF');
+  K.fillRR(g, 120, 352, 66, 40, 5, '#2A3550'); K.fillRR(g, 112, 388, 82, 5, 2.5, '#3B4A66'); K.fillRR(g, 125, 357, 56, 30, 3, '#EEF4FF');
+  K.fillRR(g, 125, 357, 56, 7, 3, '#2D6BD8'); K.fillRR(g, 130, 368, 30, 6, 3, '#D3E0F8'); K.fillRR(g, 146, 377, 30, 6, 3, '#2D6BD8');
+  // WhatsApp guest: standing, phone in hand
+  H.person(g, H.who({ x: 222, y: 470, s: .48, ph: 1.1, c: { skin: '#C98D66', hair: '#141214', top: '#6FB7A8', top2: '#57A090', low: '#2F3B52', shoe: '#22283A' },
+    outfit: 'hoodie', hairStyle: 'short', mood: 'happy', look: .6, hands: [[22, -232], [44, -226]] }));
+  K.fillRR(g, 228, 338, 18, 32, 4, '#1D2233'); K.fillRR(g, 230, 341, 14, 25, 3, '#E6F7EC'); K.fillRR(g, 231, 343, 9, 4, 2, '#15864A'); K.fillRR(g, 234, 350, 9, 4, 2, '#15864A');
+  // front-desk staff (Mia), headset, tablet with the handed-over chat
+  H.person(g, H.who({ x: 492, y: 470, s: .48, ph: 2.1, c: { skin: '#EDBF9B', hair: '#2A1C1A', top: '#B4307A', top2: '#8A1F5B', shirt: '#FFFFFF', low: '#2F3B52', shoe: '#22283A' },
+    outfit: 'blazer', hairStyle: 'bun', headset: '#2F3B52', mood: 'happy', look: -.6, talk: true, hands: [[-62, -232], [-20, -236]] }));
+  K.fillRR(g, 452, 336, 40, 30, 5, '#2A3550'); K.fillRR(g, 455, 339, 34, 24, 3, '#F3EEFF'); K.fillRR(g, 458, 342, 20, 5, 2, '#7350CF'); K.fillRR(g, 466, 351, 20, 5, 2, '#B4307A');
+  // the front desk
+  K.shadowed(g, 22, 8, .18, function () { K.fillRR(g, 252, 368, 300, 104, 10, '#FFFFFF'); });
+  var dg = g.createLinearGradient(0, 380, 0, 470); dg.addColorStop(0, '#F7E3EC'); dg.addColorStop(1, '#EBC9D8'); K.fillRR(g, 258, 382, 288, 88, 8, dg);
+  K.fillRR(g, 244, 362, 316, 12, 6, '#E9D9C4');
+  K.plaque(g, { x: 314, y: 398, w: 176, h: 50 }, 'Ask us anything', 'Web · WhatsApp · App · 24/7', '#B4307A', function (gg, x, y) { K.fillRR(gg, x - 8, y - 7, 16, 11, 4, '#FFFFFF'); gg.beginPath(); gg.moveTo(x - 4, y + 3); gg.lineTo(x - 6, y + 8); gg.lineTo(x + 1, y + 3); gg.fill(); });
+  // in-app guest: standing at the right, tablet with the app chat
+  H.person(g, H.who({ x: 610, y: 470, s: .48, ph: 3.2, c: { skin: '#D9A47E', hair: '#1A1416', top: '#8FA8D8', top2: '#7590C6', low: '#4A4F66', shoe: '#2A2F45' },
+    outfit: 'tee', hairStyle: 'long', glasses: true, mood: 'calm', look: -.7, hands: [[-56, -226], [-14, -232]] }));
+  K.fillRR(g, 572, 334, 40, 32, 5, '#2A3550'); K.fillRR(g, 575, 337, 34, 26, 3, '#F3EEFF'); K.fillRR(g, 578, 340, 22, 5, 2, '#7350CF'); K.fillRR(g, 584, 350, 22, 5, 2, '#C9BCEE');
+  g.restore();
+  // soft magenta glow behind Nexi (the assistant at the desk)
+  var gl = g.createRadialGradient(528, 985, 10, 528, 985, 170); gl.addColorStop(0, 'rgba(240,120,190,.30)'); gl.addColorStop(1, 'rgba(240,120,190,0)'); g.fillStyle = gl; g.fillRect(340, 800, 380, 380);
+  H.pool(g, 540, 1275, 440, 60, .5);
+  H.vignette(g, .07);
+
+  // ---- flows (post px): three channels converge on Nexi; the refund chat is handed to Mia; the lookup answer rises to the card
+  var N = { x: 528, y: 990 }, svg = '';
+  function q(a, c, b, t) { var u = 1 - t; return [u * u * a[0] + 2 * u * t * c[0] + t * t * b[0], u * u * a[1] + 2 * u * t * c[1] + t * t * b[1]]; }
+  function chip(p, col, sc, op) { return '<g transform="translate(' + p[0].toFixed(0) + ' ' + p[1].toFixed(0) + ') scale(' + sc.toFixed(2) + ')" opacity="' + op.toFixed(2) + '"><path d="M-17 -12 h34 a6 6 0 0 1 6 6 v12 a6 6 0 0 1 -6 6 h-22 l-8 7 v-7 h-4 a6 6 0 0 1 -6 -6 v-12 a6 6 0 0 1 6 -6z" fill="' + col + '" stroke="#fff" stroke-width="3"/><circle cx="-7" cy="0" r="2.4" fill="#fff"/><circle cx="1" cy="0" r="2.4" fill="#fff"/><circle cx="9" cy="0" r="2.4" fill="#fff"/></g>'; }
+  function lane(a, c, b, col, n) {
+    svg += '<path d="M' + a[0] + ' ' + a[1] + ' Q ' + c[0] + ' ' + c[1] + ' ' + b[0] + ' ' + b[1] + '" fill="none" stroke="' + col + '" stroke-width="4" stroke-dasharray="2 11" stroke-linecap="round" opacity=".75"/>';
+    svg += '<circle cx="' + a[0] + '" cy="' + a[1] + '" r="7" fill="' + col + '" stroke="#fff" stroke-width="3"/>';
+    for (var j = 1; j <= n; j++) { var t = j / (n + 1); svg += chip(q(a, c, b, t), col, .7 + t * .35, .45 + t * .5); }
+  }
+  lane(P(153, 372), [400, 1180], [470, 1010], '#2D6BD8', 3);   // web widget
+  lane(P(237, 352), [420, 1000], [478, 975], '#15864A', 1);    // WhatsApp
+  lane(P(592, 350), [780, 1170], [596, 1012], '#7350CF', 3);   // in-app
+  // handover to a person: glowing magenta thread Nexi -> Mia's tablet, with a context packet
+  var h0 = [604, 1000], h1 = P(472, 348), hc = [690, 960];
+  svg += '<defs><filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter></defs>';
+  var hd = 'M' + h0[0] + ' ' + h0[1] + ' Q ' + hc[0] + ' ' + hc[1] + ' ' + h1[0] + ' ' + h1[1];
+  svg += '<path d="' + hd + '" fill="none" stroke="#F07ABF" stroke-width="12" opacity=".5" filter="url(#gl)"/><path d="' + hd + '" fill="none" stroke="#B4307A" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>';
+  var pk = q(h0, hc, h1, .5);
+  svg += '<g transform="translate(' + pk[0].toFixed(0) + ' ' + (pk[1] - 4).toFixed(0) + ')"><rect x="-17" y="-13" width="34" height="26" rx="5" fill="#fff" stroke="#B4307A" stroke-width="3"/><rect x="-10" y="-6" width="20" height="3.5" rx="1.7" fill="#B4307A"/><rect x="-10" y="1" width="14" height="3" rx="1.5" fill="#E8B6D2"/></g>';
+  svg += '<circle cx="' + h1[0] + '" cy="' + h1[1] + '" r="7" fill="#B4307A" stroke="#fff" stroke-width="3"/>';
+  // the lookup answer rising from Nexi to the record card
+  var a = document.getElementById('ans').getBoundingClientRect(), ax = a.left + 118 + 8, ay = a.bottom + 10;
+  svg += '<path d="M' + N.x + ' ' + (N.y - 92) + ' L ' + ax + ' ' + ay + '" stroke="#B4307A" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>';
+  document.getElementById('flow').innerHTML = svg;
+});
+</script>
+</body></html>

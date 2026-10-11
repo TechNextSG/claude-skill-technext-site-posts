@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-for-construction</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<style>
+/* 08 · Construction — outdoors for once: a sunny sky, a building frame rising behind the hoarding, a tower crane, a site
+   manager in hard hat and hi-vis checking progress on a tablet, a worker carrying a plank. The text card runs full width
+   across the top, the two records float mid-height, the URL sits centred. */
+.card{left:72px;right:72px;top:184px;--acc:#D98A00}
+.card h1{font-size:62px}
+.r1{left:72px;top:1100px;width:310px;--px:250px}
+.r1::after{top:-7px;bottom:auto}
+.r2{right:72px;top:578px;width:290px;--px:110px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+  <div class="card" data-qa="card"><span class="k">odoo for construction</span>
+    <h1>Bill each milestone <em>as the site rises.</em></h1>
+    <p>Projects, site costs and progress billing, tracked per job from the first pour.</p>
+    <div class="apps"><span><img src="../assets/img/odoo/project.svg" alt="">Project</span><span><img src="../assets/img/odoo/purchase.svg" alt="">Purchase</span><span><img src="../assets/img/odoo/account.svg" alt="">Accounting</span><span><img src="../assets/img/odoo/hr_timesheet.svg" alt="">Timesheets</span></div>
+  </div>
+  <div class="rec r1" data-qa="rec1" style="--tb:#FFF3D1;--tc:#8A5A00"><small>sample</small><div class="hd"><img src="../assets/img/odoo/account.svg" alt="">Progress bill</div><b>Milestone 3 · 60%</b><span>Tower B frame, sample client</span><span class="tag">Sent to client</span></div>
+  <div class="rec r2" data-qa="rec2"><small>sample</small><div class="hd"><img src="../assets/img/odoo/project.svg" alt="">Site costs</div><b>SGD 412k of 690k</b><span>Materials, labour, plant hire</span><span class="tag">On budget</span></div>
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/industries/construction</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var GY = 1010, NAVY = '#1F2E5A', SUN = '#F6B800';
+  // sky
+  H.grad(g, 0, 0, 1080, GY, '#8ECBF5', '#FFF4D6');
+  var sg = g.createRadialGradient(930, 470, 10, 930, 470, 300); sg.addColorStop(0, 'rgba(255,236,160,.9)'); sg.addColorStop(.35, 'rgba(255,226,140,.35)'); sg.addColorStop(1, 'rgba(255,226,140,0)');
+  g.fillStyle = sg; g.fillRect(0, 0, 1080, GY); K.fillE(g, 930, 470, 44, 44, '#FFF1C2');
+  K.cloud(g, 60, 660, .32); K.cloud(g, 760, 600, .3);
+  // distant city
+  g.fillStyle = 'rgba(120,150,190,.35)'; [[0, 150], [70, 220], [130, 120], [600, 180], [660, 260], [730, 140], [960, 200], [1020, 130]].forEach(function (b) { g.fillRect(b[0], GY - b[1], 64, b[1]); });
+
+  // tower crane (behind the building)
+  g.fillStyle = SUN; g.fillRect(860, 560, 30, GY - 560); g.strokeStyle = '#D99E00'; g.lineWidth = 3; g.beginPath();
+  for (var y = 560; y < GY; y += 30) { g.moveTo(860, y); g.lineTo(890, y + 30); g.moveTo(890, y); g.lineTo(860, y + 30); } g.stroke();
+  K.fillRR(g, 480, 548, 560, 18, 4, SUN); K.fillRR(g, 930, 566, 70, 30, 4, NAVY); K.fillRR(g, 848, 566, 54, 40, 6, '#FFFFFF'); K.fillRR(g, 854, 572, 42, 20, 4, '#BFE4FA');
+  g.strokeStyle = '#5A6680'; g.lineWidth = 2; g.beginPath(); g.moveTo(560, 566); g.lineTo(560, 700); g.stroke();
+  K.fillRR(g, 470, 700, 180, 16, 3, '#E07A3A'); // a steel beam on the hook
+
+  // the building frame rising
+  var bx = 150, bw = 560, fl = 4, fh = 92, by = GY - fl * fh;
+  // finished lower floors: concrete slabs + glazing
+  for (var f = 0; f < fl; f++) { var fy = GY - (f + 1) * fh, done = f < 2;
+    if (done) { K.fillRR(g, bx, fy, bw, fh, 0, '#E9ECF3'); for (var w = 0; w < 6; w++) { K.fillRR(g, bx + 16 + w * 90, fy + 18, 74, fh - 30, 4, '#A9D6F2'); g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(bx + 26 + w * 90, fy + 18, 12, fh - 30); } }
+    K.fillRR(g, bx - 12, fy, bw + 24, 14, 3, '#C9CFDA'); }
+  // columns on the open floors
+  g.fillStyle = NAVY; for (var c = 0; c <= 6; c++) g.fillRect(bx + c * (bw / 6) - 7, by - 40, 14, fh * 2 + 40);
+  K.fillRR(g, bx - 12, by - 40, bw + 24, 12, 3, NAVY);
+  // scaffold on the right face
+  g.strokeStyle = '#8C97AC'; g.lineWidth = 6; g.beginPath(); [bx + bw + 20, bx + bw + 70].forEach(function (x) { g.moveTo(x, by - 50); g.lineTo(x, GY); }); g.stroke();
+  for (var s = 0; s < 5; s++) { var py = by - 30 + s * fh * 0.85; K.fillRR(g, bx + bw + 10, py, 72, 9, 2, '#D9A35A'); }
+  // site hoarding in front of the building
+  K.shadowed(g, 18, 6, .16, function () { K.fillRR(g, -20, GY - 70, 1120, 80, 0, '#FFFFFF'); });
+  K.fillRR(g, -20, GY - 70, 1120, 18, 0, NAVY); g.fillStyle = SUN; for (var hz = -20; hz < 1100; hz += 60) { g.beginPath(); g.moveTo(hz, GY - 52); g.lineTo(hz + 30, GY - 52); g.lineTo(hz + 10, GY - 34); g.lineTo(hz - 20, GY - 34); g.closePath(); g.fill(); }
+
+  // ground: compacted site earth with tyre tracks
+  H.grad(g, 0, GY + 10, 1080, 1440 - GY, '#F2E3C2', '#E2CDA2');
+  g.strokeStyle = 'rgba(160,120,70,.18)'; g.lineWidth = 10; g.beginPath(); g.moveTo(200, 1440); g.quadraticCurveTo(420, 1150, 560, GY + 10); g.moveTo(330, 1440); g.quadraticCurveTo(520, 1150, 640, GY + 10); g.stroke();
+  H.pool(g, 560, 1270, 480, 80, .5);
+  // props: a pallet of bricks and a stack of rebar, safety cones
+  K.shadowed(g, 16, 6, .2, function () { K.fillRR(g, 40, 1140, 180, 16, 4, '#B58A5A'); });
+  for (var r = 0; r < 3; r++) for (var q = 0; q < 4; q++) K.fillRR(g, 48 + q * 40 + (r % 2) * 10, 1120 - r * 26, 34, 22, 3, ['#D46A4A', '#C75C3E'][(r + q) % 2]);
+  g.strokeStyle = '#6E7891'; g.lineWidth = 6; g.beginPath(); for (var rb = 0; rb < 5; rb++) { g.moveTo(880, 1160 - rb * 9); g.lineTo(1080, 1150 - rb * 9); } g.stroke();
+  function cone(x, y) { g.fillStyle = '#F07A2E'; g.beginPath(); g.moveTo(x - 22, y); g.lineTo(x - 7, y - 66); g.lineTo(x + 7, y - 66); g.lineTo(x + 22, y); g.closePath(); g.fill(); K.fillRR(g, x - 15, y - 40, 30, 10, 2, '#FFFFFF'); K.fillRR(g, x - 30, y - 6, 60, 10, 3, '#E0661C'); }
+  cone(300, 1080); cone(980, 1100);
+
+  // worker carrying a plank (left)
+  var wk = H.who({ x: 480, y: 1240, s: .86, ph: 1.3, c: { skin: '#C98E66', hair: '#1E1A1A', top: '#4A6FA8', top2: '#3B5C91', low: '#3A3F55', shoe: '#5A3E2B', hat: '#FFFFFF' },
+    outfit: 'tee', hairStyle: 'short', hat: 'hardhat', vest: '#FFD23A', short: true, mood: 'happy', look: .6, hands: [[-80, -250], [86, -250]] });
+  H.person(g, wk);
+  K.shadowed(g, 10, 4, .18, function () { K.fillRR(g, 330, 1240 - .86 * 262, 320, 22, 4, '#D9A35A'); });
+  g.fillStyle = 'rgba(255,255,255,.25)'; g.fillRect(330, 1240 - .86 * 262 + 3, 320, 4);
+  K.fillE(g, 480 - 80 * .86, 1240 - 250 * .86, 19 * .86, 19 * .86, '#C98E66'); K.fillE(g, 480 + 86 * .86, 1240 - 250 * .86, 19 * .86, 19 * .86, '#C98E66');
+
+  // site manager with the progress tablet (right, nearer)
+  H.person(g, H.who({ x: 840, y: 1320, s: .98, ph: 2.2, c: { skin: '#EDC09A', hair: '#2B1D16', top: NAVY, top2: '#17234A', low: '#2C3550', shoe: '#2A2F45', hat: SUN },
+    outfit: 'blazer', hairStyle: 'bob', hat: 'hardhat', vest: '#FFD23A', glasses: true, hold: 'tablet', mood: 'happy', look: -.6, talk: true, hands: [[-56, -196], [96, -150]] }));
+  H.vignette(g, .1);
+});
+</script>
+</body></html>

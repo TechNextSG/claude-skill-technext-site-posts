@@ -1,0 +1,16 @@
+/* Pain-point series (8 Oct 2026): same frame as series.css (logo row, chip, headline, sub, URL pill) plus a split
+   scene - "Today" (the pain, muted) left, "With Odoo" (the fix, bright) right - divided by a tilted seam.
+   Load after scene.css + series.css. */
+.tp-chip.pain i{background:#FDECEA}
+.tp-h .pain{color:#D9473F}
+.lab{position:absolute;z-index:6;display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 16px 10px;font:800 17px/1 var(--font-display);letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:0 2px 6px rgba(31,31,61,.08),0 14px 28px -16px rgba(31,31,61,.4)}
+.lab.today{background:#3A3F55;color:#fff}
+.lab.fix{background:var(--acc,#3167CA);color:#fff}
+.lab i{width:10px;height:10px;border-radius:50%;background:currentColor;opacity:.8}
+.vs{position:absolute;z-index:6;width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center;font:800 20px/1 var(--font-display);color:var(--ink);
+  box-shadow:0 2px 6px rgba(31,31,61,.1),0 18px 36px -18px rgba(31,31,61,.5)}
+.note{position:absolute;z-index:5;background:#fff;border-radius:14px;padding:10px 14px 11px;font:700 17px/1.25 var(--font-display);color:var(--ink);
+  box-shadow:0 2px 6px rgba(31,31,61,.07),0 16px 32px -18px rgba(31,31,61,.42)}
+.note small{display:block;font:600 15px/1.2 var(--font-body);color:var(--label);margin-top:3px}
+.note.bad{color:#B5352E}.note.good{color:var(--acc-d,#137A4A)}

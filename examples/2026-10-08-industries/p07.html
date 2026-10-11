@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-for-ecommerce</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<style>
+/* 07 · Ecommerce — a lavender packing room seen front-on: bin shelving on the left, a packing table with parcels and a
+   label printer in the middle, a courier collecting at the open back door. The order travels: website -> pack -> ship.
+   Text card sits low (bottom-left), the URL bottom-right, the two records float high over the wall. */
+.card{left:72px;top:920px;width:640px;--acc:#7A55C9}
+.r1{left:72px;top:190px;width:300px;--px:200px}
+.r2{left:718px;top:190px;width:290px;--px:170px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+  <div class="card" data-qa="card"><span class="k">odoo for online stores</span>
+    <h1>Click, pack, ship, <em>booked.</em></h1>
+    <p>Online orders, fulfilment and books in one system, from the website cart to the courier.</p>
+    <div class="apps"><span><img src="../assets/img/odoo/website_sale.svg" alt="">eCommerce</span><span><img src="../assets/img/odoo/stock.svg" alt="">Inventory</span><span><img src="../assets/img/odoo/account.svg" alt="">Accounting</span></div>
+  </div>
+  <div class="rec r1" data-qa="rec1"><small>sample</small><div class="hd"><img src="../assets/img/odoo/website_sale.svg" alt="">Website order</div><b>S00381 · 3 items</b><span>Paid online · SGD 86.40</span><span class="tag">Ready to pack</span></div>
+  <div class="rec r2" data-qa="rec2" style="--tb:#EFE9FB;--tc:#5B3FA8"><small>sample</small><div class="hd"><img src="../assets/img/odoo/stock.svg" alt="">Delivery</div><b>WH/OUT/00217</b><span>Tracking sent to buyer</span><span class="tag">Out for delivery</span></div>
+  <div class="sp-foot" style="justify-content:flex-end"><span class="sp-url soft" data-qa="url">technext.asia/industries/ecommerce</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var k = 1.4, sx = -140, sy = 222, F = 470;
+  function dots(col) { return function (g2, W, ry, kk, ox, oy) { g2.fillStyle = col; var st = 40 * kk;
+    for (var y = oy % st + st * 0.5; y < ry - st * 0.4; y += st) for (var x = (ox % st) + ((Math.round(y / st) % 2) ? st / 2 : 0); x < W; x += st) { g2.beginPath(); g2.arc(x, y, 3.2 * kk, 0, 7); g2.fill(); } }; }
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#F6F2FE', '#ECE5FB'], wains: ['#DDD3F6', '#D1C5F1'], rail: '#FFFFFF', floor: ['#F5F3FA', '#DFD9EE'],
+    base: '#C4B6EB', panelLine: 'rgba(80,50,140,.07)', pattern: dots('rgba(122,85,201,.10)') });
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+
+  // open back door (right) with a sunny street and the courier van
+  var d = { x: 690, y: 170, w: 170, h: 300 };
+  K.shadowed(g, 20, 8, .18, function () { K.fillRR(g, d.x - 14, d.y - 14, d.w + 28, d.h + 14, 12, '#FFFFFF'); });
+  g.save(); g.beginPath(); g.rect(d.x, d.y, d.w, d.h); g.clip(); K.windowSky(g, d, 3, 0, '#9FD6FA', '#EAF7FF');
+  g.fillStyle = '#CFE3C8'; g.fillRect(d.x, d.y + d.h - 70, d.w, 70); g.fillStyle = '#B9C5D6'; g.fillRect(d.x, d.y + d.h - 34, d.w, 34);
+  K.fillRR(g, d.x + 20, d.y + 130, 170, 104, 14, '#FFFFFF'); K.fillRR(g, d.x + 20, d.y + 186, 170, 14, 4, '#7A55C9');
+  K.fillRR(g, d.x + 30, d.y + 142, 60, 34, 6, '#BFE4FA'); K.fillE(g, d.x + 60, d.y + 236, 16, 16, '#2A3550'); K.fillE(g, d.x + 60, d.y + 236, 6, 6, '#C9D3E3');
+  g.fillStyle = 'rgba(255,255,255,.28)'; g.beginPath(); g.moveTo(d.x + 20, d.y + d.h); g.lineTo(d.x + 70, d.y); g.lineTo(d.x + 96, d.y); g.lineTo(d.x + 46, d.y + d.h); g.closePath(); g.fill(); g.restore();
+  // sunlight spilling in from the door
+  g.save(); var lp = g.createLinearGradient(0, F, 0, F + 140); lp.addColorStop(0, 'rgba(255,248,215,.75)'); lp.addColorStop(1, 'rgba(255,248,215,0)');
+  g.fillStyle = lp; g.beginPath(); g.moveTo(d.x, F); g.lineTo(d.x + d.w, F); g.lineTo(d.x + d.w - 30, F + 140); g.lineTo(d.x - 160, F + 140); g.closePath(); g.fill(); g.restore();
+
+  // bin shelving (left)
+  K.shadowed(g, 18, 8, .16, function () { K.fillRR(g, 108, 108, 236, 362, 10, '#FFFFFF'); });
+  var bins = ['#B9A3EE', '#FFC9A8', '#9FD9C8', '#FFE08A', '#A9C7F5', '#F6B3C8'];
+  for (var r = 0; r < 4; r++) {
+    K.fillRR(g, 116, 192 + r * 82, 220, 7, 3, '#E2DAF6');
+    for (var b = 0; b < 3; b++) { var bx = 124 + b * 70, by = 140 + r * 82, c = bins[(b + r * 2) % 6];
+      K.fillRR(g, bx, by, 62, 52, 6, c); K.fillRR(g, bx, by + 18, 62, 34, 6, K.tone(c, .08)); K.fillRR(g, bx + 18, by + 28, 26, 12, 3, '#FFFFFF'); }
+  }
+  K.fillRR(g, 108, 458, 236, 12, 4, '#E2DAF6');
+
+  // wall plaque + a small orders screen
+  K.plaque(g, { x: 404, y: 60, w: 216, h: 50 }, 'Lumen Goods', 'sample online store', '#7A55C9', function (g2, x, y) {
+    g2.fillStyle = '#fff'; g2.beginPath(); g2.moveTo(x - 8, y - 4); g2.lineTo(x + 8, y - 4); g2.lineTo(x + 6, y + 8); g2.lineTo(x - 6, y + 8); g2.closePath(); g2.fill();
+    g2.strokeStyle = '#fff'; g2.lineWidth = 2.4; g2.beginPath(); g2.arc(x, y - 4, 5, Math.PI, 0); g2.stroke(); });
+
+  // packer behind the table, handing a sealed box toward the door
+  H.person(g, H.who({ x: 470, y: 452, s: .62, ph: .9, c: { skin: '#E6B590', hair: '#211A1E', top: '#7A55C9', top2: '#6644B3', low: '#2C3E66' },
+    outfit: 'tee', hairStyle: 'pony', apron: '#3B3F6B', feet: false, mood: 'happy', look: .5, talk: true, hands: [[-58, -205], [70, -205]] }));
+  // packing table
+  K.shadowed(g, 20, 8, .18, function () { K.fillRR(g, 352, 352, 300, 118, 14, '#FFFFFF'); });
+  K.fillRR(g, 352, 352, 300, 16, 8, '#ECE6FA'); K.fillRR(g, 372, 392, 260, 6, 3, '#DDD3F6');
+  // label printer + a label coming out
+  K.fillRR(g, 560, 304, 74, 50, 10, '#2A3550'); K.fillRR(g, 568, 312, 30, 12, 4, '#9FD9C8'); K.fillE(g, 620, 320, 5, 5, '#7CE0A8');
+  K.fillRR(g, 572, 286, 46, 24, 3, '#FFFFFF'); g.fillStyle = '#2A3550'; for (var q = 0; q < 8; q++) g.fillRect(577 + q * 4.6, 292, q % 2 ? 1.6 : 3, 12);
+  // the open box being packed, between the packer's hands
+  K.fillRR(g, 430, 300, 84, 56, 6, '#C99A6B'); K.fillRR(g, 430, 300, 84, 12, 4, '#B5865A');
+  g.fillStyle = '#D7AE80'; g.beginPath(); g.moveTo(430, 300); g.lineTo(412, 284); g.lineTo(440, 284); g.lineTo(452, 300); g.closePath(); g.fill();
+  g.beginPath(); g.moveTo(514, 300); g.lineTo(532, 284); g.lineTo(504, 284); g.lineTo(492, 300); g.closePath(); g.fill();
+  K.fillRR(g, 450, 292, 22, 14, 3, '#B9A3EE'); K.fillRR(g, 476, 290, 18, 16, 3, '#9FD9C8');
+  // sealed parcels waiting at the left end + tape roll
+  K.fillRR(g, 362, 312, 56, 42, 6, '#C99A6B'); K.fillRR(g, 362, 312, 56, 9, 4, '#B5865A'); g.fillStyle = 'rgba(255,240,210,.55)'; g.fillRect(386, 312, 8, 42); K.fillRR(g, 396, 326, 18, 12, 2, '#FFFFFF');
+  K.fillRR(g, 368, 282, 44, 30, 5, '#D7AE80'); K.fillRR(g, 368, 282, 44, 7, 3, '#C49A6C');
+  K.fillE(g, 538, 344, 16, 9, '#B9A3EE'); K.fillE(g, 538, 342, 7, 4, '#ECE6FA');
+  // table front: two drawers and a bubble-wrap roll on a rail
+  K.fillRR(g, 380, 404, 110, 48, 8, '#F4F0FC'); K.fillRR(g, 512, 404, 110, 48, 8, '#F4F0FC'); K.fillRR(g, 415, 424, 40, 7, 3, '#C4B6EB'); K.fillRR(g, 547, 424, 40, 7, 3, '#C4B6EB');
+
+  // courier at the door, with a handheld scanner
+  H.person(g, H.who({ x: 764, y: 470, s: .6, ph: 2.6, c: { skin: '#C98E66', hair: '#1C1718', top: '#F2A23A', top2: '#D98A26', low: '#3A4766', shoe: '#2A2F45', hat: '#F2A23A' },
+    outfit: 'tee', hairStyle: 'short', hat: 'cap', short: true, hold: 'tablet', mood: 'happy', look: -.8, hands: [[-60, -190], [70, -140]] }));
+  g.restore();
+
+  // foreground: a stack of parcels at the right, below the door (soft focus)
+  H.pool(g, 640, 1000, 420, 70, .45);
+  H.blur(g, 5, function () {
+    K.shadowed(g, 30, 12, .2, function () { K.fillRR(g, 790, 1090, 250, 180, 14, '#C99A6B'); });
+    K.fillRR(g, 790, 1090, 250, 26, 10, '#B5865A'); g.fillStyle = 'rgba(255,240,210,.5)'; g.fillRect(900, 1090, 30, 180);
+    K.fillRR(g, 830, 960, 180, 132, 12, '#D7AE80'); K.fillRR(g, 830, 960, 180, 20, 8, '#C49A6C'); K.fillRR(g, 940, 1000, 54, 38, 5, '#FFFFFF');
+  });
+  H.vignette(g, .1);
+});
+</script>
+</body></html>

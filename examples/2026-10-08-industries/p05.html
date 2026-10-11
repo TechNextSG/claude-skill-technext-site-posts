@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-for-travel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<style>
+/* 05 · Travel — an agency counter at the airport: a wide window onto the runway (a jet rolling out) fills the upper
+   half, the agent in a headset books a couple with their roller case. Booking (sale order) -> supplier bill. Text card
+   sits low on the right, over the floor, so the room reads first. */
+.card{right:72px;top:936px;width:620px;padding:30px 36px 28px;--acc:#1D7FD0}
+.card h1{font-size:60px}
+.r1{left:72px;top:944px;width:290px;--px:150px}
+.r1::after{top:-7px;bottom:auto}
+.r2{left:72px;top:1134px;width:290px}
+.r2::after{top:-7px;bottom:auto}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+  <div class="card" data-qa="card"><span class="k">odoo for travel</span>
+    <h1>Every trip booked, <em>every supplier paid.</em></h1>
+    <p>Quotes, bookings, supplier bills and payments for agencies, tours and hospitality.</p>
+    <div class="apps"><span><img src="../assets/img/odoo/sale.svg" alt="">Sales</span><span><img src="../assets/img/odoo/purchase.svg" alt="">Purchase</span><span><img src="../assets/img/odoo/account.svg" alt="">Accounting</span></div>
+  </div>
+  <div class="rec r1" data-qa="rec1"><small>sample</small><div class="hd"><img src="../assets/img/odoo/sale.svg" alt="">Booking</div><b>S00318 · Kyoto</b><span>5 nights · 2 pax · air + hotel</span><span class="tag">Confirmed</span></div>
+  <div class="rec r2 no-tail" data-qa="rec2" style="--tb:#FFF3DC;--tc:#A35F00"><small>sample</small><div class="hd"><img src="../assets/img/odoo/purchase.svg" alt="">Supplier bill</div><b>BILL/2026/0207</b><span>Hotel · 5 nights · 2 pax</span><span class="tag">To pay</span></div>
+  <div class="sp-foot" style="justify-content:flex-start"><span class="sp-url soft" data-qa="url">technext.asia/industries/travel</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var k = 1.3, sx = -130, sy = 200, F = 470;
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#EEF6FF', '#E1EDFA'], wains: ['#CFE2F5', '#C2D8EF'], rail: '#FFFFFF', floor: ['#F7F1E6', '#E9DDC8'],
+    base: '#B7CFE8', floorLine: 'rgba(255,255,255,.8)', pattern: K.plusPattern('rgba(49,103,202,.07)') });
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+
+  // ---- the big window onto the runway ----
+  var w = { x: 150, y: -20, w: 410, h: 300 };
+  K.windowFrame(g, w, F);
+  K.windowSky(g, w, 9, 0, '#8CCBF5', '#E9F6FF');
+  g.save(); g.beginPath(); g.rect(w.x, w.y, w.w, w.h); g.clip();
+  var hz = w.y + 196;
+  // far city + control tower
+  g.fillStyle = 'rgba(140,175,210,.55)'; [[0, 26], [26, 40], [52, 22], [70, 48], [100, 30], [300, 34], [330, 52], [362, 28], [386, 44]].forEach(function (b) { g.fillRect(w.x + b[0], hz - b[1], 24, b[1]); });
+  K.fillRR(g, w.x + 190, hz - 92, 12, 92, 3, '#B9CCE0'); K.fillRR(g, w.x + 176, hz - 112, 40, 22, 6, '#A9C0D8'); K.fillRR(g, w.x + 180, hz - 108, 32, 10, 3, '#E3F1FF');
+  // grass + runway + markings
+  H.grad(g, w.x, hz, w.w, w.h, '#BFE3B0', '#A5D394');
+  g.fillStyle = '#8E98A8'; g.beginPath(); g.moveTo(w.x - 10, hz + 22); g.lineTo(w.x + w.w + 10, hz + 22); g.lineTo(w.x + w.w + 10, hz + 70); g.lineTo(w.x - 10, hz + 70); g.closePath(); g.fill();
+  g.fillStyle = 'rgba(255,255,255,.9)'; for (var d = 0; d < 9; d++) g.fillRect(w.x + 6 + d * 48, hz + 44, 26, 4);
+  g.fillStyle = '#FFD56A'; for (d = 0; d < 14; d++) K.fillE(g, w.x + 10 + d * 30, hz + 20, 2.2, 2.2, '#FFD56A');
+  // the jet, side on, rolling to the left
+  g.save(); g.translate(w.x + 300, w.y + 120); g.rotate(-0.22); g.scale(.78, .78);
+  g.fillStyle = '#C9D5E4'; g.beginPath(); g.moveTo(-10, -26); g.lineTo(70, -6); g.lineTo(26, -6); g.closePath(); g.fill(); // far wing
+  K.fillRR(g, -118, -40, 236, 34, 17, '#FFFFFF'); // fuselage
+  g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(84, -38); g.lineTo(112, -96); g.lineTo(134, -96); g.lineTo(118, -36); g.closePath(); g.fill(); // tail
+  g.fillStyle = '#1D7FD0'; g.beginPath(); g.moveTo(98, -66); g.lineTo(112, -96); g.lineTo(134, -96); g.lineTo(124, -60); g.closePath(); g.fill();
+  K.fillRR(g, -112, -22, 222, 6, 3, '#1D7FD0'); K.fillRR(g, -112, -15, 222, 3, 2, '#FFB648');
+  g.fillStyle = '#5C7290'; for (d = 0; d < 13; d++) K.fillRR(g, -80 + d * 13, -33, 6, 7, 2, '#5C7290');
+  g.fillStyle = '#3B4E6B'; g.beginPath(); g.moveTo(-118, -26); g.quadraticCurveTo(-112, -38, -96, -36); g.lineTo(-100, -28); g.closePath(); g.fill();
+  g.fillStyle = '#E3EAF3'; g.beginPath(); g.moveTo(-20, -14); g.lineTo(46, 6); g.lineTo(70, 6); g.lineTo(22, -14); g.closePath(); g.fill(); // near wing
+  K.fillRR(g, 6, -4, 40, 16, 8, '#D3DCE8'); K.fillE(g, 6, 4, 4, 8, '#7D8CA3');
+  K.fillRR(g, -84, -6, 4, 12, 2, '#5C6670'); K.fillE(g, -82, 8, 5, 5, '#2A3550'); K.fillRR(g, 40, -6, 4, 12, 2, '#5C6670'); K.fillE(g, 36, 8, 5, 5, '#2A3550'); K.fillE(g, 48, 8, 5, 5, '#2A3550');
+  g.restore();
+  g.restore();
+  K.windowGlass(g, w);
+  g.fillStyle = '#FFFFFF'; g.fillRect(w.x + w.w / 3 - 4, w.y, 8, w.h); g.fillRect(w.x + 2 * w.w / 3 - 4, w.y, 8, w.h);
+
+  // ---- right wall: agency plaque + departures board + clock ----
+  K.shadowed(g, 16, 6, .18, function () { K.fillRR(g, 610, 0, 250, 150, 14, '#22355A'); });
+  K.fillRR(g, 610, 0, 250, 28, 12, '#2C4470'); K.text(g, 'DEPARTURES', 628, 20, 12, 800, '#FFC94A');
+  [['TOKYO', '09:40', '#7EE0A8'], ['BALI', '10:15', '#7EE0A8'], ['MANILA', '11:05', '#FFC94A'], ['HANOI', '12:30', '#7EE0A8']].forEach(function (r, i) {
+    var y = 52 + i * 26; K.text(g, r[0], 628, y, 13, 800, '#FFFFFF'); K.text(g, r[1], 760, y, 13, 700, '#BFD3F0'); K.fillE(g, 838, y - 5, 5, 5, r[2]); });
+  // ---- the agent behind the counter ----
+  H.person(g, H.who({ x: 735, y: 456, s: .6, ph: .9, c: { skin: '#E9BC97', hair: '#1F1715', top: '#1D7FD0', top2: '#165FA0', shirt: '#FFFFFF', low: '#22355A', pocket: '#FFC94A' },
+    outfit: 'blazer', hairStyle: 'pony', headset: '#FF8A5B', feet: false, mood: 'happy', look: -.8, talk: true, hands: [[-96, -200], [70, -170]] }));
+  // counter
+  K.shadowed(g, 22, 8, .18, function () { K.fillRR(g, 590, 330, 300, 142, 16, '#FFFFFF'); });
+  K.fillRR(g, 582, 322, 316, 20, 10, '#E3EEF9'); K.fillRR(g, 610, 362, 260, 70, 12, '#1D7FD0'); K.fillRR(g, 610, 362, 260, 10, 5, '#3A95DF');
+  // counter logo stripe
+  g.fillStyle = '#FFFFFF'; g.save(); g.translate(740, 398); g.scale(1.3, 1.3); g.beginPath(); g.moveTo(9, -7); g.lineTo(-9, 0); g.lineTo(-3, 2); g.lineTo(-1, 8); g.lineTo(2, 3); g.closePath(); g.fill(); g.restore();
+  K.text(g, 'HORIZON TRAVEL', 740, 422, 11, 800, 'rgba(255,255,255,.85)', 'center');
+  // monitor (back to us, screen angled) + brochure stand
+  K.fillRR(g, 806, 262, 74, 58, 8, '#2A3550'); K.fillRR(g, 811, 267, 64, 46, 5, '#E7F7FF'); K.fillRR(g, 817, 274, 36, 6, 3, '#1D7FD0'); K.fillRR(g, 817, 285, 48, 4, 2, '#BFD4E4'); K.fillRR(g, 817, 294, 30, 4, 2, '#BFD4E4'); K.fillRR(g, 836, 314, 14, 10, 2, '#2A3550');
+  K.fillRR(g, 604, 286, 58, 38, 6, '#F4F7FB'); K.fillRR(g, 610, 280, 22, 32, 3, '#FFB648'); K.fillRR(g, 634, 284, 22, 30, 3, '#7EC8F0');
+  // ---- the couple with their roller case ----
+  // roller case (beside the woman, left)
+  g.save(); g.translate(172, 552);
+  K.soft(g, 0, 4, 60, 10, .22);
+  g.strokeStyle = '#7D8899'; g.lineWidth = 6; g.lineCap = 'round'; g.beginPath(); g.moveTo(-18, -110); g.lineTo(-18, -170); g.lineTo(18, -170); g.lineTo(18, -110); g.stroke();
+  K.fillRR(g, -46, -118, 92, 112, 14, '#FF8A5B'); K.fillRR(g, -46, -118, 92, 14, 7, '#FF9F78');
+  g.fillStyle = 'rgba(160,60,30,.18)'; g.fillRect(-20, -104, 6, 92); g.fillRect(14, -104, 6, 92);
+  K.fillRR(g, 22, -96, 26, 34, 4, '#FFFFFF'); K.fillRR(g, 27, -88, 16, 4, 2, '#1D7FD0'); K.fillRR(g, 27, -80, 12, 3, 2, '#C9D3E3');
+  K.fillE(g, -30, 0, 8, 8, '#2A3550'); K.fillE(g, 30, 0, 8, 8, '#2A3550');
+  g.restore();
+  // woman holding the passports
+  H.person(g, H.who({ x: 300, y: 556, s: .7, ph: 2.4, c: { skin: '#E3B089', hair: '#2A1C18', top: '#F6C64B', top2: '#E0A92E', low: '#4A6FA5', shoe: '#F7F8FB' },
+    outfit: 'tee', hairStyle: 'long', short: true, mood: 'happy', look: .7, hands: [[-60, -196], [80, -150]], hold: 'passport' }));
+  // man, glasses, sunhat, pointing at the board
+  H.person(g, H.who({ x: 470, y: 556, s: .72, ph: 1.2, c: { skin: '#C98E66', hair: '#1B1A1E', top: '#4FB3A0', top2: '#3A9583', low: '#E8D9BF', shoe: '#5B4A3E', hat: '#F3E3C0', hatBand: '#1D7FD0' },
+    outfit: 'tee', hairStyle: 'short', hat: 'sunhat', glasses: true, short: true, backpack: '#2C4470', mood: 'happy', look: .9, talk: false, hands: [[-70, -150], [120, -300]] }));
+  g.restore();
+  H.pool(g, 420, 920, 360, 60, .5);
+  H.blur(g, 6, function () { K.plant(g, { x: 1020, y: 990 }, '#7EC8F0', '#A7DBF6'); });
+  H.vignette(g, .09);
+});
+</script>
+</body></html>

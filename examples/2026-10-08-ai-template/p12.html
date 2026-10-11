@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>rag-knowledge-assistants</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+/* 12 · RAG Knowledge Assistants — "Answers grounded in your own documents."
+   A reading room: someone asks in plain language at the desk; the answer card is tied by a glowing thread to the exact
+   binder (and page) it came from on the shelf. Other binders stay dim: nothing outside your documents. */
+:root{--acc:#2F7D5B;--acc-l:#E3F3EA;--acc-d:#1F5E43}
+.q{left:72px;top:572px;width:380px}
+.a{right:72px;top:612px;width:420px}
+.nexi-png{left:462px;top:560px;width:150px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip" data-qa="chip"><i><img src="../assets/img/odoo/knowledge.svg" alt=""></i>AI Solution · <b>RAG Knowledge Assistants</b></div>
+  <h1 class="tp-h" data-qa="headline">Answers grounded in <em>your own documents.</em></h1>
+  <p class="tp-sub" data-qa="sub">Ask in plain language. Get the answer, <b>with the source.</b></p>
+
+  <div class="bub me q" data-qa="question"><small>Question · sample</small>How many unused leave days can I carry over?</div>
+  <div class="bub a" data-qa="answer"><small>Answer · sample</small>Up to 5 days, used by 31 March.<br><span class="src" id="srcchip">HR Policy 2026 · section 4.2</span></div>
+  <img class="nexi-png" src="../assets/sp/nexi/nexi-point-right.png" alt="">
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/solutions/ai-knowledge</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var k = 1.6, sx = -236, sy = 500, F = 470;
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#F7F4EC', '#EFEADC'], wains: ['#DCE9DF', '#CFE0D3'], rail: '#FFFFFF', floor: ['#EADCC6', '#D6C2A4'], base: '#BFD3C4',
+    floorKind: 'planks', floorLine: 'rgba(140,100,60,.14)' });
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+  // binder shelves: left (Manuals, Contracts) and right (Policies, Tickets)
+  var cols = ['#7FB79A', '#E4B66B', '#8FA8D8', '#D99A8A', '#B6A2D6', '#9CC6C0'];
+  function shelf(x, labels, hi) {
+    K.shadowed(g, 16, 6, .16, function () { K.fillRR(g, x, 120, 196, 350, 10, '#FFFFFF'); });
+    for (var r = 0; r < 4; r++) {
+      var y = 140 + r * 82; K.fillRR(g, x + 8, y + 68, 180, 6, 3, '#E5DCCB');
+      for (var b = 0; b < 7; b++) { var bx = x + 14 + b * 24, on = hi && hi[0] === r && hi[1] === b;
+        if (on) continue;
+        K.fillRR(g, bx, y + 8, 20, 60, 3, cols[(b + r * 2) % 6]); K.fillRR(g, bx + 4, y + 18, 12, 14, 2, 'rgba(255,255,255,.7)'); }
+      if (labels[r]) { K.fillRR(g, x - 4, y + 72, 90, 22, 6, '#2F3B52'); K.text(g, labels[r], x + 41, y + 88, 12, 800, '#FFFFFF', 'center'); }
+    }
+    if (hi) { var bx2 = x + 14 + hi[1] * 24, y2 = 140 + hi[0] * 82; // the cited binder, pulled out and lit
+      g.save(); g.translate(bx2 + 10, y2 + 38); g.rotate(-.18); g.shadowColor = 'rgba(80,200,140,.9)'; g.shadowBlur = 26;
+      K.fillRR(g, -12, -34, 24, 64, 3, '#2F7D5B'); g.restore();
+      g.save(); g.translate(bx2 + 10, y2 + 38); g.rotate(-.18); K.fillRR(g, -7, -22, 14, 16, 2, '#FFFFFF'); g.restore(); }
+  }
+  shelf(140, ['Manuals', 'Contracts', '', 'Tickets'], null);
+  shelf(676, ['Policies', '', 'ERP records', ''], [1, 2]);
+  // reading lamp + desk with laptop, person seated behind
+  H.person(g, H.who({ x: 470, y: 470, s: .6, ph: 1.2, c: { skin: '#E6B48E', hair: '#1E1A1A', top: '#8FA8D8', top2: '#6F8CC6', low: '#3A4766', shoe: '#2A2F45' }, outfit: 'blazer', hairStyle: 'long', glasses: true, sit: true, chairCol: '#2F3B52', mood: 'happy', look: .4, talk: true, hands: [[-70, -210], [70, -210]] }));
+  K.shadowed(g, 20, 8, .18, function () { K.fillRR(g, 360, 372, 230, 22, 8, '#C99A6B'); });
+  K.fillRR(g, 372, 394, 14, 76, 4, '#B5865A'); K.fillRR(g, 564, 394, 14, 76, 4, '#B5865A');
+  K.fillRR(g, 430, 330, 92, 44, 6, '#2A3550'); K.fillRR(g, 422, 370, 108, 6, 3, '#3B4A66'); K.fillRR(g, 436, 336, 80, 32, 4, '#E8F6EE');
+  K.fillRR(g, 442, 342, 46, 5, 2, '#2F7D5B'); K.fillRR(g, 442, 352, 62, 4, 2, '#BFD4C6'); K.fillRR(g, 442, 360, 40, 4, 2, '#BFD4C6');
+  K.plant(g, { x: 640, y: 470 }, '#E8DCC8', '#F1E8D8');
+  g.restore();
+  H.pool(g, 540, 1270, 420, 60, .5);
+  H.vignette(g, .08);
+  // pages flying from the shelves into the laptop (retrieval)
+  var lap = { x: sx + 476 * k, y: sy + 356 * k }, pages = '';
+  [[sx + 250 * k, sy + 340 * k, -14], [sx + 270 * k, sy + 420 * k, 10], [sx + 740 * k, sy + 420 * k, 12]].forEach(function (s0, i) {
+    for (var j = 1; j <= 3; j++) { var t = j / 4, x = s0[0] + (lap.x - s0[0]) * t, y = s0[1] + (lap.y - s0[1]) * t - Math.sin(t * Math.PI) * 28, sc = .7 + t * .3, op = .35 + t * .55;
+      pages += '<g transform="translate(' + x.toFixed(0) + ' ' + y.toFixed(0) + ') rotate(' + (s0[2] * (1 - t)).toFixed(0) + ') scale(' + sc.toFixed(2) + ')" opacity="' + op.toFixed(2) + '"><rect x="-22" y="-28" width="44" height="56" rx="6" fill="#fff" stroke="#CFE0D3" stroke-width="2"/><rect x="-14" y="-18" width="28" height="4" rx="2" fill="#2F7D5B"/><rect x="-14" y="-8" width="24" height="3" rx="1.5" fill="#BFD4C6"/><rect x="-14" y="0" width="28" height="3" rx="1.5" fill="#BFD4C6"/><rect x="-14" y="8" width="18" height="3" rx="1.5" fill="#BFD4C6"/></g>'; }
+    var d = 'M' + s0[0] + ' ' + s0[1] + ' Q ' + ((s0[0] + lap.x) / 2) + ' ' + (Math.min(s0[1], lap.y) - 40) + ' ' + lap.x + ' ' + lap.y;
+    pages = '<path d="' + d + '" fill="none" stroke="#9CC6B0" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round" opacity=".8"/>' + pages; });
+  // the citation thread: from the lit binder to the source chip (post px)
+  var bx = sx + (676 + 14 + 2 * 24 + 10) * k, by = sy + (140 + 82 + 38) * k, chip = document.getElementById('srcchip').getBoundingClientRect();
+  var cx = chip.left + chip.width / 2, cy = chip.bottom;
+  document.getElementById('flow').innerHTML = pages +
+    '<defs><filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter></defs>' +
+    '<path d="M' + bx + ' ' + (by - 30) + ' C ' + (bx - 10) + ' ' + (by - 120) + ', ' + (cx + 40) + ' ' + (cy + 120) + ', ' + cx + ' ' + (cy + 4) + '" fill="none" stroke="#5CD69A" stroke-width="12" opacity=".45" filter="url(#gl)"/>' +
+    '<path d="M' + bx + ' ' + (by - 30) + ' C ' + (bx - 10) + ' ' + (by - 120) + ', ' + (cx + 40) + ' ' + (cy + 120) + ', ' + cx + ' ' + (cy + 4) + '" fill="none" stroke="#2F7D5B" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>' +
+    '<circle cx="' + bx + '" cy="' + (by - 30) + '" r="9" fill="#2F7D5B" stroke="#fff" stroke-width="4"/><circle cx="' + cx + '" cy="' + (cy + 4) + '" r="7" fill="#2F7D5B" stroke="#fff" stroke-width="3"/>';
+});
+</script>
+</body></html>

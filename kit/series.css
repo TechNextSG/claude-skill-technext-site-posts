@@ -1,0 +1,21 @@
+/* Series template (AI Solution, 8 Oct 2026): every post in a category shares this frame - logo row and URL pill
+   unchanged from brand.css, then a category chip, the headline and the subline at fixed positions. Only the scene
+   (canvas + overlays below y ~540) changes per post. Load after scene.css. */
+.tp-chip{position:absolute;z-index:7;left:72px;top:186px;display:inline-flex;align-items:center;gap:12px;background:#fff;border-radius:999px;
+  padding:11px 22px 12px 12px;font:700 22px/1 var(--font-display);color:var(--ink);box-shadow:0 2px 6px rgba(31,31,61,.06),0 16px 32px -18px rgba(31,31,61,.4)}
+.tp-chip i{width:34px;height:34px;border-radius:50%;background:var(--acc-l,#EAF1FC);display:grid;place-items:center;font-style:normal}
+.tp-chip i img{width:22px;height:22px}
+.tp-chip b{color:var(--acc,#3167CA);font-weight:800}
+.tp-h{position:absolute;z-index:7;left:72px;right:72px;top:256px;font:800 78px/1.0 var(--font-display);letter-spacing:-.034em;color:var(--ink)}
+.tp-h em{font-style:normal;color:var(--acc,#3167CA)}
+.tp-sub{position:absolute;z-index:7;left:72px;right:140px;top:446px;font:500 26px/1.4 var(--font-body);color:#45465F}
+.tp-sub b{color:var(--ink);font-weight:700}
+#flow{position:absolute;inset:0;z-index:4;pointer-events:none}
+/* chat/question bubble (soft) */
+.bub{position:absolute;z-index:5;background:#fff;border-radius:22px 22px 22px 6px;padding:16px 20px;font:600 21px/1.35 var(--font-body);color:var(--ink);
+  box-shadow:0 2px 6px rgba(31,31,61,.07),0 22px 44px -22px rgba(31,31,61,.42)}
+.bub small{display:block;font:700 15px/1 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--label);margin-bottom:8px}
+.bub.me{border-radius:22px 22px 6px 22px;background:var(--acc,#3167CA);color:#fff}
+.bub.me small{color:rgba(255,255,255,.8)}
+.src{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:var(--acc-l,#EAF1FC);color:var(--acc-d,#2552A6);border-radius:10px;padding:7px 11px;font:700 16px/1 var(--font-display)}
+.nexi-png{position:absolute;z-index:5;pointer-events:none}

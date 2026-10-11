@@ -1,0 +1,82 @@
+/* Social-post staging for technext.asia pages. Loaded AFTER the page's own CSS, so the card, buttons, chips and
+   caption keep the website's skin; this file only places things in a 1080x1440 (3:4) frame. */
+html.sp-html,html.sp-html body{margin:0;padding:0;width:1080px;height:1440px;overflow:hidden;background:#fff}
+.sp-post{min-height:0!important}
+.sp-frame{position:relative;width:1080px;height:1440px;overflow:hidden;isolation:isolate}
+.sp-cam{position:absolute;inset:0;overflow:hidden;z-index:0}
+.sp-scene{position:absolute;max-width:none;display:block}
+
+/* the page chain is kept for the world-scoped skins, but it must not lay out like the live hero */
+.sp-post main{position:absolute;inset:0;z-index:2;display:block;padding:0;margin:0}
+.sp-post .ixw-hero{position:absolute!important;inset:0!important;height:auto!important;min-height:0!important;max-height:none!important;
+  background:none!important;overflow:visible!important;padding:0!important;margin:0!important}
+.sp-post .ixw-hero::before,.sp-post .ixw-hero::after{display:none!important}
+.sp-post .ixw-hero-in{position:static!important;max-width:none!important;padding:0!important;margin:0!important;width:auto!important;height:auto!important}
+
+/* the site card, re-placed and scaled (zoom keeps the world's borders/lip proportions crisp) */
+.sp-card{position:absolute;left:var(--cx);top:var(--cy);width:var(--cw);zoom:var(--cz);transform:rotate(var(--cr));transform-origin:30% 0}
+.sp-card .ixw-copy{position:relative!important;inset:auto!important;left:auto!important;top:auto!important;transform:none!important;
+  width:auto!important;max-width:none!important;margin:0!important;opacity:1!important;visibility:visible!important;animation:none!important;translate:none!important}
+.sp-card .ixw-copy *{animation:none!important;transition:none!important}
+.sp-card .m-short{display:none!important}.sp-card .m-full{display:inline!important}
+.sp-card .actions{flex-wrap:nowrap}
+.sp-card .actions .btn{white-space:nowrap}
+.sp-card .btn-ghost{text-transform:none;letter-spacing:0}
+
+/* the page's own Nexi caption bubble, static */
+.sp-cap{position:absolute;z-index:3;zoom:1.12}
+.sp-cap .ixw-cap{position:relative!important;inset:auto!important;left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;
+  transform:none!important;translate:none!important;width:auto!important;max-width:none!important;opacity:1!important;visibility:visible!important;margin:0!important;animation:none!important}
+.sp-cap .ixw-cap *{animation:none!important;transition:none!important}
+.sp-cap .ixw-cap-av b{display:none!important}
+.sp-cap .ixw-cap-av b[data-for="tn"]{display:none!important}
+
+/* fixed social frame */
+.sp-logos{position:absolute;z-index:5;left:0;right:0;top:0;height:112px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;
+  background:var(--sp-tint,transparent)}
+.sp-tn{height:46px;width:auto;display:block}
+.sp-odoo{height:40px;width:auto;display:block}
+.sp-foot{position:absolute;z-index:5;left:0;right:0;bottom:30px;display:flex;justify-content:center;pointer-events:none}
+.sp-url{font:700 22px/1 var(--font-display,"Plus Jakarta Sans",sans-serif);letter-spacing:.01em;color:#16243F;background:#fff;
+  border:2px solid #16243F;border-radius:999px;padding:12px 24px 13px;box-shadow:0 4px 0 #16243F}
+
+/* ?qa=1 outlines (dbg) */
+.sp-qa *{outline:1px solid rgba(255,0,80,.35)}
+
+/* ---------- dynamic layer: the website's own vocabulary (ink outline + hard lip, Caveat hand notes) ---------- */
+.sp-fx{position:absolute;inset:0;z-index:1;pointer-events:none}
+.sp-fx-top{position:absolute;inset:0;z-index:4;pointer-events:none}
+.sp-fx svg,.sp-fx-top svg{position:absolute;overflow:visible}
+/* light: stage spotlight / sun wash / vignette, set per post with --lx --ly */
+.sp-light{position:absolute;inset:0;background:radial-gradient(ellipse 520px 460px at var(--lx,50%) var(--ly,60%),rgba(255,236,170,.0) 0,rgba(255,236,170,.0) 55%,rgba(27,31,59,.34) 100%)}
+.sp-beam{position:absolute;width:520px;height:1100px;transform-origin:50% 0;background:linear-gradient(180deg,rgba(255,240,190,.55),rgba(255,240,190,0));
+  clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);mix-blend-mode:screen}
+/* hand note sticker */
+.sp-note{position:absolute;font:700 34px/1.02 var(--font-hand);color:var(--ink-n,#1B1F3B);background:#fff;border:2.5px solid #1B1F3B;border-radius:14px;
+  padding:10px 18px 12px;box-shadow:0 5px 0 #1B1F3B;white-space:nowrap}
+.sp-note small{display:block;font:700 15px/1.2 var(--font-display);letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
+.sp-note.is-tape::before{content:"";position:absolute;left:50%;top:-14px;width:74px;height:24px;margin-left:-37px;background:rgba(240,215,154,.9);transform:rotate(-4deg);border-radius:3px}
+/* hand-drawn arrow: <svg class="sp-arrow"><path d="..."/></svg> */
+.sp-arrow path{fill:none;stroke:#1B1F3B;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+.sp-arrow .head{stroke-width:4.5}
+.sp-arrow.is-light path{stroke:#fff}
+/* stamp */
+.sp-stamp{position:absolute;font:800 30px/1 var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:var(--sc,#E5484D);
+  border:4px solid currentColor;border-radius:12px;padding:12px 18px;background:rgba(255,255,255,.88);box-shadow:inset 0 0 0 3px #fff,0 0 0 2px rgba(255,255,255,.7)}
+.sp-stamp small{display:block;font:700 15px/1.2 var(--font-display);letter-spacing:.12em;margin-top:6px;color:#1B1F3B}
+/* chips (Odoo stage / entity tags) */
+.sp-chip{position:absolute;display:inline-flex;align-items:center;gap:10px;font:800 24px/1 var(--font-display);color:#1B1F3B;background:#fff;
+  border:2.5px solid #1B1F3B;border-radius:999px;padding:12px 20px 13px 14px;box-shadow:0 5px 0 #1B1F3B;white-space:nowrap}
+.sp-chip i{width:22px;height:22px;border-radius:50%;background:var(--c,#3167CA);border:2px solid #1B1F3B;flex:none}
+.sp-chip em{font-style:normal;font:600 18px/1 var(--font-body);opacity:.7}
+.sp-chip.is-on{background:var(--c,#21B799);color:#fff}
+.sp-chip.is-on i{background:#fff}
+/* speed lines */
+.sp-speed{position:absolute;height:6px;border-radius:6px;background:#fff;opacity:.85}
+/* post legibility: the card's small print is sized for a desktop screen; a phone feed needs >= 15 px */
+.sp-card .ixw-ep,.sp-card .ixw-ep *{font-size:16px!important}
+.sp-card .orc-apps a,.sp-card .twr-tags a,.sp-card .twr-tags span{font-size:16px!important}
+.sp-card .orc-apps img{width:20px!important;height:20px!important}
+.sp-card h1{font-size:54px!important;line-height:1.02!important}
+.sp-card .h1-hand{font-size:34px!important}
+.sp-card .lead{font-size:20px!important;line-height:1.42!important}

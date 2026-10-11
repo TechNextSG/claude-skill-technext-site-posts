@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>pain-lost-leads</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<link rel="stylesheet" href="../assets/pain.css">
+<style>
+/* 25 · Pain point: lost leads. Scenario: the sales lead sits under a rain of web forms, emails, WhatsApp chats and phone
+   notes; some tumble off the desk unanswered. With Odoo CRM the same leads land in one pipeline, each with a stage
+   and an owner. */
+:root{--acc:#C2357F;--acc-l:#FBE6F0;--acc-d:#9A2564}
+.l1{left:72px;top:560px}.l2{left:600px;top:560px}
+.vs{left:508px;top:860px}
+.n1{left:72px;top:1180px;width:250px}.n2{left:760px;top:1180px;width:248px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip pain" data-qa="chip"><i><img src="../assets/img/odoo/crm.svg" alt=""></i>Pain point · <b>Lost leads</b></div>
+  <h1 class="tp-h" data-qa="headline">Leads slipping through<br><span class="pain">five inboxes?</span></h1>
+  <p class="tp-sub" data-qa="sub">Leads with no owner. <b>Odoo CRM assigns a stage and an owner.</b></p>
+
+  <span class="lab today l1" data-qa="lab-today"><i></i>Today</span>
+  <span class="lab fix l2" data-qa="lab-fix"><i></i>With Odoo</span>
+  <div class="vs" data-qa="vs">vs</div>
+  <div class="note bad n1" data-qa="note-bad">7 leads unanswered<small>this week, no owner · sample</small></div>
+  <div class="note good n2" data-qa="note-good">Every lead owned<small>stage + salesperson · sample</small></div>
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/odoo/crm-development</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var TOP = 540, FY = 1150, ACC = '#C2357F', SEAM = function (y) { return 560 - (y - TOP) * 0.08; };
+  function half(left, fn) { g.save(); g.beginPath();
+    if (left) { g.moveTo(0, TOP); g.lineTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.lineTo(0, 1440); }
+    else { g.moveTo(SEAM(TOP), TOP); g.lineTo(1080, TOP); g.lineTo(1080, 1440); g.lineTo(SEAM(1440), 1440); }
+    g.closePath(); g.clip(); fn(); g.restore(); }
+  H.grad(g, 0, 0, 1080, TOP, '#F6F7FB', '#EEF1F7');
+  function room(x0, x1, wallA, wallB, wains, floorA, floorB) {
+    H.grad(g, x0, TOP, x1 - x0, FY - TOP, wallA, wallB);
+    H.grad(g, x0, FY - 190, x1 - x0, 190, wains[0], wains[1]); g.fillStyle = 'rgba(255,255,255,.7)'; g.fillRect(x0, FY - 196, x1 - x0, 6);
+    H.grad(g, x0, FY, x1 - x0, 1440 - FY, floorA, floorB);
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 2; g.beginPath(); for (var d = 1; d < 7; d++) { var yy = FY + Math.pow(d / 6, 1.6) * (1440 - FY); g.moveTo(x0, yy); g.lineTo(x1, yy); } g.stroke();
+  }
+  function desk(cx) { K.shadowed(g, 18, 8, .18, function () { K.fillRR(g, cx - 170, 1120, 340, 22, 10, '#C99A6B'); }); K.fillRR(g, cx - 156, 1142, 14, 120, 4, '#B5865A'); K.fillRR(g, cx + 142, 1142, 14, 120, 4, '#B5865A'); }
+  // ---- lead "items": envelope, web form, WhatsApp bubble, phone note (sticky) ----
+  function envelope(c) { K.fillRR(g, -34, -23, 68, 46, 6, c || '#FFFFFF'); g.strokeStyle = '#C9CEDB'; g.lineWidth = 3; g.lineJoin = 'round';
+    g.beginPath(); g.moveTo(-30, -19); g.lineTo(0, 4); g.lineTo(30, -19); g.stroke(); }
+  function form() { K.fillRR(g, -30, -38, 60, 76, 7, '#FFFFFF'); K.fillRR(g, -30, -38, 60, 14, 7, '#3167CA');
+    for (var i = 0; i < 3; i++) K.fillRR(g, -22, -16 + i * 15, 44, 9, 3, '#E3E6EE'); K.fillRR(g, -22, 28, 26, 7, 3, '#3167CA'); }
+  function chat() { g.fillStyle = '#25A35A'; g.beginPath(); g.arc(0, 0, 28, 0, 7); g.fill();
+    g.beginPath(); g.moveTo(-22, 14); g.lineTo(-30, 32); g.lineTo(-6, 24); g.closePath(); g.fill();
+    [-11, 0, 11].forEach(function (x) { K.fillE(g, x, 0, 4, 4, '#FFFFFF'); }); }
+  function sticky(col) { K.fillRR(g, -30, -30, 60, 60, 4, col || '#FFE07A'); g.fillStyle = 'rgba(0,0,0,.06)'; g.fillRect(-30, -30, 60, 10);
+    g.strokeStyle = 'rgba(80,60,20,.45)'; g.lineWidth = 3; g.lineCap = 'round'; g.beginPath(); g.moveTo(-20, -4); g.lineTo(16, -6); g.moveTo(-20, 8); g.lineTo(8, 8); g.moveTo(-20, 19); g.lineTo(12, 18); g.stroke(); }
+  function phoneNote() { sticky('#FFB8C9'); g.strokeStyle = '#B5355A'; g.lineWidth = 4; g.beginPath(); g.arc(16, -14, 7, 0, 7); g.stroke(); }
+  var DRAW = { e: envelope, f: form, c: chat, s: sticky, p: phoneNote };
+  function item(k, x, y, rot, s, streak) {
+    if (streak) { g.strokeStyle = 'rgba(90,98,130,.35)'; g.lineWidth = 3; g.lineCap = 'round'; g.beginPath();
+      [-16, 0, 16].forEach(function (dx) { g.moveTo(x + dx, y - 44 - streak); g.lineTo(x + dx, y - 44); }); g.stroke(); }
+    g.save(); g.translate(x, y); g.rotate(rot * Math.PI / 180); g.scale(s || 1, s || 1);
+    K.shadowed(g, 12, 5, .2, function () { DRAW[k](); }); DRAW[k](); g.restore(); }
+  function badge(x, y, col, kind) { K.shadowed(g, 10, 4, .18, function () { K.fillE(g, x, y, 24, 24, '#FFFFFF'); }); K.fillE(g, x, y, 18, 18, col);
+    g.save(); g.translate(x, y); g.strokeStyle = '#fff'; g.fillStyle = '#fff'; g.lineWidth = 3; g.lineCap = 'round'; g.lineJoin = 'round';
+    if (kind === 'e') { g.strokeRect(-9, -6, 18, 12); g.beginPath(); g.moveTo(-9, -6); g.lineTo(0, 1); g.lineTo(9, -6); g.stroke(); }
+    else if (kind === 'f') { g.fillRect(-7, -7, 14, 3); g.fillRect(-7, -1, 14, 3); g.fillRect(-7, 5, 8, 3); }
+    else if (kind === 'd') { g.beginPath(); g.moveTo(2, -9); g.lineTo(-5, 1); g.lineTo(1, 1); g.lineTo(-2, 9); g.lineTo(6, -2); g.lineTo(0, -2); g.closePath(); g.fill(); }
+    else if (kind === 'c') { [-6, 0, 6].forEach(function (x) { g.beginPath(); g.arc(x, 0, 2.2, 0, 7); g.fill(); }); }
+    else { g.beginPath(); g.moveTo(-7, -8); g.quadraticCurveTo(-9, 6, 7, 8); g.stroke(); }
+    g.restore(); }
+
+  // ---- TODAY: leads raining down from four channels, some falling off the desk ----
+  half(true, function () {
+    room(0, 600, '#DADDE8', '#CDD1DE', ['#BFC4D3', '#B5BACB'], '#C9CCD6', '#B8BCC8');
+    g.fillStyle = 'rgba(40,50,80,.10)'; g.fillRect(0, TOP, 600, 1440 - TOP);
+    // four channel "spouts" on the wall
+    [[95, '#3167CA', 'f'], [180, '#D9473F', 'e'], [265, '#25A35A', 'c'], [350, '#E9A23B', 'p'], [435, '#7B5BD6', 'd']].forEach(function (b) { badge(b[0], 662, b[1], b[2]); });
+    H.person(g, H.who({ x: 300, y: 1240, s: .66, ph: .6, c: { skin: '#E3AE86', hair: '#16131A', top: '#8E7F96', top2: '#76697E', low: '#3A4766' }, outfit: 'blazer', hairStyle: 'pony', sit: true, chairCol: '#4A5068', mood: 'wow', look: -.2, hands: [[-92, -386], [92, -386]] }));
+    desk(300);
+    // piles on the desk
+    for (var i = 0; i < 5; i++) K.fillRR(g, 150 + (i % 2) * 4, 1110 - i * 7, 64, 8, 2, i % 2 ? '#FFFFFF' : '#EEF0F5');
+    item('s', 410, 1100, 8, .7); item('e', 445, 1104, -6, .7);
+    // the rain
+    item('f', 110, 760, -12, 1, 30); item('e', 205, 800, 14, 1, 40); item('c', 330, 760, -8, 1, 26);
+    item('p', 440, 790, 16, 1, 34); item('s', 150, 880, 22, .95, 24); item('e', 410, 900, -18, .95, 28);
+    item('c', 90, 1000, 10, .85, 20); item('f', 500, 1010, 24, .85, 22);
+    // dropping off the desk edge, unanswered
+    item('e', 488, 1170, 38, .85); item('s', 470, 1262, -30, .8); item('c', 505, 1300, 60, .7);
+    g.save(); g.translate(410, 1226); g.rotate(-.18); K.shadowed(g, 8, 3, .2, function () { K.fillRR(g, -66, -15, 132, 30, 15, '#D9473F'); });
+    K.text(g, 'no reply · 3 days', 0, 6, 15, 800, '#FFFFFF', 'center'); g.restore();
+    // sweat drops
+    [[384, 975], [396, 1000]].forEach(function (d) { g.fillStyle = '#9FD3F2'; g.beginPath(); g.moveTo(d[0], d[1] - 12); g.quadraticCurveTo(d[0] + 9, d[1] + 2, d[0], d[1] + 6); g.quadraticCurveTo(d[0] - 9, d[1] + 2, d[0], d[1] - 12); g.fill(); });
+  });
+
+  // ---- WITH ODOO: the same leads land in one CRM pipeline ----
+  half(false, function () {
+    room(480, 1080, '#FCF3F7', '#F6E6EE', ['#F0D3E1', '#EAC6D7'], '#F8F2F5', '#EBDDE4');
+    // pipeline board on the wall
+    var BX = 628, BY = 640, BW = 420, BH = 262;
+    K.shadowed(g, 22, 8, .16, function () { K.fillRR(g, BX, BY, BW, BH, 16, '#FFFFFF'); });
+    K.fillRR(g, BX, BY, BW, 34, 16, '#FBE6F0'); g.fillStyle = '#FBE6F0'; g.fillRect(BX, BY + 18, BW, 16);
+    K.text(g, 'CRM · Pipeline', BX + 16, BY + 23, 15, 800, '#9A2564');
+    var cols = ['New', 'Qualified', 'Proposition', 'Won'], cw = 96, gap = 8, x0 = BX + 14,
+      av = [['#3167CA', 'M'], ['#C2357F', 'J'], ['#E07B28', 'A'], ['#14A38B', 'R'], ['#6B4FA0', 'K']];
+    var counts = [3, 2, 2, 2];
+    cols.forEach(function (c, ci) {
+      var cx = x0 + ci * (cw + gap);
+      K.fillRR(g, cx, BY + 44, cw, BH - 56, 10, ci === 3 ? '#E9F7EF' : '#F5F6FA');
+      K.text(g, c, cx + 8, BY + 64, 13, 800, ci === 3 ? '#137A4A' : '#3A3F55');
+      K.fillRR(g, cx + 8, BY + 71, cw - 16, 3, 1.5, ci === 3 ? '#1F9D6B' : ACC);
+      for (var r = 0; r < counts[ci]; r++) {
+        var cy = BY + 82 + r * 54, a = av[(ci * 2 + r) % av.length];
+        K.shadowed(g, 6, 2, .12, function () { K.fillRR(g, cx + 6, cy, cw - 12, 46, 7, '#FFFFFF'); });
+        K.fillRR(g, cx + 13, cy + 9, 48, 6, 3, '#3A3F55'); K.fillRR(g, cx + 13, cy + 21, 36, 5, 2.5, '#D6D9E3');
+        K.fillE(g, cx + cw - 24, cy + 31, 10, 10, a[0]); K.text(g, a[1], cx + cw - 24, cy + 36, 12, 800, '#FFFFFF', 'center');
+        if (ci === 3) { K.fillE(g, cx + 20, cy + 34, 6, 6, '#1F9D6B'); }
+        else { K.fillRR(g, cx + 13, cy + 31, 24, 6, 3, ['#9FC0F5', '#F3B2D2', '#F8C99E'][ci]); }
+      }
+    });
+    // the person, calm, with the CRM on her monitor beside her
+    H.person(g, H.who({ x: 770, y: 1240, s: .66, ph: 1.4, c: { skin: '#E3AE86', hair: '#16131A', top: '#C2357F', top2: '#9A2564', low: '#3A4766' }, outfit: 'blazer', hairStyle: 'pony', sit: true, chairCol: '#2F3B52', mood: 'happy', look: .4, hands: [[-70, -210], [70, -210]] }));
+    desk(770);
+    K.fillRR(g, 872, 1000, 156, 104, 10, '#2A3550'); K.fillRR(g, 879, 1007, 142, 82, 6, '#FFFFFF'); K.fillRR(g, 943, 1104, 14, 16, 3, '#2A3550');
+    K.fillRR(g, 879, 1007, 142, 14, 6, '#FBE6F0');
+    for (var c2 = 0; c2 < 4; c2++) { K.fillRR(g, 885 + c2 * 34, 1026, 30, 56, 4, c2 === 3 ? '#E9F7EF' : '#F2F3F8');
+      for (var r2 = 0; r2 < (c2 === 0 ? 3 : 2); r2++) K.fillRR(g, 888 + c2 * 34, 1030 + r2 * 17, 24, 13, 3, '#FFFFFF'); }
+    K.fillRR(g, 640, 1104, 70, 16, 4, '#FFFFFF'); K.fillRR(g, 680, 1092, 26, 26, 6, '#FFFFFF'); K.fillRR(g, 684, 1096, 18, 8, 3, '#C98E55');
+  });
+  g.strokeStyle = '#FFFFFF'; g.lineWidth = 10; g.beginPath(); g.moveTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.stroke();
+  H.vignette(g, .07);
+  // incoming channels on the right merge into one line that feeds the "New" column; one card moving New -> Qualified
+  function src(x, y, col, inner) { return '<g transform="translate(' + x + ' ' + y + ')"><circle r="22" fill="#fff"/><circle r="16" fill="' + col + '"/>' + inner + '</g>'; }
+  document.getElementById('flow').innerHTML =
+    '<path d="M638 935 C 664 935, 676 905, 676 912 M638 975 C 664 975, 676 945, 676 912 M638 1015 C 664 1015, 676 985, 676 912 M638 1055 C 664 1055, 676 990, 676 912 M638 1095 C 664 1095, 676 990, 676 912" fill="none" stroke="#C2357F" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>' +
+    '<path d="M668 914 L676 904 L684 914" fill="none" stroke="#C2357F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<g transform="translate(620 935)"><circle r="19" fill="#fff"/><circle r="14" fill="#3167CA"/><rect x="-6" y="-6" width="12" height="3" fill="#fff"/><rect x="-6" y="-1" width="12" height="3" fill="#fff"/><rect x="-6" y="4" width="7" height="3" fill="#fff"/></g>' +
+    '<g transform="translate(620 975)"><circle r="19" fill="#fff"/><circle r="14" fill="#D9473F"/><rect x="-7" y="-5" width="14" height="10" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M-7 -5 L0 1 L7 -5" fill="none" stroke="#fff" stroke-width="2.2"/></g>' +
+    '<g transform="translate(620 1015)"><circle r="19" fill="#fff"/><circle r="14" fill="#25A35A"/><circle cx="-5" r="2" fill="#fff"/><circle r="2" fill="#fff"/><circle cx="5" r="2" fill="#fff"/></g>' +
+    '<g transform="translate(620 1055)"><circle r="19" fill="#fff"/><circle r="14" fill="#E9A23B"/><path d="M-5 -7 Q-7 5 6 7" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></g>' +
+    '<g transform="translate(620 1095)"><circle r="19" fill="#fff"/><circle r="14" fill="#7B5BD6"/><path d="M2 -8 L-4 1 L1 1 L-2 8 L5 -2 L0 -2 Z" fill="#fff"/></g>' +
+    '<path d="M724 762 C 734 742, 754 742, 764 760" fill="none" stroke="#C2357F" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>';
+});
+</script>
+</body></html>

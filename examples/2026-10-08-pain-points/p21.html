@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>pain-stock-mismatch</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<link rel="stylesheet" href="../assets/pain.css">
+<style>
+/* 21 · Pain point: stock mismatch. Scenario: the store manager faces an empty shelf while the system still says 20,
+   count sheets flying and a customer waiting. With Odoo, each POS sale moves stock live (till -> stock card "19 left")
+   and the reorder is drafted. */
+:root{--acc:#E07B28;--acc-l:#FDEEDF;--acc-d:#B35E17}
+.l1{left:72px;top:560px}.l2{left:600px;top:560px}
+.vs{left:508px;top:860px}
+.n1{left:72px;top:1180px;width:250px}.n2{left:760px;top:1180px;width:248px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip pain" data-qa="chip"><i><img src="../assets/img/odoo/stock.svg" alt=""></i>Pain point · <b>Stock mismatch</b></div>
+  <h1 class="tp-h" data-qa="headline">The system says 20.<br><span class="pain">The shelf says zero.</span></h1>
+  <p class="tp-sub" data-qa="sub">Store counts drift from the books. <b>Odoo updates stock on every sale.</b></p>
+
+  <span class="lab today l1" data-qa="lab-today"><i></i>Today</span>
+  <span class="lab fix l2" data-qa="lab-fix"><i></i>With Odoo</span>
+  <div class="vs" data-qa="vs">vs</div>
+  <div class="note bad n1" data-qa="note-bad">Says 20, shelf empty<small>counted weeks ago · sample</small></div>
+  <div class="note good n2" data-qa="note-good">Sold 1, now 19 left<small>reorder drafted · sample</small></div>
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/odoo/apps/inventory</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var TOP = 540, FY = 1150, SEAM = function (y) { return 560 - (y - TOP) * 0.08; };
+  function half(left, fn) { g.save(); g.beginPath();
+    if (left) { g.moveTo(0, TOP); g.lineTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.lineTo(0, 1440); }
+    else { g.moveTo(SEAM(TOP), TOP); g.lineTo(1080, TOP); g.lineTo(1080, 1440); g.lineTo(SEAM(1440), 1440); }
+    g.closePath(); g.clip(); fn(); g.restore(); }
+  H.grad(g, 0, 0, 1080, TOP, '#F6F7FB', '#EEF1F7');
+  function room(x0, x1, wallA, wallB, wains, floorA, floorB) {
+    H.grad(g, x0, TOP, x1 - x0, FY - TOP, wallA, wallB);
+    H.grad(g, x0, FY - 190, x1 - x0, 190, wains[0], wains[1]); g.fillStyle = 'rgba(255,255,255,.7)'; g.fillRect(x0, FY - 196, x1 - x0, 6);
+    H.grad(g, x0, FY, x1 - x0, 1440 - FY, floorA, floorB);
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 2; g.beginPath(); for (var d = 1; d < 7; d++) { var yy = FY + Math.pow(d / 6, 1.6) * (1440 - FY); g.moveTo(x0, yy); g.lineTo(x1, yy); } g.stroke();
+  }
+  // a store shelf unit; fill = array of item colours per row (null = empty row)
+  function shelf(x, y, w, h, rows, fill, wood) {
+    K.shadowed(g, 16, 8, .16, function () { K.fillRR(g, x, y, w, h, 8, wood[0]); });
+    K.fillRR(g, x + 10, y + 10, w - 20, h - 20, 4, wood[1]);
+    var rh = (h - 20) / rows;
+    for (var r = 0; r < rows; r++) {
+      var by = y + 10 + (r + 1) * rh;
+      K.fillRR(g, x + 6, by - 8, w - 12, 10, 3, wood[0]);
+      var items = fill[r];
+      if (items) for (var i = 0; i < items.n; i++) { var bx = x + 18 + i * ((w - 36) / items.n); K.fillRR(g, bx, by - 8 - items.h, (w - 36) / items.n - 6, items.h, 4, i % 2 ? items.c : items.c2); K.fillRR(g, bx + 4, by - 8 - items.h + 8, (w - 36) / items.n - 14, 8, 2, 'rgba(255,255,255,.7)'); }
+    }
+  }
+  function drop(x, y) { g.fillStyle = '#9FD3F2'; g.beginPath(); g.moveTo(x, y - 12); g.quadraticCurveTo(x + 9, y + 2, x, y + 6); g.quadraticCurveTo(x - 9, y + 2, x, y - 12); g.fill(); }
+
+  // ---- TODAY: dim store, empty shelf, wall screen still says 20, count sheets flying, customer waiting ----
+  half(true, function () {
+    room(0, 600, '#DADDE8', '#CDD1DE', ['#BFC4D3', '#B5BACB'], '#C9CCD6', '#B8BCC8');
+    g.fillStyle = 'rgba(40,50,80,.10)'; g.fillRect(0, TOP, 600, 1440 - TOP);
+    // wall screen: "In stock 20"
+    K.shadowed(g, 14, 6, .2, function () { K.fillRR(g, 72, 628, 210, 112, 12, '#2A3550'); });
+    K.fillRR(g, 81, 637, 192, 94, 8, '#FFFFFF'); K.fillRR(g, 81, 637, 192, 22, 8, '#E9EBF2');
+    K.text(g, 'Rice 5kg · in stock', 92, 654, 13, 700, '#6A7088');
+    K.text(g, '20', 92, 716, 50, 800, '#3A3F55'); K.text(g, 'units', 160, 714, 18, 700, '#8A90A6');
+    K.fillE(g, 252, 700, 12, 12, '#7C86A3');
+    // empty shelf behind the customer, red "0" price tag
+    shelf(40, 790, 230, 350, 3, [null, null, { n: 2, h: 34, c: '#AEB4C6', c2: '#9AA1B6' }], ['#A9AEBF', '#C3C7D4']);
+    K.fillRR(g, 120, 892, 70, 30, 6, '#FFFFFF'); K.text(g, '0 left', 155, 913, 15, 800, '#D9473F', 'center');
+    // customer waiting (casual), looking at the manager
+    H.person(g, H.who({ x: 150, y: 1262, s: .56, ph: 2.1, c: { skin: '#D9A27A', hair: '#1E1A1A', top: '#9AA3BC', top2: '#8790AA', low: '#4A556F' }, outfit: 'tee', hairStyle: 'long', mood: 'calm', look: .8, hold: 'bags' }));
+    // the store manager, hands on head
+    H.person(g, H.who({ x: 390, y: 1262, s: .64, ph: .6, c: { skin: '#E3AE86', hair: '#1A1717', top: '#8A93AE', top2: '#737C99', low: '#3A4766' }, outfit: 'tee', apron: '#7E879F', hairStyle: 'short', mood: 'wow', look: -.5, hands: [[-92, -386], [92, -386]] }));
+    drop(470, 975); drop(482, 1002);
+    // count sheets flying out of the clipboard
+    [[330, 800, -18], [420, 770, 14], [480, 860, -8], [300, 880, 22], [395, 860, -26]].forEach(function (p, i) {
+      g.save(); g.translate(p[0], p[1]); g.rotate(p[2] * Math.PI / 180);
+      K.shadowed(g, 10, 4, .2, function () { K.fillRR(g, -30, -38, 60, 76, 5, '#FFFFFF'); });
+      if (i % 2 === 0) K.fillRR(g, -12, -44, 24, 12, 3, '#8A6A4A');
+      for (var r = 0; r < 5; r++) { K.fillRR(g, -20, -22 + r * 11, 28, 4, 2, '#D3D7E2'); K.fillRR(g, 12, -22 + r * 11, 8, 4, 2, r === (i + 1) % 5 ? '#D9473F' : '#D3D7E2'); }
+      g.restore(); });
+  });
+
+  // ---- WITH ODOO: bright store, stocked shelf, POS sale ticks stock down live ----
+  half(false, function () {
+    room(480, 1080, '#FFF7EF', '#FBEBDC', ['#F6D9BE', '#F1CEAE'], '#FBF5EF', '#EEE2D6');
+    // stocked shelf at the back right
+    shelf(870, 820, 190, 300, 3, [{ n: 3, h: 40, c: '#F2A65A', c2: '#E07B28' }, { n: 3, h: 40, c: '#7FB6E8', c2: '#3167CA' }, { n: 2, h: 44, c: '#F2A65A', c2: '#E59448' }], ['#D9A877', '#F3DCC3']);
+    // the manager behind the counter
+    H.person(g, H.who({ x: 760, y: 1262, s: .64, ph: 1.4, c: { skin: '#E3AE86', hair: '#1A1717', top: '#E07B28', top2: '#C2651A', low: '#3A4766' }, outfit: 'tee', apron: '#B35E17', hairStyle: 'short', mood: 'happy', look: .6, hands: [[-80, -200], [80, -200]] }));
+    // counter
+    K.shadowed(g, 18, 8, .18, function () { K.fillRR(g, 560, 1110, 340, 24, 10, '#C99A6B'); });
+    K.fillRR(g, 572, 1134, 316, 150, 6, '#E9C9A6'); K.fillRR(g, 572, 1134, 316, 10, 4, 'rgba(0,0,0,.06)');
+    // POS till beside him (left), screen low
+    K.fillRR(g, 600, 1040, 96, 64, 8, '#2A3550'); K.fillRR(g, 606, 1046, 84, 50, 5, '#FFFFFF');
+    K.fillRR(g, 612, 1052, 44, 7, 3, '#E07B28'); K.fillRR(g, 612, 1066, 70, 5, 2, '#E3E6EE'); K.fillRR(g, 612, 1078, 56, 5, 2, '#E3E6EE');
+    K.fillRR(g, 640, 1104, 16, 8, 2, '#2A3550');
+    // customer with bags, happy
+    H.person(g, H.who({ x: 985, y: 1262, s: .56, ph: 2.6, c: { skin: '#D9A27A', hair: '#1E1A1A', top: '#F2A65A', top2: '#E59448', low: '#4A556F' }, outfit: 'tee', hairStyle: 'long', mood: 'happy', look: -.8, hold: 'bags' }));
+  });
+  g.strokeStyle = '#FFFFFF'; g.lineWidth = 10; g.beginPath(); g.moveTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.stroke();
+  H.vignette(g, .07);
+
+  var A = '#E07B28';
+  function card(x, y, w, head, big, col) {
+    return '<g transform="translate(' + x + ' ' + y + ')"><rect x="0" y="0" width="' + w + '" height="74" rx="12" fill="#fff" filter="url(#sh)"/>' +
+      '<rect x="0" y="0" width="6" height="74" rx="3" fill="' + col + '"/>' +
+      '<text x="18" y="25" font-family="Inter,sans-serif" font-size="14" font-weight="600" fill="#6A7088">' + head + '</text>' +
+      '<text x="18" y="56" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="#1F1F3D">' + big + '</text></g>';
+  }
+  document.getElementById('flow').innerHTML =
+    '<defs><filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#1F1F3D" flood-opacity=".16"/></filter>' +
+    '<marker id="ar" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="' + A + '"/></marker>' +
+    '<marker id="ab" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#D9473F"/></marker></defs>' +
+    // TODAY: screen vs shelf clash
+    '<path d="M250 745 C 300 790, 290 850, 205 885" fill="none" stroke="#D9473F" stroke-width="4" stroke-dasharray="3 10" stroke-linecap="round" marker-end="url(#ab)"/>' +
+    '<g transform="translate(300 812)"><circle r="20" fill="#D9473F"/><text x="0" y="9" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="26" font-weight="800" fill="#fff">≠</text></g>' +
+    // WITH ODOO: till -> stock card -> reorder
+    '<path d="M640 1036 C 600 960, 600 860, 640 790" fill="none" stroke="' + A + '" stroke-width="4" stroke-dasharray="2 11" stroke-linecap="round" marker-end="url(#ar)"/>' +
+    '<circle cx="608" cy="930" r="9" fill="' + A + '" opacity=".9"/><circle cx="604" cy="880" r="6" fill="' + A + '" opacity=".55"/>' +
+    '<g transform="translate(572 962)"><rect x="-4" y="-17" width="64" height="30" rx="15" fill="' + A + '"/><text x="28" y="4" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="15" font-weight="800" fill="#fff">−1</text></g>' +
+    card(600, 700, 168, 'Rice 5kg · on hand', '19 left', A) +
+    '<path d="M776 737 L 836 737" fill="none" stroke="' + A + '" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round" marker-end="url(#ar)"/>' +
+    card(846, 700, 196, 'Purchase · draft', 'Reorder 40', '#3167CA');
+});
+</script>
+</body></html>

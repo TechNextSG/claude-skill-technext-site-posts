@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>careers</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+/* 17 · Careers — "Recruitment day: open roles in Taguig City."
+   Fresh environment: an open-air recruitment day in a Taguig City plaza. BGC-style towers behind, bunting overhead,
+   the TechNext booth (striped canopy, blue backdrop, counter) and a "6 open roles" board; the Odoo consultant card
+   has just been pulled off the board and flies toward the candidate holding a CV, whom a TechNext recruiter welcomes.
+   Amber chevrons on the paving lead the other candidates in. */
+:root{--acc:#D98706;--acc-l:#FFF1D6;--acc-d:#A86400}
+.banner{position:absolute;z-index:5;left:118px;top:748px;width:394px;text-align:center;color:#fff}
+.banner b{display:block;font:800 40px/1.05 var(--font-display);letter-spacing:-.02em}
+.banner span{display:block;font:600 17px/1.3 var(--font-body);color:rgba(255,255,255,.88);margin-top:8px}
+.board{position:absolute;z-index:5;left:618px;top:592px;width:392px;background:#fff;border-radius:20px;padding:18px 18px 18px;
+  box-shadow:0 2px 6px rgba(31,31,61,.07),0 24px 46px -22px rgba(31,31,61,.45);border-top:8px solid var(--acc)}
+.board .hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:2px 4px 14px}
+.board .hd b{font:800 30px/1 var(--font-display);color:var(--ink);letter-spacing:-.02em}
+.board .hd b i{font-style:normal;color:var(--acc)}
+.board .hd span{font:600 15px/1.2 var(--font-body);color:var(--label);text-align:right}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.role{height:74px;border-radius:13px;background:#F6F7FB;padding:12px 12px 0 14px;position:relative}
+.role b{display:block;font:800 18px/1.15 var(--font-display);color:var(--ink)}
+.role span{display:block;font:600 15px/1.2 var(--font-body);color:var(--label);margin-top:4px}
+.role::before{content:"";position:absolute;right:12px;bottom:12px;width:10px;height:10px;border-radius:50%;background:var(--c,#3167CA)}
+.role.gone{background:transparent;border:2.5px dashed #E8C27A}
+.role.gone::before{display:none}
+.fly{position:absolute;z-index:6;left:338px;top:878px;width:200px;height:84px;border-radius:14px;background:#fff;padding:13px 14px 0 16px;
+  transform:rotate(-7deg);box-shadow:0 0 0 3px var(--acc),0 0 30px 6px rgba(244,177,52,.55),0 26px 40px -18px rgba(31,31,61,.5)}
+.fly b{display:block;font:800 19px/1.15 var(--font-display);color:var(--ink)}
+.fly span{display:block;font:700 15px/1.2 var(--font-body);color:var(--acc-d);margin-top:5px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip" data-qa="chip"><i><img src="../assets/img/odoo/hr_recruitment.svg" alt=""></i>Company · <b>Careers</b></div>
+  <h1 class="tp-h" data-qa="headline">Build the systems <em>companies run on.</em></h1>
+  <p class="tp-sub" data-qa="sub">Recruitment day in Taguig City: <b>six open roles.</b></p>
+
+  <div class="banner" data-qa="banner"><b>Join TechNext</b><span>Odoo projects for clients in 10+ countries</span></div>
+
+  <div class="board" data-qa="board">
+    <div class="hd"><b><i>6</i> open roles</b><span>Taguig City,<br>Metro Manila</span></div>
+    <div class="grid">
+      <div class="role" style="--c:#3167CA"><b>Odoo architect</b><span>Open role</span></div>
+      <div class="role" style="--c:#21B799"><b>Finance</b><span>Open role</span></div>
+      <div class="role gone"></div>
+      <div class="role" style="--c:#E0456B"><b>HR</b><span>Open role</span></div>
+      <div class="role" style="--c:#F2A93B"><b>Sales</b><span>Open role</span></div>
+      <div class="role" style="--c:#8E6BD8"><b>Marketing</b><span>Open role</span></div>
+    </div>
+  </div>
+  <div class="fly" data-qa="fly-card"><b>Odoo consultant</b><span>Open role · Taguig</span></div>
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/careers</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var HZ = 1080;                                    // plaza horizon (paving starts)
+  // warm morning sky
+  H.grad(g, 0, 0, 1080, HZ, '#FBF8F2', '#FCE6C4');
+  (function () { var r = g.createRadialGradient(540, 760, 20, 540, 760, 520); r.addColorStop(0, 'rgba(255,214,140,.55)'); r.addColorStop(1, 'rgba(255,214,140,0)'); g.fillStyle = r; g.fillRect(0, 300, 1080, 800); })();
+  K.cloud(g, 120, 600, .3); K.cloud(g, 560, 570, .22);
+  // BGC-style skyline: far towers, then nearer glass towers with window grids
+  function tower(x, w, h, col, win, cap) {
+    var y = HZ - h; K.fillRR(g, x, y, w, h + 6, 4, col);
+    if (cap === 'slope') { g.fillStyle = col; g.beginPath(); g.moveTo(x, y + 2); g.lineTo(x + w, y - 26); g.lineTo(x + w, y + 4); g.closePath(); g.fill(); }
+    if (cap === 'crown') { K.fillRR(g, x + w * .2, y - 18, w * .6, 22, 4, col); K.fillRR(g, x + w / 2 - 2, y - 52, 4, 36, 2, col); }
+    if (win) { g.fillStyle = win; for (var r = y + 16; r < HZ - 10; r += 18) for (var c = x + 8; c < x + w - 10; c += 14) g.fillRect(c, r, 7, 8); }
+    g.fillStyle = 'rgba(255,255,255,.22)'; g.fillRect(x + 4, y + 4, Math.max(4, w * .12), h - 8);
+  }
+  [[20, 70, 300], [110, 54, 360], [300, 80, 330], [470, 60, 400], [560, 90, 300], [700, 66, 380], [820, 84, 320], [960, 70, 360]].forEach(function (t) { tower(t[0], t[1], t[2], '#D8DEEC', null); });
+  tower(-10, 96, 250, '#B9C8E0', 'rgba(255,255,255,.45)', 'slope');
+  tower(180, 88, 300, '#A9BCDA', 'rgba(255,255,255,.4)', 'crown');
+  tower(380, 70, 230, '#BCCAE0', 'rgba(255,255,255,.45)');
+  tower(612, 110, 340, '#A4B8D8', 'rgba(255,255,255,.4)', 'slope');
+  tower(760, 74, 260, '#B6C6DF', 'rgba(255,255,255,.45)');
+  tower(880, 120, 300, '#A9BCDA', 'rgba(255,255,255,.4)', 'crown');
+  // plaza trees along the back edge
+  function tree(x, y, r) { K.fillRR(g, x - 5, y - 10, 10, 60, 4, '#9A7B5E'); K.fillE(g, x, y - 24, r, r * .9, '#8CC79A'); K.fillE(g, x - r * .3, y - 34, r * .55, r * .5, '#A6D6B0'); }
+  tree(590, 1040, 46); tree(1040, 1036, 50);
+  // paving
+  H.grad(g, 0, HZ, 1080, 1440 - HZ, '#F1E7D8', '#E4D5C0');
+  K.fillRR(g, 0, HZ - 6, 1080, 12, 0, '#E9DCC8');
+  H.floorLines(g, HZ, 1440, 540, 'rgba(255,255,255,.55)', 8, 14);
+  // bunting overhead (two swags)
+  function bunting(x0, y0, x1, y1, sag, cols) {
+    g.strokeStyle = '#B9A07A'; g.lineWidth = 2.5; g.beginPath(); g.moveTo(x0, y0); g.quadraticCurveTo((x0 + x1) / 2, Math.max(y0, y1) + sag, x1, y1); g.stroke();
+    for (var i = 1; i < 12; i++) { var t = i / 12, x = (1 - t) * (1 - t) * x0 + 2 * t * (1 - t) * (x0 + x1) / 2 + t * t * x1, y = (1 - t) * (1 - t) * y0 + 2 * t * (1 - t) * (Math.max(y0, y1) + sag) + t * t * y1;
+      g.fillStyle = cols[i % cols.length]; g.beginPath(); g.moveTo(x - 13, y); g.lineTo(x + 13, y); g.lineTo(x, y + 30); g.closePath(); g.fill(); }
+  }
+  bunting(-10, 520, 560, 540, 50, ['#F4B134', '#3167CA', '#FFFFFF', '#F28C7A']);
+  bunting(520, 540, 1090, 520, 46, ['#3167CA', '#F4B134', '#F28C7A', '#FFFFFF']);
+
+  // ---- the TechNext booth (left): striped canopy, blue backdrop, counter
+  var bx0 = 80, bx1 = 552;
+  K.soft(g, (bx0 + bx1) / 2, 1162, 280, 22, .2);
+  K.fillRR(g, bx0 + 4, 690, 10, 472, 4, '#C9CED9'); K.fillRR(g, bx1 - 14, 690, 10, 472, 4, '#C9CED9');
+  K.shadowed(g, 18, 8, .16, function () { K.fillRR(g, 104, 722, 422, 280, 10, '#3167CA'); });
+  g.save(); K.rr(g, 104, 722, 422, 280, 10); g.clip();
+  g.fillStyle = 'rgba(255,255,255,.07)';
+  for (var py = 740; py < 1000; py += 56) for (var px = 120 + ((py / 56) % 2) * 28; px < 526; px += 56) { g.beginPath(); g.moveTo(px + 10, py - 6); g.lineTo(px - 10, py + 2); g.lineTo(px - 3, py + 4); g.lineTo(px - 1, py + 11); g.lineTo(px + 3, py + 5); g.closePath(); g.fill(); }
+  g.restore();
+  // canopy roof + scalloped valance
+  g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(bx0 - 14, 662); g.lineTo(316, 604); g.lineTo(bx1 + 14, 662); g.closePath(); g.fill();
+  g.save(); g.beginPath(); g.moveTo(bx0 - 14, 662); g.lineTo(316, 604); g.lineTo(bx1 + 14, 662); g.closePath(); g.clip();
+  for (var s = 0; s < 10; s += 2) { g.fillStyle = '#F4B134'; g.beginPath(); g.moveTo(316, 604); g.lineTo(bx0 - 14 + s * 50.4, 662); g.lineTo(bx0 - 14 + (s + 1) * 50.4, 662); g.closePath(); g.fill(); }
+  g.restore();
+  K.shadowed(g, 14, 6, .14, function () { K.fillRR(g, bx0 - 14, 660, bx1 - bx0 + 28, 34, 4, '#FFFFFF'); });
+  for (var v = 0; v < 10; v++) { var vx = bx0 - 14 + v * 50.4; g.fillStyle = v % 2 ? '#FFFFFF' : '#F4B134'; g.fillRect(vx, 660, 50.4, 34); g.beginPath(); g.arc(vx + 25.2, 694, 25.2, 0, Math.PI); g.fill(); }
+
+  // TechNext teammate behind the counter
+  H.person(g, H.who({ x: 236, y: 1160, s: .56, ph: .4, c: { skin: '#EDC4A2', hair: '#1E1A1A', top: '#8CC2B4', top2: '#FFFFFF', low: '#2A3550' }, outfit: 'cardigan', hairStyle: 'bun',
+    idcard: '#3167CA', mood: 'happy', look: .5, hands: [[-60, -170], [70, -176]] }));
+  // counter with the TechNext skirt
+  K.shadowed(g, 16, 6, .16, function () { K.fillRR(g, 118, 994, 396, 18, 8, '#FFFFFF'); });
+  K.fillRR(g, 128, 1010, 376, 150, 6, '#2552A6'); K.fillRR(g, 128, 1010, 376, 12, 4, '#1E4691');
+  g.fillStyle = '#FFFFFF'; g.save(); g.translate(316, 1080); g.scale(1.6, 1.6); g.beginPath(); g.moveTo(14, -10); g.lineTo(-14, 2); g.lineTo(-5, 4); g.lineTo(-2, 13); g.lineTo(3, 5); g.closePath(); g.fill(); g.restore();
+  // on the counter: laptop, a stack of flyers, a cup of pens
+  K.fillRR(g, 372, 956, 82, 40, 6, '#2A3550'); K.fillRR(g, 364, 992, 98, 6, 3, '#3B4A66'); K.fillRR(g, 378, 962, 70, 28, 4, '#FFF1D6');
+  K.fillRR(g, 150, 984, 64, 12, 3, '#FFFFFF'); K.fillRR(g, 154, 978, 60, 8, 3, '#F4B134'); K.fillRR(g, 476, 968, 22, 28, 5, '#F28C7A');
+  K.fillRR(g, 480, 954, 3, 16, 1, '#2A3550'); K.fillRR(g, 489, 950, 3, 20, 1, '#3167CA');
+  // a potted plant by the booth
+  K.plant(g, { x: 40, y: 1160 }, '#F4B134', '#F7C35E');
+
+  // the role-board easel legs (behind the candidates)
+  K.fillRR(g, 680, 940, 12, 230, 4, '#B7A48B'); K.fillRR(g, 936, 940, 12, 230, 4, '#B7A48B');
+  K.soft(g, 814, 1172, 170, 14, .18);
+
+  // amber chevrons on the paving, leading toward the booth
+  g.fillStyle = 'rgba(244,177,52,.55)';
+  [[770, 1350], [870, 1350], [970, 1350], [80, 1350], [180, 1350], [280, 1350]].forEach(function (c) {
+    g.beginPath(); g.moveTo(c[0], c[1]); g.lineTo(c[0] + 26, c[1] - 16); g.lineTo(c[0] + 40, c[1] - 16); g.lineTo(c[0] + 14, c[1]); g.lineTo(c[0] + 40, c[1] + 16); g.lineTo(c[0] + 26, c[1] + 16); g.closePath(); g.fill(); });
+
+  H.pool(g, 470, 1290, 320, 50, .5);
+  // cast on the plaza floor
+  var FL = 1296, S = .6;
+  var recruiter = H.who({ x: 392, y: FL, s: S, ph: 1.1, c: { skin: '#E6B48E', hair: '#1A1615', top: '#5B8DEF', top2: '#FFFFFF', low: '#2A3550' }, outfit: 'polo', short: true, hairStyle: 'short', glasses: true,
+    idcard: '#3167CA', mood: 'happy', look: .7, talk: true, hands: [[-60, -150], [120, -250]] });
+  var cand = H.who({ x: 578, y: FL, s: S, ph: 2.2, c: { skin: '#F0C8A8', hair: '#231816', top: '#EEF1F7', top2: '#FFFFFF', low: '#4A5470', shoe: '#5A4636' }, outfit: 'shirt', hairStyle: 'long',
+    idcard: '#9AA6BC', mood: 'happy', look: -.7, hands: [[-112, -214], [62, -150]] });
+  var c3 = H.who({ x: 792, y: FL, s: S * .96, ph: 3.1, c: { skin: '#D9A27A', hair: '#1E1A1A', top: '#F28C7A', top2: '#FFFFFF', low: '#2A3550', print: '#FFFFFF' }, outfit: 'tee', backpack: '#6C7A96', hairStyle: 'short',
+    idcard: '#9AA6BC', mood: 'happy', look: -.5, hands: [[-70, -150], [70, -150]] });
+  var c4 = H.who({ x: 958, y: FL, s: S * .95, ph: 4.0, c: { skin: '#EDC4A2', hair: '#2B1D16', top: '#B9A6D8', top2: '#FFFFFF', low: '#3A4560' }, outfit: 'cardigan', hairStyle: 'pony', glasses: true,
+    idcard: '#9AA6BC', mood: 'calm', look: -.6, hands: [[-70, -150], [70, -168]] });
+  [c4, c3].forEach(function (p) { H.person(g, p); });
+  H.person(g, recruiter); H.person(g, cand);
+  // the CV in the candidate's hand (held out toward the recruiter)
+  (function () { var hx = cand.x + cand.hands[0][0] * S, hy = cand.y + cand.hands[0][1] * S;
+    g.save(); g.translate(hx - 18, hy - 22); g.rotate(-0.14);
+    K.shadowed(g, 8, 3, .2, function () { K.fillRR(g, -26, -36, 52, 68, 4, '#FFFFFF'); });
+    K.fillRR(g, -19, -28, 14, 16, 2, '#C9D6EE'); g.fillStyle = '#F4B134'; g.fillRect(-1, -26, 20, 4); g.fillStyle = '#C9D3E3'; g.fillRect(-1, -18, 16, 3);
+    for (var l = 0; l < 4; l++) g.fillRect(-19, -4 + l * 8, l === 3 ? 22 : 38, 3);
+    g.restore(); K.fillE(g, hx, hy, 11.5, 11.5, cand.c.skin); })();
+  H.vignette(g, .07);
+
+  // dynamic overlay: the card's trail from the empty board slot, speed lines, sparkles, a welcome wave
+  var s = '<defs><filter id="gl" x="-40%" y="-80%" width="180%" height="260%"><feGaussianBlur stdDeviation="5"/></filter></defs>';
+  var trail = 'M 660 820 C 610 836, 580 866, 540 902';
+  s += '<path d="' + trail + '" fill="none" stroke="#F4C46A" stroke-width="12" opacity=".55" filter="url(#gl)"/>';
+  s += '<path d="' + trail + '" fill="none" stroke="#D98706" stroke-width="4" stroke-dasharray="2 11" stroke-linecap="round"/>';
+  [[548, 958, 590, 946], [556, 974, 584, 966]].forEach(function (l) { s += '<line x1="' + l[0] + '" y1="' + l[1] + '" x2="' + l[2] + '" y2="' + l[3] + '" stroke="#F4B134" stroke-width="4" stroke-linecap="round" opacity=".8"/>'; });
+  function spark(x, y, r, c) { return '<path d="M' + x + ' ' + (y - r) + ' Q ' + x + ' ' + y + ' ' + (x + r) + ' ' + y + ' Q ' + x + ' ' + y + ' ' + x + ' ' + (y + r) + ' Q ' + x + ' ' + y + ' ' + (x - r) + ' ' + y + ' Q ' + x + ' ' + y + ' ' + x + ' ' + (y - r) + ' Z" fill="' + c + '"/>'; }
+  s += spark(326, 884, 12, '#F4B134') + spark(548, 872, 8, '#3167CA') + spark(600, 980, 9, '#F4B134');
+  document.getElementById('flow').innerHTML = s;
+});
+</script>
+</body></html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-ai-integrations</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+/* 13 · Odoo + AI integrations — "AI working inside your ERP records."
+   An accounts office: a paper vendor invoice flies out of the in-tray into Nexi, who fills the Odoo vendor bill field by
+   field (a lit step line: Vendor, Bill date, PO matched, Total). The line then runs down to the Confirm button, where
+   the accountant's hand is: AI prepares, a person approves. */
+:root{--acc:#7A4A72;--acc-l:#F4EAF2;--acc-d:#5A3354}
+.bill{position:absolute;z-index:5;right:72px;top:588px;width:452px;background:#fff;border-radius:22px;padding:18px 20px 16px;
+  box-shadow:0 2px 6px rgba(31,31,61,.07),0 26px 50px -24px rgba(31,31,61,.45)}
+.bill .hd{display:flex;align-items:center;gap:10px;font:800 15px/1 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--label)}
+.bill .hd img{width:26px;height:26px}
+.bill .hd small{margin-left:auto;font:600 15px/1 var(--font-body);letter-spacing:0;text-transform:none;color:#9AA0B4}
+.bill .st{display:flex;gap:6px;margin:12px 0 10px}
+.bill .st span{font:700 15px/1 var(--font-display);padding:6px 10px;border-radius:999px;background:#F1F2F6;color:#8A8FA6}
+.bill .st span.on{background:var(--acc);color:#fff}
+.rows{position:relative}
+.rows::before{content:"";position:absolute;left:13px;top:22px;bottom:22px;width:4px;border-radius:2px;background:linear-gradient(var(--acc) 0 74%,#E7DCE5 74%)}
+.row{position:relative;display:flex;align-items:center;gap:12px;padding:9px 12px 9px 0;margin:3px 0;border-radius:12px}
+.row i{position:relative;z-index:1;flex:none;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;font:800 15px/30px var(--font-display);text-align:center;font-style:normal;box-shadow:0 0 0 4px #fff}
+.row .l{width:112px;flex:none;font:600 16px/1.2 var(--font-body);color:var(--label)}
+.row .v{font:700 19px/1.2 var(--font-display);color:var(--ink)}
+.row .v em{font-style:normal;color:#1E8A5A;font-weight:800}
+.row.lit{background:linear-gradient(90deg,rgba(122,74,114,0) 0,var(--acc-l) 40px)}
+.row.now{background:linear-gradient(90deg,rgba(122,74,114,0) 0,#F0DDEB 40px);box-shadow:inset 0 0 0 2px rgba(122,74,114,.35)}
+.row.now i{box-shadow:0 0 0 4px #fff,0 0 18px 6px rgba(190,110,175,.7)}
+.row.now .v::after{content:"";display:inline-block;width:3px;height:20px;margin-left:4px;vertical-align:-3px;background:var(--acc)}
+.bill .ft{margin-top:10px;font:600 15px/1.3 var(--font-body);color:var(--acc-d);background:var(--acc-l);border-radius:10px;padding:8px 11px}
+.ok{position:absolute;z-index:5;left:496px;top:986px;width:236px;background:#fff;border-radius:20px;padding:14px 16px 16px;
+  box-shadow:0 2px 6px rgba(31,31,61,.07),0 22px 44px -22px rgba(31,31,61,.45)}
+.ok small{display:block;font:700 15px/1 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--label);margin-bottom:10px}
+.ok b{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--acc);color:#fff;border-radius:12px;padding:12px 0;font:800 22px/1 var(--font-display);
+  box-shadow:0 0 0 5px var(--acc-l),0 10px 22px -8px rgba(90,51,84,.7)}
+.nexi-png{left:396px;top:574px;width:150px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip" data-qa="chip"><i><img src="../assets/img/odoo/ai_app.svg" alt=""></i>AI Solution · <b>Odoo + AI integrations</b></div>
+  <h1 class="tp-h" data-qa="headline">AI working inside your<br><em>ERP records.</em></h1>
+  <p class="tp-sub" data-qa="sub">Works inside Odoo, on your data. <b>A person approves every step.</b></p>
+
+  <div class="bill" data-qa="bill">
+    <div class="hd"><img src="../assets/img/odoo/account.svg" alt="">Vendor bill<small>sample</small></div>
+    <div class="st"><span>Received</span><span class="on">Read by AI</span><span>Posted</span></div>
+    <div class="rows" id="rows">
+      <div class="row lit"><i>1</i><span class="l">Vendor</span><span class="v">Lim Paper Supply</span></div>
+      <div class="row lit"><i>2</i><span class="l">Bill date</span><span class="v">06 Oct 2026</span></div>
+      <div class="row lit"><i>3</i><span class="l">PO matched</span><span class="v">P00042 <em>&#10003; 3 lines</em></span></div>
+      <div class="row now" id="rtotal"><i>4</i><span class="l">Total</span><span class="v">SGD 1,284.00</span></div>
+    </div>
+    <div class="ft">Draft ready. Waiting for your approval.</div>
+  </div>
+
+  <div class="ok" id="okc" data-qa="confirm"><small>Accounts · approve</small><b>&#10003; Confirm</b></div>
+  <img class="nexi-png" src="../assets/sp/nexi/nexi-point-right.png" alt="">
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/odoo/ai-integration</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var k = 1.6, sx = 0, sy = 500, F = 470;
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#F8F3F4', '#EFE6EA'], wains: ['#E8DCE6', '#DCCDD9'], rail: '#FFFFFF', floor: ['#E6D8C6', '#D2BFA6'], base: '#CDB9C8',
+    floorKind: 'planks', floorLine: 'rgba(140,100,60,.14)' });
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+  // filing cabinet + in-tray (left)
+  K.shadowed(g, 16, 6, .16, function () { K.fillRR(g, 40, 300, 100, 170, 8, '#DCD3E0'); });
+  for (var d = 0; d < 3; d++) { K.fillRR(g, 48, 310 + d * 52, 84, 44, 6, '#ECE6EF'); K.fillRR(g, 76, 326 + d * 52, 28, 7, 3, '#A99AB0'); }
+  K.fillRR(g, 50, 276, 80, 24, 4, '#B78A5E'); K.fillRR(g, 54, 270, 72, 8, 2, '#FFFFFF'); K.fillRR(g, 56, 264, 70, 8, 2, '#F6F2EA'); K.fillRR(g, 52, 284, 76, 4, 2, '#9C7349');
+  // accountant seated at the desk, right hand on the Confirm card
+  H.person(g, H.who({ x: 232, y: 470, s: .6, ph: .4, c: { skin: '#D9A07A', hair: '#1B1616', top: '#B67FA8', top2: '#9A6390', low: '#3A3550', shoe: '#2A2840' }, outfit: 'blazer', hairStyle: 'bun', glasses: false, sit: true, chairCol: '#2F3B52', mood: 'happy', look: .5, talk: false, hands: [[-30, -190], [150, -214]] }));
+  // desk with paper stack + mug + small laptop
+  K.shadowed(g, 20, 8, .18, function () { K.fillRR(g, 150, 372, 250, 22, 8, '#C99A6B'); });
+  K.fillRR(g, 162, 394, 14, 76, 4, '#B5865A'); K.fillRR(g, 374, 394, 14, 76, 4, '#B5865A');
+  K.fillRR(g, 166, 360, 46, 12, 2, '#FFFFFF'); K.fillRR(g, 170, 354, 42, 6, 2, '#F3EEE6');
+  K.fillRR(g, 222, 346, 18, 26, 5, '#7A4A72'); K.fillRR(g, 238, 352, 8, 12, 4, 'rgba(0,0,0,0)');
+  g.lineWidth = 3; g.strokeStyle = '#7A4A72'; g.beginPath(); g.arc(242, 359, 6, -1.4, 1.4); g.stroke();
+  // plant + low cabinet (right, under the bill)
+  K.shadowed(g, 14, 5, .14, function () { K.fillRR(g, 470, 400, 150, 70, 8, '#E9E1EA'); });
+  K.fillRR(g, 480, 412, 62, 48, 6, '#F4EFF5'); K.fillRR(g, 548, 412, 62, 48, 6, '#F4EFF5');
+  K.plant(g, { x: 590, y: 400 }, '#E8DCC8', '#F1E8D8');
+  g.restore();
+  H.pool(g, 540, 1270, 420, 60, .5);
+  H.vignette(g, .08);
+
+  // SVG overlay: invoice flying from the in-tray into Nexi, scan beam to the fields, approval line to Confirm
+  var tray = { x: sx + 90 * k, y: sy + 262 * k }, nx = { x: 452, y: 690 };
+  var rows = document.getElementById('rows').getBoundingClientRect(), tot = document.getElementById('rtotal').getBoundingClientRect(),
+      ok = document.getElementById('okc').getBoundingClientRect(), bill = document.querySelector('.bill').getBoundingClientRect();
+  function paper(x, y, r, sc, op) {
+    return '<g transform="translate(' + x.toFixed(0) + ' ' + y.toFixed(0) + ') rotate(' + r.toFixed(0) + ') scale(' + sc.toFixed(2) + ')" opacity="' + op.toFixed(2) + '">' +
+      '<rect x="-26" y="-34" width="52" height="68" rx="5" fill="#fff" stroke="#E2D3DF" stroke-width="2"/>' +
+      '<rect x="-18" y="-25" width="22" height="5" rx="2" fill="#7A4A72"/><rect x="-18" y="-14" width="36" height="3" rx="1.5" fill="#D9C8D5"/>' +
+      '<rect x="-18" y="-7" width="30" height="3" rx="1.5" fill="#D9C8D5"/><rect x="-18" y="2" width="36" height="3" rx="1.5" fill="#D9C8D5"/>' +
+      '<rect x="-18" y="9" width="24" height="3" rx="1.5" fill="#D9C8D5"/><rect x="2" y="20" width="16" height="5" rx="2" fill="#7A4A72"/></g>';
+  }
+  var cx1 = 150, cy1 = 560, path = 'M' + tray.x + ' ' + (tray.y - 6) + ' Q ' + cx1 + ' ' + cy1 + ' ' + (nx.x - 30) + ' ' + (nx.y - 24);
+  var svg = '<defs><filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>' +
+    '<linearGradient id="bm" x1="0" x2="1"><stop offset="0" stop-color="#C98ABD" stop-opacity=".0"/><stop offset="1" stop-color="#C98ABD" stop-opacity=".55"/></linearGradient></defs>';
+  svg += '<path d="' + path + '" fill="none" stroke="#C9A9C2" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round" opacity=".9"/>';
+  [.3, .58, .84].forEach(function (t, i) {
+    var u = 1 - t, x = u * u * tray.x + 2 * u * t * cx1 + t * t * (nx.x - 30), y = u * u * (tray.y - 6) + 2 * u * t * cy1 + t * t * (nx.y - 24);
+    svg += paper(x, y, -16 + t * 26, .8 + t * .3, .45 + t * .5);
+  });
+  // scan beam: Nexi -> field rows (fan)
+  var bx = bill.left - 2;
+  svg += '<path d="M' + (nx.x + 52) + ' ' + (nx.y + 8) + ' L ' + bx + ' ' + (rows.top + 6) + ' L ' + bx + ' ' + (tot.bottom - 4) + ' Z" fill="url(#bm)"/>';
+  // approval line: Total row -> Confirm button (glow + dotted)
+  var sxp = bill.left + 34, syp = bill.bottom, ex = ok.right - 40, ey = ok.top;
+  var ap = 'M' + sxp + ' ' + syp + ' C ' + sxp + ' ' + (syp + 30) + ', ' + ex + ' ' + (ey - 40) + ', ' + ex + ' ' + ey;
+  svg += '<path d="' + ap + '" fill="none" stroke="#D69ACB" stroke-width="12" opacity=".45" filter="url(#gl)"/>' +
+    '<path d="' + ap + '" fill="none" stroke="#7A4A72" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>' +
+    '<circle cx="' + sxp + '" cy="' + (syp + 2) + '" r="8" fill="#7A4A72" stroke="#fff" stroke-width="3"/>';
+  // press ripple where her hand meets the button
+  var hx = ok.left + 6, hy = ok.top + 62;
+  svg += '<circle cx="' + hx + '" cy="' + hy + '" r="26" fill="none" stroke="#7A4A72" stroke-width="3" opacity=".35"/><circle cx="' + hx + '" cy="' + hy + '" r="40" fill="none" stroke="#7A4A72" stroke-width="2" opacity=".18"/>';
+  document.getElementById('flow').innerHTML = svg;
+  // sparkles around the bill (outside the text)
+  function star(x, y, r, c) { return '<path d="M' + x + ' ' + (y - r) + ' Q ' + x + ' ' + y + ' ' + (x + r) + ' ' + y + ' Q ' + x + ' ' + y + ' ' + x + ' ' + (y + r) + ' Q ' + x + ' ' + y + ' ' + (x - r) + ' ' + y + ' Q ' + x + ' ' + y + ' ' + x + ' ' + (y - r) + 'Z" fill="' + c + '"/>'; }
+  var sp = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  sp.setAttribute('viewBox', '0 0 1080 1440'); sp.setAttribute('data-qa-skip', '');
+  sp.style.cssText = 'position:absolute;inset:0;z-index:6;pointer-events:none';
+  sp.innerHTML = star(bill.right - 6, bill.top - 4, 18, '#E7B347') + star(bill.right + 10, bill.top + 34, 9, '#C98ABD') +
+    star(bill.left - 18, tot.top + 4, 13, '#E7B347') + star(bill.left - 34, tot.bottom + 10, 7, '#C98ABD') +
+    star(ok.right + 6, ok.top - 6, 14, '#E7B347') + star(ok.right + 22, ok.top + 22, 7, '#C98ABD');
+  document.querySelector('.f').appendChild(sp);
+});
+</script>
+</body></html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>blog</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+/* 18 · Blog — "Odoo 20 news and plain-language ERP guides."
+   Fresh environment: a cosy morning café reading corner by a big window. A business owner in an armchair reads the
+   TechNext blog on a tablet; the articles lift off the screen and fan up into the room like magazine pages, the Odoo 20
+   explainer highlighted. At the next table a TechNext writer (blue ID) is drafting on a laptop, a thread to that article. */
+:root{--acc:#E5534B;--acc-l:#FDECEA;--acc-d:#C2392F}
+.art{position:absolute;z-index:5;background:#fff;border-radius:18px;padding:12px 14px 15px;
+  box-shadow:0 2px 6px rgba(31,31,61,.07),0 22px 44px -22px rgba(31,31,61,.45)}
+.art .th{height:44px;border-radius:10px;margin-bottom:11px;position:relative;overflow:hidden}
+.art .th::before,.art .th::after{content:"";position:absolute;border-radius:6px;background:rgba(255,255,255,.7)}
+.art .th::before{left:12px;top:12px;width:42%;height:7px}
+.art .th::after{left:12px;top:25px;width:26%;height:7px;opacity:.7}
+.art small{display:block;font:800 13px/1 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--label);margin-bottom:7px;font-size:15px}
+.art b{display:block;font:800 20px/1.24 var(--font-display);letter-spacing:-.01em;color:var(--ink)}
+.a1{left:72px;top:592px;width:270px;transform:rotate(-4deg)}
+.a1 .th{background:linear-gradient(120deg,#8FB4F0,#3167CA)}
+.a2{left:398px;top:570px;width:288px;transform:rotate(-.5deg)}
+.a2 .th{background:linear-gradient(120deg,#7FD0B6,#21A07F)}
+.a3{left:742px;top:600px;width:266px;transform:rotate(4deg)}
+.a3 .th{background:linear-gradient(120deg,#F7C873,#E59A2E)}
+.hl{left:372px;top:800px;width:330px;padding:14px 18px 16px;transform:rotate(-1.5deg);
+  box-shadow:0 0 0 4px var(--acc),0 0 40px 6px rgba(229,83,75,.35),0 26px 50px -20px rgba(120,30,30,.5)}
+.hl .tag{display:inline-flex;align-items:center;gap:7px;background:var(--acc);color:#fff;border-radius:999px;padding:6px 12px 7px 7px;font:800 15px/1 var(--font-display);margin-bottom:9px}
+.hl .tag img{width:18px;height:18px;background:#fff;border-radius:50%;padding:2px}
+.hl b{font-size:24px;line-height:1.18}
+.hl span{display:block;margin-top:8px;font:600 15px/1.3 var(--font-body);color:var(--acc-d)}
+.badge{position:absolute;z-index:6;left:722px;top:846px;width:84px;height:84px;border-radius:50%;background:var(--acc);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(10deg);
+  box-shadow:0 0 0 5px #fff,0 14px 26px -10px rgba(120,30,30,.55)}
+.badge small{font:800 15px/1 var(--font-display);letter-spacing:.02em}
+.badge b{font:800 31px/1 var(--font-display);letter-spacing:-.02em;margin-top:2px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip" data-qa="chip"><i><img src="../assets/img/odoo/website_blog.svg" alt=""></i>Company · <b>Blog</b></div>
+  <h1 class="tp-h" data-qa="headline">Odoo 20 is here.<br><em>We explain it.</em></h1>
+  <p class="tp-sub" data-qa="sub">Odoo 20 news and <b>plain-language ERP guides.</b></p>
+
+  <div class="art a1" data-qa="art-impl"><div class="th"></div><small>Guide</small><b>How an Odoo implementation works, step by step</b></div>
+  <div class="art a2" data-qa="art-invoicenow"><div class="th"></div><small>Singapore</small><b>InvoiceNow for GST-registered businesses: the dates, and what to do now</b></div>
+  <div class="art a3" data-qa="art-country"><div class="th"></div><small>SG · PH · VN</small><b>Odoo 20 in Singapore, the Philippines and Vietnam: the country changes</b></div>
+  <div class="art hl" data-qa="art-odoo20"><div class="tag"><img src="../assets/img/odoo/website_blog.svg" alt="">New release</div><b>Odoo 20: what&rsquo;s new, in plain language</b><span>Written by the TechNext team</span></div>
+  <div class="badge" data-qa="badge"><small>Odoo</small><b>20</b></div>
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/blog</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  // post px throughout: warm café wall, one big morning window, wainscot, oak floor
+  var FY = 1180, WY = 548, WB = 1052;
+  H.grad(g, 0, 0, 1080, FY, '#FCF6EE', '#F6EADC');
+  // the big window: frame, morning sky, street of shophouses and trees, glass, mullions
+  var W = { x: 56, y: WY, w: 968, h: WB - WY };
+  K.shadowed(g, 26, 10, .16, function () { K.fillRR(g, W.x - 16, W.y - 16, W.w + 32, W.h + 32, 22, '#FFFFFF'); });
+  g.save(); K.rr(g, W.x, W.y, W.w, W.h, 10); g.clip();
+  H.grad(g, W.x, W.y, W.w, W.h, '#BFE2F6', '#FFE6CC');
+  var sun = g.createRadialGradient(150, 900, 10, 150, 900, 420); sun.addColorStop(0, 'rgba(255,236,190,.95)'); sun.addColorStop(.25, 'rgba(255,226,170,.55)'); sun.addColorStop(1, 'rgba(255,226,170,0)');
+  g.fillStyle = sun; g.fillRect(W.x, W.y, W.w, W.h);
+  K.fillE(g, 150, 900, 46, 46, '#FFF4D6');
+  K.cloud(g, 520, 640, .3); K.cloud(g, 880, 700, .24);
+  // far towers
+  g.fillStyle = '#C9DCEC'; [[260, 170, 50], [330, 230, 44], [600, 200, 56], [700, 260, 40], [900, 190, 60]].forEach(function (b) { K.fillRR(g, b[0], WB - 120 - b[1], b[2], b[1] + 20, 4, '#C9DCEC'); });
+  // shophouse row
+  var cols = ['#F6C7B6', '#F9E0A8', '#BFE0D0', '#F4B8C2', '#C9D7F2', '#F8D3A6', '#CDE6C2'];
+  for (var i = 0; i < 9; i++) { var sx = W.x + i * 112 - 20, hgt = 150 + (i % 3) * 14, col = cols[i % cols.length];
+    K.fillRR(g, sx, WB - hgt, 112, hgt, 2, col); g.fillStyle = K.tone(col, .14); g.fillRect(sx, WB - hgt, 112, 12);
+    g.fillStyle = 'rgba(255,255,255,.75)'; for (var c = 0; c < 3; c++) { K.fillRR(g, sx + 14 + c * 32, WB - hgt + 30, 20, 34, 9, 'rgba(255,255,255,.75)'); }
+    g.fillStyle = K.tone(col, .3); g.fillRect(sx + 6, WB - 70, 100, 6); }
+  // trees in front of the shophouses
+  [[120, 980], [410, 990], [700, 985], [960, 978]].forEach(function (t) { K.fillRR(g, t[0] - 5, t[1], 10, WB - t[1], 3, '#8C6B50'); K.fillE(g, t[0], t[1] - 22, 54, 44, '#8CC79A'); K.fillE(g, t[0] - 22, t[1] - 4, 34, 28, '#79B98A'); K.fillE(g, t[0] + 24, t[1] - 8, 30, 26, '#9ED3AA'); });
+  K.windowGlass(g, W);
+  g.restore();
+  g.fillStyle = '#FFFFFF'; [W.x + W.w / 3, W.x + 2 * W.w / 3].forEach(function (x) { g.fillRect(x - 7, W.y, 14, W.h); }); g.fillRect(W.x, W.y + 150, W.w, 10);
+  // sill + wainscot
+  K.shadowed(g, 14, 6, .14, function () { K.fillRR(g, 36, WB + 14, 1008, 20, 8, '#FFFFFF'); });
+  H.grad(g, 0, WB + 34, 1080, FY - WB - 34, '#E9CFB4', '#E2C3A4');
+  g.fillStyle = 'rgba(255,255,255,.35)'; for (var px = 40; px < 1080; px += 120) g.fillRect(px, WB + 50, 3, FY - WB - 66);
+  // plants on the sill
+  K.plant(g, { x: 96, y: WB + 16 }, '#F2A48F', '#F6B9A7');
+  K.plant(g, { x: 990, y: WB + 16 }, '#9FBCE6', '#B5CCEE');
+  // oak floor
+  H.grad(g, 0, FY, 1080, 1440 - FY, '#EBD3B6', '#DCBE9C');
+  g.strokeStyle = 'rgba(160,110,70,.16)'; g.lineWidth = 2; g.beginPath();
+  for (var d = 1; d < 7; d++) { var yy = FY + Math.pow(d / 6, 1.5) * (1440 - FY); g.moveTo(0, yy); g.lineTo(1080, yy); }
+  for (var j = -14; j <= 14; j++) { g.moveTo(540 + j * 70, FY); g.lineTo(540 + j * 190, 1440); } g.stroke();
+  // morning sunbeams falling across the floor
+  g.save(); g.globalAlpha = .22; g.fillStyle = '#FFF3D2';
+  [[120, 330], [430, 610], [740, 900]].forEach(function (b) { g.beginPath(); g.moveTo(b[0], FY); g.lineTo(b[1], FY); g.lineTo(b[1] + 220, 1440); g.lineTo(b[0] + 220, 1440); g.closePath(); g.fill(); });
+  g.restore();
+  H.pool(g, 300, 1270, 300, 60, .5); H.pool(g, 820, 1270, 260, 50, .4);
+
+  // armchair (behind the owner)
+  var ax = 220, ay = 1262;
+  K.soft(g, ax, ay + 4, 150, 18, .22);
+  K.fillRR(g, ax - 110, 990, 220, 220, 46, '#7FA99B'); K.fillRR(g, ax - 96, 1004, 192, 40, 22, 'rgba(255,255,255,.12)');
+  K.fillRR(g, ax - 128, ay - 22, 12, 24, 4, '#8C6B50'); K.fillRR(g, ax + 116, ay - 22, 12, 24, 4, '#8C6B50');
+  K.fillRR(g, ax - 118, 1186, 236, 58, 22, K.tone('#7FA99B', .1));
+  // the business owner, reading
+  H.person(g, H.who({ x: ax, y: ay, s: .72, ph: .6, c: { skin: '#E9BC97', hair: '#1E1817', top: '#F2B544', top2: '#E0A030', low: '#3A4766', shoe: '#5A4436' },
+    outfit: 'blazer', hairStyle: 'bun', glasses: true, sit: true, chair: false, mood: 'happy', look: .75, hands: [[-60, -150], [180, -312]] }));
+  // armrests in front of the body
+  K.fillRR(g, ax - 140, 1120, 52, 128, 24, K.tone('#7FA99B', .05)); K.fillRR(g, ax + 88, 1120, 52, 128, 24, K.tone('#7FA99B', .05));
+  // the tablet, held up beside her face, screen glowing with the blog
+  g.save(); g.translate(334, 1024); g.rotate(.08);
+  K.shadowed(g, 18, 6, .25, function () { K.fillRR(g, -48, -58, 96, 120, 12, '#2A3550'); });
+  K.fillRR(g, -42, -52, 84, 108, 7, '#FFFFFF'); K.fillRR(g, -42, -52, 84, 22, 6, '#E5534B');
+  K.fillRR(g, -34, -20, 68, 26, 5, '#FDECEA'); g.fillStyle = '#C9D3E3'; g.fillRect(-34, 14, 60, 5); g.fillRect(-34, 25, 44, 5); g.fillRect(-34, 36, 54, 5);
+  g.restore();
+  K.fillE(g, ax + 180 * .72, ay + (-312 + 46) * .72, 13, 13, '#E9BC97');
+
+  // side table with coffee + books (between the two)
+  K.soft(g, 470, 1266, 70, 10, .2);
+  K.fillRR(g, 464, 1170, 12, 94, 4, '#A57B57'); K.fillE(g, 470, 1262, 40, 7, '#A57B57');
+  K.shadowed(g, 10, 4, .14, function () { K.fillE(g, 470, 1166, 70, 14, '#C99A6B'); }); K.fillE(g, 470, 1162, 70, 12, '#D9AE80');
+  K.fillRR(g, 420, 1140, 64, 12, 3, '#3167CA'); K.fillRR(g, 426, 1128, 56, 12, 3, '#F2B544'); K.fillRR(g, 422, 1117, 60, 11, 3, '#E5534B');
+  K.fillE(g, 510, 1158, 24, 5, '#FFFFFF'); K.fillRR(g, 496, 1128, 28, 30, 7, '#FFFFFF'); K.fillE(g, 510, 1130, 13, 4, '#8A5A3B');
+  g.strokeStyle = '#FFFFFF'; g.lineWidth = 5; g.beginPath(); g.arc(525, 1142, 7, -1.4, 1.4); g.stroke();
+
+  // the writer's café table + laptop, then the bentwood chair and the TechNext writer
+  var wx = 880, wy = 1262;
+  K.soft(g, 700, 1266, 90, 12, .2);
+  K.fillRR(g, 694, 1150, 12, 112, 4, '#8C6B50'); K.fillE(g, 700, 1260, 46, 8, '#8C6B50');
+  K.fillRR(g, wx - 64, 1060, 128, 120, 60, '#B98A5E'); K.fillRR(g, wx - 50, 1074, 100, 92, 46, '#F6EADC');
+  H.person(g, H.who({ x: wx, y: wy, s: .72, ph: 2.1, c: { skin: '#E6B48E', hair: '#1A1615', top: '#8FB2E3', top2: '#FFFFFF', low: '#2A3550', shoe: '#2A2F45' },
+    outfit: 'polo', short: true, hairStyle: 'short', idcard: '#3167CA', sit: true, chair: false, mood: 'happy', look: -.7, hands: [[-180, -232], [44, -150]] }));
+  K.shadowed(g, 12, 6, .16, function () { K.fillE(g, 700, 1146, 104, 14, '#C99A6B'); }); K.fillE(g, 700, 1142, 104, 12, '#D9AE80');
+  // laptop: base + lid seen from the back, TechNext plane on the lid
+  K.fillRR(g, 668, 1130, 116, 8, 3, '#B9C3D1');
+  g.fillStyle = '#C9D3E3'; g.beginPath(); g.moveTo(678, 1132); g.lineTo(770, 1132); g.lineTo(784, 1062); g.lineTo(694, 1062); g.closePath(); g.fill();
+  g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(742, 1088); g.lineTo(718, 1098); g.lineTo(726, 1100); g.lineTo(728, 1108); g.lineTo(732, 1101); g.closePath(); g.fill();
+  K.fillE(g, wx - 180 * .72, wy + (-232 + 46) * .72, 13, 13, '#E6B48E');
+  K.fillRR(g, 620, 1118, 26, 24, 6, '#E5534B'); K.fillE(g, 633, 1120, 10, 3, '#8A5A3B');
+  H.vignette(g, .07);
+
+  // flow overlay: page trails from the tablet up to each article, a draft thread from the laptop to the Odoo 20 piece
+  var T = [352, 960];
+  var s = '<defs><filter id="gl" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur stdDeviation="6"/></filter>' +
+    '<radialGradient id="rg"><stop offset="0" stop-color="#FFB3A8" stop-opacity=".9"/><stop offset="1" stop-color="#FFB3A8" stop-opacity="0"/></radialGradient></defs>';
+  s += '<ellipse cx="' + T[0] + '" cy="' + (T[1] + 6) + '" rx="70" ry="34" fill="url(#rg)"/>';
+  var ends = [[230, 760, -90], [540, 790, 40], [880, 806, 90], [470, 900, 10]];
+  ends.forEach(function (e) {
+    var cx = (T[0] + e[0]) / 2 + e[2], cy = Math.min(T[1], e[1]) - 30, d = 'M' + T[0] + ' ' + T[1] + ' Q ' + cx + ' ' + cy + ' ' + e[0] + ' ' + e[1];
+    s += '<path d="' + d + '" fill="none" stroke="#FFB3A8" stroke-width="12" opacity=".55" filter="url(#gl)"/>' +
+      '<path d="' + d + '" fill="none" stroke="#E5534B" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>';
+  });
+  // little pages in flight
+  function page(x, y, r, sc) { return '<g transform="translate(' + x + ' ' + y + ') rotate(' + r + ') scale(' + (sc || 1) + ')"><rect x="-17" y="-22" width="34" height="44" rx="5" fill="#fff" stroke="#F3C9C3" stroke-width="2"/><rect x="-10" y="-13" width="20" height="4" rx="2" fill="#E5534B"/><rect x="-10" y="-3" width="20" height="3" rx="1.5" fill="#C9D3E3"/><rect x="-10" y="5" width="14" height="3" rx="1.5" fill="#C9D3E3"/></g>'; }
+  s += page(258, 830, -18, .9) + page(610, 838, 14, .85) + page(652, 774, 18, .75);
+  // draft thread: laptop to the highlighted article
+  s += '<path d="M738 1056 C 724 1006, 690 990, 650 958" fill="none" stroke="#3167CA" stroke-width="4" stroke-dasharray="2 11" stroke-linecap="round"/>';
+  s += '<circle cx="738" cy="1056" r="7" fill="#3167CA" stroke="#fff" stroke-width="3"/>';
+  // coffee steam
+  [[504, 1118], [516, 1112]].forEach(function (p, n) { s += '<path d="M' + p[0] + ' ' + p[1] + ' c -10 -14, 10 -22, 0 -36 c -8 -12, 8 -20, 2 -30" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity="' + (.8 - n * .25) + '"/>'; });
+  // sparkles round the highlight
+  [[352, 820, 1], [350, 930, .7], [520, 776, .7]].forEach(function (p) { s += '<path transform="translate(' + p[0] + ' ' + p[1] + ') scale(' + p[2] + ')" d="M0 -14 L4 -4 L14 0 L4 4 L0 14 L-4 4 L-14 0 L-4 -4 Z" fill="#F2B544"/>'; });
+  document.getElementById('flow').innerHTML = s;
+});
+</script>
+</body></html>

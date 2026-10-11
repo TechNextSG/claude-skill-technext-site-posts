@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-crm-development</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/brand.css">
+<style>
+/* 02 · CRM development — "Pass the lead. Win the deal."  Bird's-eye running track curving out of the corner;
+   lead cards race along the lanes past Odoo's pipeline stages to a chequered finish that turns into a quotation. */
+.f{background:#E9F7F1}
+.grid{position:absolute;inset:0;background:linear-gradient(rgba(33,183,153,.12) 2px,transparent 2px) 0 0/54px 54px,linear-gradient(90deg,rgba(33,183,153,.12) 2px,transparent 2px) 0 0/54px 54px;
+  -webkit-mask:linear-gradient(180deg,#000,transparent 60%);mask:linear-gradient(180deg,#000,transparent 60%)}
+#track{position:absolute;inset:0;z-index:1}
+.kick{position:absolute;left:76px;top:180px;font-size:46px;color:#0E8C73;transform:rotate(-3deg)}
+.h{position:absolute;left:70px;top:252px;font-size:118px;color:var(--ink)}
+.h em{font-style:normal;color:#fff;-webkit-text-stroke:0;background:var(--mint);padding:0 18px 6px;border-radius:18px;box-shadow:0 7px 0 var(--ink);border:3px solid var(--ink);display:inline-block;transform:rotate(-2deg);margin-top:10px}
+.sub{position:absolute;left:76px;top:530px;width:560px;font:500 26px/1.4 var(--font-body);color:#33405A}
+.sub b{font-weight:700;color:var(--ink)}
+.stage{position:absolute;z-index:4;transform:translate(-50%,-50%) rotate(var(--r));display:flex;align-items:center;gap:10px;background:#fff;border:3px solid var(--ink);border-radius:999px;
+  box-shadow:0 6px 0 var(--ink);padding:11px 20px 12px 12px;font:800 24px/1 var(--font-display);white-space:nowrap}
+.stage i{width:26px;height:26px;border-radius:50%;border:3px solid var(--ink);background:var(--c);display:grid;place-items:center;font:800 16px/1 var(--font-display);color:#fff;font-style:normal}
+.lead{position:absolute;z-index:5;transform:translate(-50%,-50%) rotate(var(--r));width:236px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:0 7px 0 var(--ink);padding:14px 16px 13px}
+.lead b{display:block;font:800 21px/1.15 var(--font-display)}
+.lead span{display:block;font:600 16px/1.3 var(--font-body);color:var(--label);margin-top:4px}
+.lead .st{display:flex;gap:4px;margin-top:8px}.lead .st u{width:16px;height:16px;background:var(--gold);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.lead .st u.o{background:#D5DCE6}
+.lead small{position:absolute;right:14px;bottom:14px;font:700 15px/1 var(--font-body);color:var(--label)}
+.lead .src{position:absolute;left:-18px;top:-18px;width:44px;height:44px;border-radius:50%;background:var(--c);border:3px solid var(--ink);display:grid;place-items:center}
+.lead .src img{width:24px;height:24px;filter:brightness(0) invert(1)}
+.won{position:absolute;z-index:6;right:36px;top:1176px;width:340px;transform:rotate(-4deg);background:#fff;border:3px solid var(--ink);border-radius:20px;box-shadow:0 8px 0 var(--ink);overflow:hidden}
+.won .top{background:var(--mint);color:#fff;padding:14px 20px;font:800 34px/1 var(--font-display);display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--ink)}
+.won .top small{font:700 16px/1 var(--font-display);letter-spacing:.12em}
+.won .body{padding:16px 20px 18px;display:flex;gap:14px;align-items:center}
+.won .body img{width:52px;height:52px}
+.won .body b{display:block;font:800 22px/1.2 var(--font-display)}
+.won .body span{display:block;font:600 16px/1.35 var(--font-body);color:var(--label)}
+.watch{position:absolute;z-index:6;left:340px;top:650px;width:112px;height:112px;transform:rotate(14deg)}
+.hn{position:absolute;z-index:6;font-size:36px;color:var(--ink);transform:rotate(var(--r))}
+</style></head>
+<body><div class="f">
+  <div class="grid"></div>
+  <svg id="track" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <p class="kick hand" data-qa="kicker">odoo crm development</p>
+  <h1 class="h disp" data-qa="headline">Pass the lead.<br><em>Win the deal.</em></h1>
+  <p class="sub" data-qa="sub">Your stages, routing and scoring, <b>shaped around how you sell.</b></p>
+
+  <svg class="watch" viewBox="0 0 150 150" data-qa="watch">
+    <rect x="62" y="0" width="26" height="18" rx="5" fill="#1F1F3D"/><circle cx="75" cy="82" r="62" fill="#fff" stroke="#1F1F3D" stroke-width="6"/>
+    <circle cx="75" cy="82" r="50" fill="none" stroke="#21B799" stroke-width="10" stroke-dasharray="230 400" transform="rotate(-90 75 82)" stroke-linecap="round"/>
+    <line x1="75" y1="82" x2="104" y2="56" stroke="#1F1F3D" stroke-width="6" stroke-linecap="round"/><circle cx="75" cy="82" r="7" fill="#1F1F3D"/>
+  </svg>
+
+  <div id="pieces"></div>
+
+  <div class="won" data-qa="won"><div class="top">WON <small>FINISH</small></div>
+    <div class="body"><img src="../assets/img/odoo/sale.svg" alt=""><div><b>Quotation created</b><span>in Odoo Sales, no re-typing<br>S00128 · sample</span></div></div></div>
+  <p class="hn hand" style="left:76px;top:660px;--r:-4deg" data-qa="hn1">every lead runs<br>your stages</p>
+
+  <div class="sp-foot" style="justify-content:flex-start"><span class="sp-url" data-qa="url">technext.asia/odoo/crm-development</span></div>
+</div>
+<script>
+// track centred off-frame at bottom-right; lanes are concentric arcs
+var C=[1100,1500],R0=470,R1=860,L=6;
+function P(r,deg){var a=deg*Math.PI/180;return [C[0]+r*Math.cos(a),C[1]+r*Math.sin(a)];}
+function arc(r,a0,a1){var p0=P(r,a0),p1=P(r,a1);return 'M'+p0[0].toFixed(1)+' '+p0[1].toFixed(1)+' A'+r+' '+r+' 0 0 1 '+p1[0].toFixed(1)+' '+p1[1].toFixed(1);}
+var h='';
+// infield turf with mow stripes
+h+='<defs><clipPath id="inf"><circle cx="'+C[0]+'" cy="'+C[1]+'" r="'+R0+'"/></clipPath><pattern id="mow" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="80" height="80" fill="#7CCB6B"/><rect width="40" height="80" fill="#8ED47B"/></pattern></defs>';
+h+='<circle cx="'+C[0]+'" cy="'+C[1]+'" r="'+R0+'" fill="url(#mow)"/>';
+// track band
+h+='<path d="'+arc((R0+R1)/2,160,290)+'" fill="none" stroke="#1F1F3D" stroke-width="'+(R1-R0+10)+'"/>';
+h+='<path d="'+arc((R0+R1)/2,160,290)+'" fill="none" stroke="#D9653B" stroke-width="'+(R1-R0-6)+'"/>';
+for(var i=1;i<L;i++){h+='<path d="'+arc(R0+i*(R1-R0)/L,160,290)+'" fill="none" stroke="#fff" stroke-width="4" opacity=".9"/>';}
+// lane numbers at the near end
+for(var i=0;i<L;i++){var p=P(R0+(i+.5)*(R1-R0)/L,190);h+='<text x="'+p[0]+'" y="'+p[1]+'" font-family="Plus Jakarta Sans" font-weight="800" font-size="30" fill="#fff" text-anchor="middle" dominant-baseline="middle" transform="rotate(-70 '+p[0]+' '+p[1]+')">'+(i+1)+'</text>';}
+// chequered finish across the lanes
+var fa=257;for(var i=0;i<12;i++){for(var j=0;j<2;j++){var r=R0+i*(R1-R0)/12,a=fa+j*2.2;
+  var q=[P(r,a),P(r+(R1-R0)/12,a),P(r+(R1-R0)/12,a+2.2),P(r,a+2.2)];
+  h+='<path d="M'+q.map(function(x){return x[0].toFixed(1)+' '+x[1].toFixed(1)}).join(' L')+'Z" fill="'+((i+j)%2?'#fff':'#1F1F3D')+'"/>';}}
+// speed streaks behind the lead cards
+[[640,198,207],[730,221,229],[600,240,248]].forEach(function(s){for(var k=0;k<3;k++)h+='<path d="'+arc(s[0]+(k-1)*26,s[1],s[2]-k*2)+'" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="'+(0.95-k*.25)+'"/>';});
+document.getElementById('track').innerHTML=h;
+// stage markers on the outer kerb + lead cards on the lanes
+var out='';
+[['New','#9AA6BC',201,'1'],['Qualified','#E9B949',220,'2'],['Proposition','#714B67',238,'3'],['Won','#21B799',256,'✓']].forEach(function(s){var p=P(R1+50,s[2]);
+  out+='<div class="stage" data-qa="stage-'+s[0]+'" style="left:'+p[0].toFixed(0)+'px;top:'+p[1].toFixed(0)+'px;--c:'+s[1]+';--r:'+(s[2]-270+8)+'deg"><i>'+s[3]+'</i>'+s[0]+'</div>';});
+[['Harbour Goods','web form · Singapore','website',640,210,2,'#3167CA'],['Bayview Clinic','WhatsApp · Philippines','whatsapp',730,232,3,'#25B456'],['Keystone Works','email · Vietnam','mail',600,251,3,'#E99A12']].forEach(function(l,n){var p=P(l[3],l[4]);
+  var st='';for(var k=0;k<3;k++)st+='<u'+(k<l[5]?'':' class="o"')+'></u>';
+  out+='<div class="lead" data-qa="lead'+n+'" style="left:'+p[0].toFixed(0)+'px;top:'+p[1].toFixed(0)+'px;--r:'+((l[4]-270)*.45).toFixed(1)+'deg;--c:'+l[6]+'"><span class="src"><img src="../assets/img/odoo/'+l[2]+'.svg" alt=""></span><b>'+l[0]+'</b><span>'+l[1]+'</span><div class="st">'+st+'</div><small>sample</small></div>';});
+document.getElementById('pieces').innerHTML=out;
+</script>
+</body></html>

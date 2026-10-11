@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-for-medical</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<style>
+/* 04 · Medical — a clinic corridor in one-point perspective: consult doors recede on the left, reception on the right,
+   a doctor walks toward us. One patient record follows the visit: booking -> consult -> invoice. */
+.card{left:72px;top:184px;width:600px;--acc:#139C80}
+.r1{left:300px;top:968px;width:300px;--px:120px}
+.r1::after{top:-7px;bottom:auto}
+.r2{left:718px;top:1176px;width:290px;--px:40px}
+.r2::after{top:-7px;bottom:auto}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+  <div class="card" data-qa="card"><span class="k">odoo for clinics</span>
+    <h1>One patient record, <em>booking to billing.</em></h1>
+    <p>Appointments, consults, stock and invoices for clinics and healthcare groups.</p>
+    <div class="apps"><span><img src="../assets/img/odoo/appointment.svg" alt="">Appointments</span><span><img src="../assets/img/odoo/stock.svg" alt="">Inventory</span><span><img src="../assets/img/odoo/account.svg" alt="">Invoicing</span></div>
+  </div>
+  <div class="rec r1" data-qa="rec1"><small>sample</small><div class="hd"><img src="../assets/img/odoo/appointment.svg" alt="">Appointment</div><b>Dr. Tan · 10:30</b><span>General consult · Room 2</span><span class="tag">Confirmed</span></div>
+  <div class="rec r2" data-qa="rec2"><small>sample</small><div class="hd"><img src="../assets/img/odoo/account.svg" alt="">Invoice</div><b>INV/2026/0412</b><span>Consult + medicine</span><span class="tag">Paid</span></div>
+  <div class="sp-foot" style="justify-content:flex-start"><span class="sp-url soft" data-qa="url">technext.asia/industries/medical</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  // front-on clinic room like the site heroes, camera pulled in (k) so the cast reads large
+  var k = 1.6, sx = -240, sy = 384, F = 470;
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#F1FAF8', '#E4F3EF'], wains: ['#D3ECE7', '#C6E5DE'], rail: '#FFFFFF', floor: ['#F4F7FB', '#DCE5EF'],
+    base: '#BFDDD7', pattern: K.plusPattern('rgba(33,183,153,.10)') });
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+  // window with the city (right wall)
+  var w = { x: 610, y: 40, w: 200, h: 230 };
+  K.windowFrame(g, w, F); K.windowSky(g, w, 4, 0, '#9ED8FA', '#E6F6FF');
+  g.fillStyle = 'rgba(130,175,205,.5)'; [[0, 70], [30, 110], [62, 60], [96, 128], [130, 84], [164, 100]].forEach(function (b) { g.fillRect(w.x + b[0], w.y + w.h - b[1], 28, b[1]); });
+  K.windowGlass(g, w); K.windowMullions(g, w);
+  K.plaque(g, { x: 610, y: -54, w: 200, h: 50 }, 'Bayview Clinic', 'sample clinic group', '#21B799', function (g2, x, y) { g2.fillStyle = '#fff'; g2.fillRect(x - 2.5, y - 8, 5, 16); g2.fillRect(x - 8, y - 2.5, 16, 5); });
+  // medicine cabinet at the left edge
+  K.shadowed(g, 16, 6, .16, function () { K.fillRR(g, 150, 150, 120, 320, 10, '#FFFFFF'); });
+  for (var r = 0; r < 4; r++) { K.fillRR(g, 158, 196 + r * 66, 104, 5, 2, '#D6EDE8'); for (var b = 0; b < 4; b++) K.fillRR(g, 162 + b * 25, 170 + r * 66, 20, 26, 3, ['#DDF4EE', '#FFD9E0', '#DDE7F8', '#FFEDB0'][(b + r) % 4]); }
+  K.fillRR(g, 230, 170 + 66, 20, 26, 3, '#FFB648');
+  // reception desk + receptionist behind it
+  H.person(g, H.who({ x: 420, y: 452, s: .56, ph: .4, c: { skin: '#EDC09A', hair: '#2B1D16', top: '#2BB3A3', top2: '#1F8F82', low: '#2C3E66' }, outfit: 'scrubs', hairStyle: 'bun', feet: false, mood: 'happy', look: .7, talk: true, hands: [[-60, -186], [80, -200]] }));
+  K.shadowed(g, 20, 8, .18, function () { K.fillRR(g, 290, 330, 290, 140, 16, '#FFFFFF'); });
+  K.fillRR(g, 290, 330, 290, 18, 10, '#E2F2EF'); K.fillRR(g, 312, 372, 246, 6, 3, '#CDEAE3'); K.fillRR(g, 470, 276, 70, 54, 8, '#2A3550'); K.fillRR(g, 475, 281, 60, 42, 5, '#E7F7FF');
+  K.fillRR(g, 481, 288, 34, 6, 3, '#21B799'); K.fillRR(g, 481, 299, 46, 4, 2, '#BFD4E4'); K.fillRR(g, 481, 308, 28, 4, 2, '#BFD4E4'); K.fillRR(g, 499, 323, 12, 7, 2, '#2A3550');
+  K.fillRR(g, 318, 304, 50, 30, 6, '#F4F7FB'); K.fillRR(g, 326, 296, 40, 10, 4, '#FF8FA3');
+  // waiting patient, seated, left foreground
+  H.person(g, H.who({ x: 236, y: 610, s: .62, ph: 2.1, c: { skin: '#D9A27A', hair: '#1E1A1A', top: '#F2B544', top2: '#D99A2B', low: '#4A5578', shoe: '#2A2F45' }, outfit: 'tee', hairStyle: 'short', glasses: true, sit: true, chairCol: '#21B799', mood: 'calm', look: .4, hands: [[-46, -228], [46, -228]] }));
+  // doctor, nearer, right
+  H.person(g, H.who({ x: 700, y: 590, s: .74, ph: 1.7, c: { skin: '#E3B089', hair: '#232634', top: '#5B8DEF', top2: '#5B8DEF', low: '#3A4766', shoe: '#2A2F45' }, outfit: 'coat', hairStyle: 'short', glasses: true, hold: 'clipboard', mood: 'happy', look: -.5, hands: [[-64, -206], [96, -150]] }));
+  g.restore();
+  H.pool(g, 640, 1190, 380, 70, .55);
+  H.blur(g, 6, function () { K.plant(g, { x: 70, y: 1540 }, '#F59A8B', '#F7AE9F'); });
+  H.vignette(g, .1);
+});
+</script>
+</body></html>

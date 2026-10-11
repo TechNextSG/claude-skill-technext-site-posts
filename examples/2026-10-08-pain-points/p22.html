@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>pain-retyping-orders</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<link rel="stylesheet" href="../assets/pain.css">
+<style>
+/* 22 · Pain point: re-typing orders. Scenario: the sales coordinator copies one order into a quotation, a delivery
+   slip and an invoice in separate files, and the quantities stop matching. With Odoo, one sales record flows
+   Quotation -> Delivery -> Invoice on a single track. */
+:root{--acc:#3167CA;--acc-l:#E6EEFB;--acc-d:#1F4FA8}
+.l1{left:72px;top:560px}.l2{left:600px;top:560px}
+.vs{left:508px;top:860px}
+.n1{left:72px;top:1180px;width:250px}.n2{left:760px;top:1180px;width:248px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip pain" data-qa="chip"><i><img src="../assets/img/odoo/sale.svg" alt=""></i>Pain point · <b>Re-typing orders</b></div>
+  <h1 class="tp-h" data-qa="headline">Typing the same order<br><span class="pain">three times?</span></h1>
+  <p class="tp-sub" data-qa="sub">Three files for one order. <b>One Odoo record runs quote to cash.</b></p>
+
+  <span class="lab today l1" data-qa="lab-today"><i></i>Today</span>
+  <span class="lab fix l2" data-qa="lab-fix"><i></i>With Odoo</span>
+  <div class="vs" data-qa="vs">vs</div>
+  <div class="note bad n1" data-qa="note-bad">12, 10 or 21 pcs?<small>one order, three files · sample</small></div>
+  <div class="note good n2" data-qa="note-good">One order, one record<small>S00042 · 12 pcs · sample</small></div>
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/solutions/odoo-erp</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var TOP = 540, FY = 1150, SEAM = function (y) { return 560 - (y - TOP) * 0.08; };
+  function half(left, fn) { g.save(); g.beginPath();
+    if (left) { g.moveTo(0, TOP); g.lineTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.lineTo(0, 1440); }
+    else { g.moveTo(SEAM(TOP), TOP); g.lineTo(1080, TOP); g.lineTo(1080, 1440); g.lineTo(SEAM(1440), 1440); }
+    g.closePath(); g.clip(); fn(); g.restore(); }
+  H.grad(g, 0, 0, 1080, TOP, '#F6F7FB', '#EEF1F7');
+  function room(x0, x1, wallA, wallB, wains, floorA, floorB) {
+    H.grad(g, x0, TOP, x1 - x0, FY - TOP, wallA, wallB);
+    H.grad(g, x0, FY - 190, x1 - x0, 190, wains[0], wains[1]); g.fillStyle = 'rgba(255,255,255,.7)'; g.fillRect(x0, FY - 196, x1 - x0, 6);
+    H.grad(g, x0, FY, x1 - x0, 1440 - FY, floorA, floorB);
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 2; g.beginPath(); for (var d = 1; d < 7; d++) { var yy = FY + Math.pow(d / 6, 1.6) * (1440 - FY); g.moveTo(x0, yy); g.lineTo(x1, yy); } g.stroke();
+  }
+  function desk(cx) { K.shadowed(g, 18, 8, .18, function () { K.fillRR(g, cx - 170, 1120, 340, 22, 10, '#C99A6B'); }); K.fillRR(g, cx - 156, 1142, 14, 120, 4, '#B5865A'); K.fillRR(g, cx + 142, 1142, 14, 120, 4, '#B5865A'); }
+  // ---- TODAY: three files of the same order, quantities that disagree ----
+  half(true, function () {
+    room(0, 600, '#DADDE8', '#CDD1DE', ['#BFC4D3', '#B5BACB'], '#C9CCD6', '#B8BCC8');
+    g.fillStyle = 'rgba(40,50,80,.10)'; g.fillRect(0, TOP, 600, 1440 - TOP);
+    H.person(g, H.who({ x: 300, y: 1240, s: .66, ph: .6, c: { skin: '#EDBF9A', hair: '#1E1A1A', top: '#8A93AE', top2: '#737C99', low: '#3A4766' }, outfit: 'blazer', hairStyle: 'pony', sit: true, chairCol: '#4A5068', mood: 'wow', look: 0, hands: [[-92, -386], [92, -386]] }));
+    desk(300);
+    [[170, 7], [430, 5]].forEach(function (p) { for (var i = 0; i < p[1]; i++) K.fillRR(g, p[0] - 30 + (i % 2) * 4, 1110 - i * 7, 64, 8, 2, i % 3 ? '#FFFFFF' : '#EEF0F5'); });
+    // three windows: quotation, delivery slip, invoice
+    [[230, 700, -5, 'Quotation', '12 pcs', '#7C86A3'], [430, 810, 6, 'Delivery slip', '10 pcs', '#E9A23B'], [120, 880, -7, 'Invoice', '21 pcs', '#D9473F']].forEach(function (w) {
+      g.save(); g.translate(w[0], w[1]); g.rotate(w[2] * Math.PI / 180);
+      K.shadowed(g, 12, 5, .2, function () { K.fillRR(g, -75, -48, 150, 96, 9, '#FFFFFF'); });
+      K.fillRR(g, -75, -48, 150, 22, 9, '#5A6380'); K.fillRR(g, -75, -34, 150, 8, 0, '#5A6380');
+      K.text(g, w[3], -64, -32, 13, 700, '#FFFFFF');
+      K.text(g, 'Order 1042', -64, -6, 12, 600, '#8A90A6');
+      K.fillRR(g, -64, 4, 60, 6, 3, '#E3E6EE'); K.fillRR(g, -64, 16, 44, 6, 3, '#E3E6EE');
+      K.text(g, w[4], 64, 32, 22, 800, w[5], 'right');
+      g.restore(); });
+    [[384, 975], [396, 1000]].forEach(function (d) { g.fillStyle = '#9FD3F2'; g.beginPath(); g.moveTo(d[0], d[1] - 12); g.quadraticCurveTo(d[0] + 9, d[1] + 2, d[0], d[1] + 6); g.quadraticCurveTo(d[0] - 9, d[1] + 2, d[0], d[1] - 12); g.fill(); });
+  });
+  // ---- WITH ODOO: one record on one track ----
+  half(false, function () {
+    room(480, 1080, '#F3F7FE', '#E5EDFB', ['#D3E0F7', '#C6D6F3'], '#F2F5FB', '#DEE5F2');
+    H.person(g, H.who({ x: 790, y: 1240, s: .66, ph: 1.4, c: { skin: '#EDBF9A', hair: '#1E1A1A', top: '#3167CA', top2: '#2552A8', low: '#3A4766' }, outfit: 'blazer', hairStyle: 'pony', sit: true, chairCol: '#2F3B52', mood: 'happy', look: .4, hands: [[-70, -210], [70, -210]] }));
+    desk(790);
+    K.fillRR(g, 890, 1000, 150, 104, 10, '#2A3550'); K.fillRR(g, 897, 1007, 136, 82, 6, '#FFFFFF'); K.fillRR(g, 958, 1104, 14, 16, 3, '#2A3550');
+    K.fillRR(g, 897, 1007, 136, 16, 6, '#E6EEFB');
+    [['#1F9D6B', 1], ['#1F9D6B', 1], ['#3167CA', 1]].forEach(function (s, i) { K.fillE(g, 920 + i * 45, 1048, 11, 11, s[0]); if (i < 2) K.fillRR(g, 932 + i * 45, 1046, 22, 4, 2, '#BFD0EE'); });
+    K.fillRR(g, 905, 1070, 70, 7, 3, '#D5DEEE');
+    K.fillRR(g, 660, 1104, 70, 16, 4, '#FFFFFF'); K.fillRR(g, 700, 1092, 26, 26, 6, '#FFFFFF'); K.fillRR(g, 704, 1096, 18, 8, 3, '#C98E55');
+    K.plant(g, { x: 560, y: 1250 }, '#7FB6E8', '#A6CCF0');
+  });
+  g.strokeStyle = '#FFFFFF'; g.lineWidth = 10; g.beginPath(); g.moveTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.stroke();
+  H.vignette(g, .07);
+
+  var A = '#3167CA', F = 'Plus Jakarta Sans,sans-serif';
+  function node(x, label, done) {
+    return '<g transform="translate(' + x + ' 800)"><rect x="-68" y="-24" width="136" height="48" rx="24" fill="' + (done ? '#fff' : A) + '" filter="url(#sh)"/>' +
+      '<circle cx="-44" cy="0" r="11" fill="' + (done ? '#1F9D6B' : '#fff') + '"/>' +
+      (done ? '<path d="M-49 0 L-45 4 L-38 -4" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' : '<circle cx="-44" cy="0" r="5" fill="' + A + '"/>') +
+      '<text x="-26" y="6" font-family="' + F + '" font-size="16" font-weight="800" fill="' + (done ? '#1F1F3D' : '#fff') + '">' + label + '</text></g>';
+  }
+  document.getElementById('flow').innerHTML =
+    '<defs><filter id="sh" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#1F1F3D" flood-opacity=".16"/></filter>' +
+    '<marker id="ab" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#D9473F"/></marker></defs>' +
+    // TODAY: tangled copy arrows
+    '<g fill="none" stroke="#D9473F" stroke-width="4" stroke-dasharray="3 10" stroke-linecap="round">' +
+    '<path d="M305 715 C 400 650, 470 700, 440 755" marker-end="url(#ab)"/>' +
+    '<path d="M370 840 C 300 760, 160 920, 205 870" marker-end="url(#ab)"/>' +
+    '<path d="M70 830 C 20 740, 90 640, 150 690" marker-end="url(#ab)"/></g>' +
+    '<g transform="translate(300 790)"><circle r="19" fill="#D9473F"/><text x="0" y="8" text-anchor="middle" font-family="' + F + '" font-size="22" font-weight="800" fill="#fff">?</text></g>' +
+    '<g transform="translate(46 730)"><circle r="17" fill="#D9473F"/><text x="0" y="7" text-anchor="middle" font-family="' + F + '" font-size="19" font-weight="800" fill="#fff">?</text></g>' +
+    // WITH ODOO: one track, one record riding it
+    '<rect x="600" y="796" width="420" height="8" rx="4" fill="#C6D6F3"/><rect x="600" y="796" width="300" height="8" rx="4" fill="' + A + '"/>' +
+    node(668, 'Quote', true) + node(820, 'Delivery', true) + node(972, 'Invoice', false) +
+    '<g transform="translate(820 690)" filter="url(#sh)"><rect x="-92" y="-36" width="184" height="72" rx="14" fill="#fff"/></g>' +
+    '<g transform="translate(820 690)"><rect x="-92" y="-36" width="6" height="72" rx="3" fill="' + A + '"/>' +
+    '<text x="-74" y="-10" font-family="Inter,sans-serif" font-size="14" font-weight="600" fill="#6A7088">Sales order</text>' +
+    '<text x="-74" y="20" font-family="' + F + '" font-size="22" font-weight="800" fill="#1F1F3D">S00042 · 12</text></g>' +
+    '<path d="M820 728 L 820 770" stroke="' + A + '" stroke-width="4" stroke-dasharray="2 9" stroke-linecap="round"/>' +
+    '<path d="M632 860 C 760 900, 900 900, 1000 856" fill="none" stroke="' + A + '" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round" opacity=".6"/>' +
+    '<text x="816" y="912" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="600" fill="#1F4FA8">same 12 pcs at every step</text>';
+});
+</script>
+</body></html>

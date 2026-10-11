@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>pain-finding-documents</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<link rel="stylesheet" href="../assets/pain.css">
+<style>
+/* 24 · Pain point: finding documents. Scenario: the HR admin digs through folders and forwarded attachments, five
+   files all called "final", none clearly current. With the knowledge assistant she asks in plain language and gets
+   the answer with a source chip that links to the one right document. */
+:root{--acc:#6B4FA0;--acc-l:#EEE9F7;--acc-d:#4F3780}
+.l1{left:72px;top:560px}.l2{left:600px;top:560px}
+.vs{left:508px;top:860px}
+.n1{left:72px;top:1180px;width:250px}.n2{left:760px;top:1180px;width:248px}
+.note.good{color:var(--acc-d)}
+.nexi-png{left:900px;top:600px;width:168px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip pain" data-qa="chip"><i><img src="../assets/img/odoo/knowledge.svg" alt=""></i>Pain point · <b>Finding documents</b></div>
+  <h1 class="tp-h" data-qa="headline">Which file is<br><span class="pain">the latest version?</span></h1>
+  <p class="tp-sub" data-qa="sub">Policies in ten folders. <b>Ask the assistant, get the source.</b></p>
+
+  <span class="lab today l1" data-qa="lab-today"><i></i>Today</span>
+  <span class="lab fix l2" data-qa="lab-fix"><i></i>With Odoo</span>
+  <div class="vs" data-qa="vs">vs</div>
+  <div class="note bad n1" data-qa="note-bad">Which one is current?<small>5 versions · sample</small></div>
+  <div class="note good n2" data-qa="note-good">One answer, one source<small>linked to the file · sample</small></div>
+
+  <img class="nexi-png" src="../assets/sp/nexi/nexi-point-left.png" alt="">
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/solutions/ai-knowledge</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var TOP = 540, FY = 1150, SEAM = function (y) { return 560 - (y - TOP) * 0.08; };
+  function half(left, fn) { g.save(); g.beginPath();
+    if (left) { g.moveTo(0, TOP); g.lineTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.lineTo(0, 1440); }
+    else { g.moveTo(SEAM(TOP), TOP); g.lineTo(1080, TOP); g.lineTo(1080, 1440); g.lineTo(SEAM(1440), 1440); }
+    g.closePath(); g.clip(); fn(); g.restore(); }
+  H.grad(g, 0, 0, 1080, TOP, '#F6F7FB', '#EEF1F7');
+  function room(x0, x1, wallA, wallB, wains, floorA, floorB) {
+    H.grad(g, x0, TOP, x1 - x0, FY - TOP, wallA, wallB);
+    H.grad(g, x0, FY - 190, x1 - x0, 190, wains[0], wains[1]); g.fillStyle = 'rgba(255,255,255,.7)'; g.fillRect(x0, FY - 196, x1 - x0, 6);
+    H.grad(g, x0, FY, x1 - x0, 1440 - FY, floorA, floorB);
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 2; g.beginPath(); for (var d = 1; d < 7; d++) { var yy = FY + Math.pow(d / 6, 1.6) * (1440 - FY); g.moveTo(x0, yy); g.lineTo(x1, yy); } g.stroke();
+  }
+  function desk(cx) { K.shadowed(g, 18, 8, .18, function () { K.fillRR(g, cx - 170, 1120, 340, 22, 10, '#C99A6B'); }); K.fillRR(g, cx - 156, 1142, 14, 120, 4, '#B5865A'); K.fillRR(g, cx + 142, 1142, 14, 120, 4, '#B5865A'); }
+  function folder(x, y, col, tab) { K.fillRR(g, x, y - 8, 34, 12, 4, tab); K.fillRR(g, x, y, 84, 16, 3, col); }
+  var HR = { skin: '#EDBF98', hair: '#1A1616', low: '#3A3550' };
+  // ---- TODAY: folders everywhere, attachments flying, which one is right? ----
+  half(true, function () {
+    room(0, 600, '#DADDE8', '#CDD1DE', ['#BFC4D3', '#B5BACB'], '#C9CCD6', '#B8BCC8');
+    g.fillStyle = 'rgba(40,50,80,.10)'; g.fillRect(0, TOP, 600, 1440 - TOP);
+    // a filing cabinet with drawers
+    K.shadowed(g, 14, 6, .16, function () { K.fillRR(g, 30, 960, 100, 300, 8, '#A9AFC2'); });
+    for (var d = 0; d < 3; d++) { K.fillRR(g, 38, 972 + d * 96, 84, 84, 6, '#B9BFD0'); K.fillRR(g, 64, 1006 + d * 96, 32, 8, 4, '#7D849C'); }
+    H.person(g, H.who({ x: 330, y: 1240, s: .66, ph: .6, c: { skin: HR.skin, hair: HR.hair, top: '#9A93B4', top2: '#837C9E', low: HR.low }, outfit: 'blazer', hairStyle: 'long', sit: true, chairCol: '#4A5068', mood: 'wow', look: 0, hands: [[-92, -386], [92, -386]] }));
+    desk(330);
+    // folder piles on the desk
+    [[180, 5], [400, 4]].forEach(function (p) { for (var i = 0; i < p[1]; i++) folder(p[0] - 42 + (i % 2) * 6, 1104 - i * 14, i % 2 ? '#E2B65A' : '#D6A845', '#C99634'); });
+    // sweat drops
+    [[416, 975], [428, 1000]].forEach(function (d) { g.fillStyle = '#9FD3F2'; g.beginPath(); g.moveTo(d[0], d[1] - 12); g.quadraticCurveTo(d[0] + 9, d[1] + 2, d[0], d[1] + 6); g.quadraticCurveTo(d[0] - 9, d[1] + 2, d[0], d[1] - 12); g.fill(); });
+  });
+  // ---- WITH ODOO: ask once, answer with its source ----
+  half(false, function () {
+    room(480, 1080, '#F5F2FB', '#EAE4F5', ['#DCD3EE', '#D1C6E8'], '#F3F1F8', '#E2DDEE');
+    H.person(g, H.who({ x: 790, y: 1240, s: .66, ph: 1.4, c: { skin: HR.skin, hair: HR.hair, top: '#6B4FA0', top2: '#563E85', low: HR.low }, outfit: 'blazer', hairStyle: 'long', sit: true, chairCol: '#2F3B52', mood: 'happy', look: .4, hands: [[-70, -210], [70, -210]] }));
+    desk(790);
+    // monitor beside her: the knowledge chat
+    K.fillRR(g, 890, 1000, 150, 104, 10, '#2A3550'); K.fillRR(g, 897, 1007, 136, 82, 6, '#FFFFFF'); K.fillRR(g, 958, 1104, 14, 16, 3, '#2A3550');
+    K.fillRR(g, 960, 1016, 64, 14, 7, '#6B4FA0'); K.fillRR(g, 905, 1038, 92, 12, 6, '#EEE9F7'); K.fillRR(g, 905, 1056, 76, 12, 6, '#EEE9F7'); K.fillRR(g, 905, 1074, 54, 9, 4, '#D9CFF0');
+    K.fillRR(g, 660, 1104, 70, 16, 4, '#FFFFFF'); K.fillRR(g, 700, 1092, 26, 26, 6, '#FFFFFF'); K.fillRR(g, 704, 1096, 18, 8, 3, '#C98E55');
+    K.plant(g, { x: 560, y: 1250 }, '#F59A8B', '#F7AE9F');
+  });
+  g.strokeStyle = '#FFFFFF'; g.lineWidth = 10; g.beginPath(); g.moveTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.stroke();
+  H.vignette(g, .07);
+
+  // ---- overlay: duplicate files flying (left), question -> answer -> source (right) ----
+  var F = 'font-family="Inter, sans-serif"', FD = 'font-family="Plus Jakarta Sans, sans-serif"';
+  var s = '<defs><filter id="sh" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#1F1F3D" flood-opacity=".16"/></filter></defs>';
+  function file(x, y, w, nm, ext, col, rot, op) {
+    return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')" opacity="' + (op || 1) + '">' +
+      '<rect x="0" y="0" width="' + w + '" height="44" rx="10" fill="#fff" filter="url(#sh)"/>' +
+      '<rect x="10" y="8" width="24" height="28" rx="4" fill="' + col + '"/><text x="22" y="27" text-anchor="middle" ' + FD + ' font-size="9" font-weight="800" fill="#fff">' + ext + '</text>' +
+      '<text x="44" y="28" ' + F + ' font-size="15" font-weight="600" fill="#3A3F55">' + nm + '</text></g>';
+  }
+  function mail(x, y, w, sub, rot) {
+    return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')">' +
+      '<rect x="0" y="0" width="' + w + '" height="58" rx="10" fill="#fff" filter="url(#sh)"/>' +
+      '<path d="M12 14 h26 v18 h-26 z M12 14 l13 10 l13 -10" fill="none" stroke="#8A90A6" stroke-width="2.4" stroke-linejoin="round"/>' +
+      '<text x="48" y="24" ' + FD + ' font-size="14" font-weight="800" fill="#3A3F55">' + sub + '</text>' +
+      '<rect x="48" y="34" width="' + (w - 64) + '" height="16" rx="5" fill="#EEF0F5"/>' +
+      '<text x="56" y="46" ' + F + ' font-size="11" font-weight="600" fill="#6A6E85">policy_final(2).pdf</text></g>';
+  }
+  s += file(78, 640, 260, 'policy_v3_final_FINAL', 'DOC', '#3167CA', -5);
+  s += file(250, 712, 220, 'policy_v2_FINAL', 'PDF', '#D9473F', 6);
+  s += mail(66, 772, 236, 'Fwd: RE: policy', -3);
+  s += file(290, 790, 200, 'policy final (1)', 'DOC', '#3167CA', -7);
+  s += file(210, 866, 196, 'policy_OLD_use', 'XLS', '#1F9D6B', 4, .95);
+  // question marks popping around her
+  [[230, 960, -10], [452, 900, 12], [104, 912, 0]].forEach(function (q) {
+    s += '<g transform="translate(' + q[0] + ' ' + q[1] + ') rotate(' + q[2] + ')"><circle r="19" fill="#fff" filter="url(#sh)"/><text y="8" text-anchor="middle" ' + FD + ' font-size="23" font-weight="800" fill="#D9473F">?</text></g>';
+  });
+
+  // right: her question
+  s += '<g transform="translate(600 632)"><rect x="0" y="0" width="290" height="46" rx="16" fill="#6B4FA0" filter="url(#sh)"/>' +
+       '<text x="16" y="29" ' + F + ' font-size="16" font-weight="600" fill="#fff">Leave days after 3 years?</text></g>';
+  // the answer card, with the source chip
+  s += '<g transform="translate(600 700)"><rect x="0" y="0" width="300" height="132" rx="16" fill="#fff" filter="url(#sh)"/>' +
+       '<text x="18" y="28" ' + FD + ' font-size="12" font-weight="800" fill="#8A8EA3" letter-spacing="1.4">ANSWER</text>' +
+       '<text x="18" y="56" ' + FD + ' font-size="20" font-weight="800" fill="#1B1F3B">18 days annual leave</text>' +
+       '<text x="18" y="78" ' + F + ' font-size="13" font-weight="600" fill="#6A6E85">from year 3 of service · sample</text>' +
+       '<rect x="18" y="92" width="210" height="28" rx="9" fill="#EEE9F7"/>' +
+       '<path d="M30 99 h10 l5 5 v10 h-15 z" fill="#6B4FA0"/>' +
+       '<text x="52" y="111" ' + FD + ' font-size="13" font-weight="800" fill="#4F3780">HR Policy 2026 · p.4</text></g>';
+  // thread from the chip to the one right document
+  s += '<path d="M830 806 C 880 812, 900 840, 924 872" fill="none" stroke="#6B4FA0" stroke-width="3.5" stroke-dasharray="2 9" stroke-linecap="round"/>';
+  s += '<g transform="translate(930 846)"><circle cx="36" cy="40" r="56" fill="#6B4FA0" opacity=".12"/>' +
+       '<rect x="0" y="0" width="72" height="88" rx="10" fill="#fff" filter="url(#sh)"/>' +
+       '<rect x="12" y="14" width="40" height="7" rx="3" fill="#6B4FA0"/><rect x="12" y="30" width="48" height="5" rx="2.5" fill="#E2DCF0"/>' +
+       '<rect x="12" y="42" width="44" height="5" rx="2.5" fill="#E2DCF0"/><rect x="12" y="54" width="48" height="5" rx="2.5" fill="#E2DCF0"/>' +
+       '<circle cx="64" cy="8" r="13" fill="#1F9D6B"/><path d="M58 8 l4 4 l8 -8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>';
+  document.getElementById('flow').innerHTML = s;
+});
+</script>
+</body></html>

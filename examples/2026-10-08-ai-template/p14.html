@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>ai-workflow-automation</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+/* 14 · Workflow Automation — "Agents that run multi-step tasks."
+   An operations room with one snaking track: a customer email drops in at the left, runs under four numbered stations
+   (Classify, Pull record, Prepare quotation, Route), turns into a quotation and rides the belt with Nexi up to a closed
+   gate. Only the operations manager's tap on Approve opens it: agents prepare, people post. */
+:root{--acc:#C8641A;--acc-l:#FDEBD9;--acc-d:#9C4A0E}
+.rec{--tb:var(--acc-l);--tc:var(--acc-d);width:248px;min-width:0;box-sizing:border-box;--pb:-7px}
+.rec .n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font:800 15px/1 var(--font-display);letter-spacing:0}
+.s1{left:72px;top:574px;--px:112px}
+.s2{left:416px;top:574px;--px:112px}
+.s3{left:760px;top:574px;--px:112px}
+.s4{left:96px;top:904px;--px:112px;--py:-7px;--pb:auto}
+.gate{left:546px;top:918px;width:274px;--px:183px}
+.gate .btns{display:flex;gap:10px;margin-top:12px}
+.gate .btns i{font:800 18px/1 var(--font-display);font-style:normal;padding:10px 14px;border-radius:10px;background:#F1EEE8;color:var(--ink)}
+.gate .btns i.ok{background:var(--acc);color:#fff;margin-left:auto;box-shadow:0 0 0 6px rgba(200,100,26,.18)}
+.nexi-png{left:356px;top:972px;width:168px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip" data-qa="chip"><i><img src="../assets/img/odoo/project.svg" alt=""></i>AI Solution · <b>Workflow Automation</b></div>
+  <h1 class="tp-h" data-qa="headline">Agents that run<br><em>multi&#8209;step tasks.</em></h1>
+  <p class="tp-sub" data-qa="sub">Let an agent do the steps. <b>Keep the decision.</b></p>
+
+  <div class="rec s1" data-qa="step1"><div class="hd"><span class="n">1</span>Classify</div><small>sample</small><b>Quote request</b><span>New email, sorted</span></div>
+  <div class="rec s2" data-qa="step2"><div class="hd"><span class="n">2</span>Pull record</div><small>sample</small><b>Lim Trading</b><span>Customer, price list B</span></div>
+  <div class="rec s3" data-qa="step3"><div class="hd"><span class="n">3</span>Quotation</div><small>sample</small><b>S00482</b><span>SGD 4,280 · draft</span></div>
+  <div class="rec s4" data-qa="step4"><div class="hd"><span class="n">4</span>Route</div><small>sample</small><b>Ops manager</b><span>Follow-up: Friday</span></div>
+  <div class="rec gate" data-qa="approve"><div class="hd"><img src="../assets/img/odoo/approvals.svg" alt="">You decide</div><small>sample</small><b>Send S00482?</b><div class="btns"><i>Edit</i><i class="ok" id="okbtn">Approve</i></div></div>
+  <img class="nexi-png" src="../assets/sp/nexi/nexi-point-right.png" alt="">
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/solutions/ai-automation</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var k = 1.6, sx = -236, sy = 500, FL = 1252, A = '#C8641A';
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#F8F3EA', '#F1E8DA'], wains: ['#F3DDC4', '#EBCFB0'], rail: '#FFFFFF', floor: ['#E2E0DA', '#CBC7BE'], base: '#E2C3A0',
+    floorKind: 'planks', floorLine: 'rgba(90,80,60,.12)' });
+  // wall details: inbox slot at the left, clock
+  K.shadowed(g, 14, 5, .14, function () { K.fillRR(g, -20, 690, 70, 80, 12, '#FFFFFF'); });
+  K.fillRR(g, -10, 722, 50, 14, 7, '#2F3B52');
+  // the belt (step 4 -> gate), legs on the floor
+  for (var lx = 80; lx <= 700; lx += 155) { K.fillRR(g, lx, 1160, 14, FL - 1160, 4, '#9AA3B5'); K.fillE(g, lx + 7, FL, 22, 5, 'rgba(30,40,60,.18)'); }
+  K.shadowed(g, 18, 8, .2, function () { K.fillRR(g, 40, 1136, 690, 30, 15, '#3A4560'); });
+  K.fillRR(g, 48, 1140, 674, 10, 5, '#56627E');
+  for (var r = 62; r < 720; r += 34) K.fillE(g, r, 1158, 5, 5, '#E9A35A');
+  // the gate: post + barrier arm (closed) in front of the belt end
+  K.fillE(g, 742, FL, 40, 7, 'rgba(30,40,60,.2)');
+  K.fillRR(g, 728, 1028, 26, FL - 1028, 8, '#2F3B52');
+  K.fillRR(g, 718, 1100, 46, 46, 12, '#3A4560'); K.fillE(g, 741, 1123, 9, 9, '#F2A65A');
+  g.save(); g.translate(741, 1123); g.rotate(-1.48);
+  K.fillRR(g, 0, -9, 120, 18, 9, '#FFFFFF');
+  g.fillStyle = A; for (var st = 14; st < 116; st += 30) { g.beginPath(); g.moveTo(st, -9); g.lineTo(st + 14, -9); g.lineTo(st + 6, 9); g.lineTo(st - 8, 9); g.closePath(); g.fill(); }
+  g.restore();
+  // plant behind the manager
+  g.save(); g.translate(sx, sy); g.scale(k, k); K.plant(g, { x: 880, y: 470 }, '#E8DCC8', '#F1E8D8'); g.restore();
+  // the operations manager taps Approve
+  H.person(g, H.who({ x: 962, y: FL, s: .67, ph: 2.1, c: { skin: '#D9A47E', hair: '#17141A', top: '#2F3B52', top2: '#25304A', shirt: '#FFFFFF', low: '#3A4256', shoe: '#22273A' },
+    outfit: 'blazer', hairStyle: 'short', glasses: true, mood: 'happy', look: -.7, hands: [[-222, -300], [60, -170]] }));
+  H.pool(g, 540, 1280, 460, 60, .45);
+  H.vignette(g, .07);
+
+  // ---------- dynamic layer (post px) ----------
+  var svg = '<defs><filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>' +
+    '<marker id="ch" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1 L8 5 L2 9" fill="none" stroke="' + A + '" stroke-width="2.4" stroke-linecap="round"/></marker></defs>';
+  var track = 'M 20 730 L 950 730 C 1066 730 1066 880 950 880 L 140 880 C 22 880 22 1140 140 1140 L 160 1140';
+  svg += '<path d="' + track + '" fill="none" stroke="#F2A65A" stroke-width="16" opacity=".35" filter="url(#gl)"/>';
+  svg += '<path d="' + track + '" fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" opacity=".9"/>';
+  svg += '<path d="' + track + '" fill="none" stroke="' + A + '" stroke-width="4" stroke-dasharray="2 13" stroke-linecap="round"/>';
+  // chevrons showing direction
+  [[300, 730, 0], [640, 730, 0], [1036, 805, 90], [700, 880, 180], [470, 880, 180], [50, 1010, 90]].forEach(function (c) {
+    svg += '<g transform="translate(' + c[0] + ' ' + c[1] + ') rotate(' + c[2] + ')"><path d="M-5 -8 L5 0 L-5 8" fill="none" stroke="' + A + '" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>'; });
+  // station ports
+  [[184, 730], [528, 730], [872, 730], [208, 880]].forEach(function (p) {
+    svg += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="16" fill="' + A + '" opacity=".18"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="8" fill="' + A + '" stroke="#fff" stroke-width="4"/>'; });
+  function streak(x, y, dir, n) { var s = ''; for (var i = 0; i < (n || 3); i++) { var len = 46 - i * 10, oy = (i - 1) * 9;
+      s += '<line x1="' + (x - dir * 30) + '" y1="' + (y + oy) + '" x2="' + (x - dir * (30 + len)) + '" y2="' + (y + oy) + '" stroke="' + A + '" stroke-width="' + (4 - i) + '" stroke-linecap="round" opacity="' + (.55 - i * .12) + '"/>'; } return s; }
+  function env(x, y, sc, tag) { var s = '<g transform="translate(' + x + ' ' + y + ') scale(' + sc + ')"><rect x="-26" y="-18" width="52" height="36" rx="7" fill="#fff" stroke="#E7C9A8" stroke-width="2.5"/><path d="M-24 -15 L0 4 L24 -15" fill="none" stroke="' + A + '" stroke-width="3" stroke-linejoin="round"/>';
+    if (tag) s += '<rect x="8" y="-30" width="30" height="16" rx="8" fill="' + A + '"/><rect x="14" y="-24" width="18" height="4" rx="2" fill="#fff"/>';
+    return s + '</g>'; }
+  function doc(x, y, sc, rot) { return '<g transform="translate(' + x + ' ' + y + ') rotate(' + (rot || 0) + ') scale(' + sc + ')"><rect x="-22" y="-28" width="44" height="56" rx="6" fill="#fff" stroke="#E7C9A8" stroke-width="2.5"/><rect x="-14" y="-18" width="28" height="5" rx="2.5" fill="' + A + '"/><rect x="-14" y="-7" width="24" height="3" rx="1.5" fill="#E9CDB0"/><rect x="-14" y="1" width="28" height="3" rx="1.5" fill="#E9CDB0"/><rect x="-14" y="9" width="18" height="3" rx="1.5" fill="#E9CDB0"/><rect x="2" y="16" width="14" height="5" rx="2.5" fill="' + A + '"/></g>'; }
+  function rec(x, y, sc) { return '<g transform="translate(' + x + ' ' + y + ') scale(' + sc + ')"><rect x="-30" y="-20" width="60" height="40" rx="8" fill="#fff" stroke="#E7C9A8" stroke-width="2.5"/><circle cx="-14" cy="-3" r="8" fill="#F6C99A"/><rect x="-2" y="-9" width="22" height="4" rx="2" fill="' + A + '"/><rect x="-2" y="0" width="18" height="3" rx="1.5" fill="#E9CDB0"/><rect x="-20" y="9" width="40" height="3" rx="1.5" fill="#E9CDB0"/></g>'; }
+  // travelling items: email in -> tagged email -> email + record -> quotation -> routed quotation
+  svg += streak(80, 730, 1) + env(80, 730, 1.15, false);
+  svg += streak(356, 730, 1) + env(356, 730, 1.15, true);
+  svg += streak(690, 730, 1) + env(672, 730, 1, true) + rec(712, 726, .95);
+  svg += streak(820, 880, -1) + doc(800, 880, 1, -8);
+  svg += streak(560, 880, -1) + doc(540, 880, 1, 6);
+  // on the belt: Nexi rides behind the quotation up to the gate
+  svg += streak(612, 1110, 1, 3) + doc(612, 1108, 1.25, -4);
+  // the tap: ripple on Approve
+  var ok = document.getElementById('okbtn').getBoundingClientRect(), ox = ok.left + ok.width / 2, oy = ok.top + ok.height / 2;
+  svg += '<circle cx="' + ox + '" cy="' + oy + '" r="' + (ok.width * .72) + '" fill="none" stroke="' + A + '" stroke-width="3" opacity=".35"/>' +
+    '<circle cx="' + ox + '" cy="' + oy + '" r="' + (ok.width * .98) + '" fill="none" stroke="' + A + '" stroke-width="2" opacity=".18"/>';
+  document.getElementById('flow').innerHTML = svg;
+});
+</script>
+</body></html>

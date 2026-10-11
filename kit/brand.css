@@ -1,0 +1,33 @@
+/* TechNext brand base for original site-inspired posts (1080x1440 frame, rendered at DPR 2).
+   Fonts and colours are the TechNext brand (brand guide / site.css); everything else is designed per post. */
+:root{
+  --blue:#3167CA;--blue-d:#2552A6;--blue-l:#EAF1FC;
+  --ink:#1F1F3D;--label:#5C5C73;--odoo:#714B67;--ok:#137A4A;
+  --gold:#E2B23A;--mint:#21B799;--coral:#E5484D;--amber:#E99A12;--teal:#14A38B;
+  --font-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --font-body:Inter,system-ui,sans-serif;
+  --font-hand:Caveat,"Segoe Print",cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1440px;overflow:hidden;background:#fff}
+body{font-family:var(--font-body);color:var(--ink);-webkit-font-smoothing:antialiased}
+.f{position:relative;width:1080px;height:1440px;overflow:hidden;isolation:isolate}
+.abs{position:absolute}
+svg{display:block;overflow:visible}
+
+/* fixed frame */
+/* logo row per the owner's reference (8 Oct 2026): 72px side margins, row centred 100px from the top,
+   TechNext logo 47px tall, Odoo wordmark 43px; content starts at y >= 175 */
+.sp-logos{position:absolute;z-index:20;left:0;right:0;top:50px;height:100px;display:flex;align-items:center;justify-content:space-between;padding:0 72px}
+.sp-tn{height:47px;width:auto;display:block}
+.sp-odoo{height:43px;width:auto;display:block}
+.sp-logos.is-light .sp-tn,.sp-logos.is-light .sp-odoo{filter:brightness(0) invert(1)}
+.sp-foot{position:absolute;z-index:20;left:0;right:0;bottom:56px;display:flex;justify-content:center;padding:0 72px}
+.sp-url{font:700 23px/1 var(--font-display);color:var(--ink);background:#fff;border:2.5px solid var(--ink);border-radius:999px;padding:13px 26px 14px;box-shadow:0 5px 0 var(--ink)}
+
+/* brand devices (shared vocabulary; compose them differently every post) */
+.hand{font-family:var(--font-hand);font-weight:700}
+.disp{font-family:var(--font-display);font-weight:800;letter-spacing:-.025em;line-height:.95}
+.lip{border:3px solid var(--ink);box-shadow:0 6px 0 var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:10px;border-radius:999px;font:800 22px/1 var(--font-display);padding:12px 20px 13px;white-space:nowrap}
+.oi{width:var(--s,40px);height:var(--s,40px);display:block}

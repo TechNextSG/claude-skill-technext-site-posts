@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-for-manufacturing</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<style>
+/* 10 · Manufacturing — a bright assembly hall seen from the side of the line: a CNC cell feeds a conveyor, an operator in
+   cap and safety glasses checks parts, the supervisor reads the costing on her tablet. Card sits low-left, records up top. */
+.card{left:72px;top:880px;width:560px;--acc:#E0661B}
+.card h1{font-size:60px}
+.r1{left:72px;top:200px;width:300px;--px:120px}
+.r2{right:72px;top:236px;width:300px;--px:200px;--tb:#FFF0E2;--tc:#A4480C}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+  <div class="card" data-qa="card"><span class="k">odoo for manufacturing</span>
+    <h1>Every part, every step, <em>costed.</em></h1>
+    <p>Bills of materials, work orders and real product costing on the shop floor.</p>
+    <div class="apps"><span><img src="../assets/img/odoo/mrp.svg" alt="">Manufacturing</span><span><img src="../assets/img/odoo/quality_control.svg" alt="">Quality</span><span><img src="../assets/img/odoo/stock.svg" alt="">Inventory</span></div>
+  </div>
+  <div class="rec r1" data-qa="rec1"><small>sample</small><div class="hd"><img src="../assets/img/odoo/mrp.svg" alt="">Work order</div><b>WH/MO/00318</b><span>Desk fan DF-200 · 240 units</span><span class="tag">In progress · 62%</span></div>
+  <div class="rec r2" data-qa="rec2"><small>sample</small><div class="hd"><img src="../assets/img/odoo/mrp.svg" alt="">Bill of materials</div><b>DF-200 · 14 components</b><span>Material + labour cost $38.40/unit</span><span class="tag">Cost updated</span></div>
+  <div class="sp-foot" style="justify-content:flex-end"><span class="sp-url soft" data-qa="url">technext.asia/industries/manufacturing</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var k = 1.4, sx = -170, sy = 222, F = 470, OR = '#F07A2A', ORD = '#C95E17', ST = '#3E5F86';
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#EEF3F9', '#E1EAF4'], wains: ['#B8CAE0', '#A8BDD7'], rail: '#FFFFFF', floor: ['#E9EEF4', '#CED8E4'],
+    base: '#8FA7C4', panelLine: 'rgba(40,70,110,.08)', floorLine: 'rgba(255,255,255,.6)' });
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+  // ---- high factory windows (centre top) + roof truss line
+  var w = { x: 380, y: 6, w: 210, h: 128 };
+  K.windowFrame(g, w, F); K.windowSky(g, w, 3, 0, '#A9DBFA', '#E8F6FF');
+  g.fillStyle = 'rgba(140,175,205,.45)'; [[0, 40], [34, 66], [70, 34], [104, 80], [146, 50], [178, 62]].forEach(function (b) { g.fillRect(w.x + b[0], w.y + w.h - b[1], 30, b[1]); });
+  K.windowGlass(g, w); K.windowMullions(g, w);
+  // safety sign on the wall
+  K.shadowed(g, 8, 3, .14, function () { K.fillRR(g, 620, 196, 64, 64, 10, '#FFFFFF'); });
+  g.fillStyle = OR; g.beginPath(); g.moveTo(652, 208); g.lineTo(676, 250); g.lineTo(628, 250); g.closePath(); g.fill();
+  K.fillRR(g, 649, 220, 6, 18, 3, '#FFFFFF'); K.fillE(g, 652, 243, 3.4, 3.4, '#FFFFFF');
+  // ---- CNC machine cell (left)
+  K.soft(g, 235, 472, 130, 14, .25);
+  K.shadowed(g, 20, 8, .2, function () { K.fillRR(g, 140, 180, 196, 290, 16, '#F4F7FB'); });
+  K.fillRR(g, 140, 180, 196, 36, 14, ST); K.fillRR(g, 140, 204, 196, 12, 0, ST);
+  K.text(g, 'CNC-02', 156, 205, 15, 800, '#FFFFFF');
+  K.fillE(g, 312, 198, 7, 7, '#5BD38A');
+  // machine window with the spindle
+  K.fillRR(g, 156, 230, 120, 120, 10, '#2A3550'); var mg = g.createLinearGradient(0, 236, 0, 344); mg.addColorStop(0, '#4E6E96'); mg.addColorStop(1, '#2D4466');
+  K.rr(g, 162, 236, 108, 108, 7); g.fillStyle = mg; g.fill();
+  K.fillRR(g, 204, 236, 24, 52, 4, '#AEB8C4'); K.fillRR(g, 210, 288, 12, 18, 3, '#D9E0E6'); K.fillRR(g, 182, 316, 70, 14, 3, '#8D97A4');
+  g.save(); g.globalAlpha = .7; K.fillE(g, 216, 310, 14, 6, '#FFB648'); g.restore();
+  g.fillStyle = 'rgba(255,255,255,.18)'; g.beginPath(); g.moveTo(176, 344); g.lineTo(214, 236); g.lineTo(236, 236); g.lineTo(198, 344); g.closePath(); g.fill();
+  // control panel
+  K.fillRR(g, 286, 232, 40, 66, 6, '#2A3550'); K.fillRR(g, 290, 236, 32, 22, 3, '#7FD1F5');
+  [0, 1, 2].forEach(function (i) { K.fillE(g, 296 + i * 10, 270, 3.5, 3.5, ['#5BD38A', '#FFC93C', '#E0456B'][i]); });
+  K.fillRR(g, 292, 282, 28, 8, 3, OR);
+  K.fillRR(g, 140, 370, 196, 10, 0, OR); g.fillStyle = '#2A3550'; for (var sI = 0; sI < 10; sI++) { g.save(); g.beginPath(); g.rect(140, 370, 196, 10); g.clip(); g.fillRect(140 + sI * 22, 366, 10, 18); g.restore(); }
+  K.fillRR(g, 150, 392, 176, 60, 8, '#E3E9F1'); K.fillRR(g, 228, 408, 26, 6, 3, '#AEB8C4');
+  // ---- operator behind the conveyor (cap + safety glasses + clipboard)
+  H.person(g, H.who({ x: 500, y: 470, s: .6, ph: 1.2, c: { skin: '#D9A27A', hair: '#1E1A1A', top: ST, top2: '#2F4C70', low: '#2A3550', hat: OR }, outfit: 'polo', hairStyle: 'short', hat: 'cap', glasses: true,
+    feet: false, hold: 'clipboard', mood: 'calm', look: .5, hands: [[-56, -252], [64, -200]] }));
+  // ---- conveyor running out of the machine
+  var CY = 372;
+  K.soft(g, 520, 472, 220, 12, .2);
+  [360, 470, 580, 690].forEach(function (lx) { K.fillRR(g, lx - 6, CY + 18, 12, 470 - CY - 18, 3, '#7A869C'); K.fillRR(g, lx - 16, 464, 32, 8, 3, '#5E6A80'); });
+  K.shadowed(g, 10, 4, .18, function () { K.fillRR(g, 336, CY, 380, 24, 10, '#5E6A80'); });
+  K.fillRR(g, 336, CY, 380, 9, 5, '#2E3446');
+  g.fillStyle = '#8D97A4'; for (var rI = 0; rI < 16; rI++) K.fillE(g, 350 + rI * 23.5, CY + 16, 5, 5, '#8D97A4');
+  K.fillRR(g, 336, CY + 22, 380, 4, 2, OR);
+  // parts on the belt: fan housings and a carton
+  [[390, 0], [615, 0]].forEach(function (p) {
+    if (p[1]) { K.fillRR(g, p[0] - 30, CY - 44, 60, 44, 5, '#C99A6B'); K.fillRR(g, p[0] - 30, CY - 44, 60, 8, 4, '#B5865A'); g.fillStyle = 'rgba(255,240,210,.55)'; g.fillRect(p[0] - 5, CY - 44, 10, 44); return; }
+    K.fillE(g, p[0], CY - 26, 26, 26, '#FFFFFF'); K.fillE(g, p[0], CY - 26, 20, 20, '#DCE6F2'); K.fillE(g, p[0], CY - 26, 6, 6, OR);
+    g.fillStyle = '#A9BCD4'; for (var b = 0; b < 3; b++) { g.save(); g.translate(p[0], CY - 26); g.rotate(b * 2.1 + .3); K.fillE(g, 10, 0, 9, 4, '#A9BCD4'); g.restore(); }
+    K.fillRR(g, p[0] - 16, CY - 4, 32, 5, 2, '#8D97A4'); });
+  // quality scanner arch over the belt
+  K.fillRR(g, 560, CY - 86, 10, 86, 3, '#AEB8C4'); K.fillRR(g, 660, CY - 86, 10, 86, 3, '#AEB8C4'); K.fillRR(g, 554, CY - 96, 122, 16, 6, ST); K.fillE(g, 615, CY - 88, 4, 4, '#5BD38A');
+  g.save(); g.globalAlpha = .25; g.fillStyle = '#7FD1F5'; g.fillRect(572, CY - 80, 86, 80); g.restore();
+  // floor safety line
+  g.restore();
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+  g.fillStyle = 'rgba(255,193,60,.85)'; g.fillRect(100, 520, 820, 6);
+  // ---- stacked parts bins (right, behind the supervisor)
+  [[800, 420, '#5B8DEF'], [800, 372, OR], [860, 420, OR]].forEach(function (b) { K.shadowed(g, 6, 3, .14, function () { K.fillRR(g, b[0] - 28, b[1], 56, 46, 6, b[2]); }); K.fillRR(g, b[0] - 16, b[1] + 10, 32, 12, 4, 'rgba(255,255,255,.6)'); });
+  K.fillRR(g, 760, 466, 140, 8, 3, '#7A869C');
+  // ---- supervisor with tablet (front right)
+  H.person(g, H.who({ x: 780, y: 610, s: .74, ph: 2.6, c: { skin: '#EDC09A', hair: '#2B1D16', top: '#FFFFFF', top2: '#E2E8F0', shirt: '#FFFFFF', low: '#34405E', shoe: '#2A2F45', hat: '#FFFFFF' }, outfit: 'polo', hairStyle: 'bun',
+    vest: OR, hold: 'tablet', mood: 'happy', look: -.6, talk: true, hands: [[-70, -210], [70, -170]] }));
+  // ---- pallet of finished cartons (front, right of the card)
+  K.soft(g, 720, 772, 120, 14, .28);
+  K.fillRR(g, 610, 752, 220, 18, 4, '#B5865A'); [618, 706, 794].forEach(function (x) { K.fillRR(g, x, 768, 28, 6, 2, '#8A5A3B'); });
+  [[620, 682], [722, 682]].forEach(function (c) { K.shadowed(g, 6, 3, .14, function () { K.fillRR(g, c[0], c[1], 98, 70, 6, '#C99A6B'); });
+    K.fillRR(g, c[0], c[1], 98, 12, 5, '#B5865A'); g.fillStyle = 'rgba(255,240,210,.55)'; g.fillRect(c[0] + 42, c[1], 14, 70);
+    K.fillRR(g, c[0] + 62, c[1] + 26, 28, 20, 3, '#FFFFFF'); K.fillE(g, c[0] + 76, c[1] + 36, 5, 5, OR); });
+  g.restore();
+  H.pool(g, 640, 940, 380, 60, .5);
+  H.vignette(g, .1);
+});
+</script>
+</body></html>

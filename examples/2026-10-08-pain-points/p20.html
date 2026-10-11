@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>pain-month-end-close</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<link rel="stylesheet" href="../assets/pain.css">
+<style>
+/* 20 · Pain point: month-end close. Scenario: the finance lead stitches five spreadsheets together at night, numbers
+   never match. With Odoo Accounting, bank lines reconcile through the month, so the close is a review, not a rebuild. */
+:root{--acc:#1F9D6B;--acc-l:#E3F5EC;--acc-d:#137A4A}
+.l1{left:72px;top:560px}.l2{left:600px;top:560px}
+.vs{left:508px;top:860px}
+.n1{left:72px;top:1180px;width:250px}.n2{left:760px;top:1180px;width:248px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip pain" data-qa="chip"><i><img src="../assets/img/odoo/accountant.svg" alt=""></i>Pain point · <b>Month-end close</b></div>
+  <h1 class="tp-h" data-qa="headline">Month-end still takes<br><span class="pain">two weeks?</span></h1>
+  <p class="tp-sub" data-qa="sub">Five spreadsheets that never match. <b>Odoo reconciles as you go.</b></p>
+
+  <span class="lab today l1" data-qa="lab-today"><i></i>Today</span>
+  <span class="lab fix l2" data-qa="lab-fix"><i></i>With Odoo</span>
+  <div class="vs" data-qa="vs">vs</div>
+  <div class="note bad n1" data-qa="note-bad">Day 12 of the close<small>totals off by 3 cents · sample</small></div>
+  <div class="note good n2" data-qa="note-good">Bank lines matched<small>reviewed daily · sample</small></div>
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/odoo/apps/accounting</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var TOP = 540, FY = 1150, SEAM = function (y) { return 560 - (y - TOP) * 0.08; };   // tilted seam x at height y
+  function half(left, fn) { g.save(); g.beginPath();
+    if (left) { g.moveTo(0, TOP); g.lineTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.lineTo(0, 1440); }
+    else { g.moveTo(SEAM(TOP), TOP); g.lineTo(1080, TOP); g.lineTo(1080, 1440); g.lineTo(SEAM(1440), 1440); }
+    g.closePath(); g.clip(); fn(); g.restore(); }
+  // shared top wall above the scenes
+  H.grad(g, 0, 0, 1080, TOP, '#F6F7FB', '#EEF1F7');
+  function room(x0, x1, wallA, wallB, wains, floorA, floorB) {
+    H.grad(g, x0, TOP, x1 - x0, FY - TOP, wallA, wallB);
+    H.grad(g, x0, FY - 190, x1 - x0, 190, wains[0], wains[1]); g.fillStyle = 'rgba(255,255,255,.7)'; g.fillRect(x0, FY - 196, x1 - x0, 6);
+    H.grad(g, x0, FY, x1 - x0, 1440 - FY, floorA, floorB);
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 2; g.beginPath(); for (var d = 1; d < 7; d++) { var yy = FY + Math.pow(d / 6, 1.6) * (1440 - FY); g.moveTo(x0, yy); g.lineTo(x1, yy); } g.stroke();
+  }
+  function desk(cx) { K.shadowed(g, 18, 8, .18, function () { K.fillRR(g, cx - 170, 1120, 340, 22, 10, '#C99A6B'); }); K.fillRR(g, cx - 156, 1142, 14, 120, 4, '#B5865A'); K.fillRR(g, cx + 142, 1142, 14, 120, 4, '#B5865A'); }
+  function clock(x, y, h, m, rim) { var c = { x: x, y: y, r: 26 }; K.clockFace(g, c, rim); K.clockHands(g, c, h, m, 0); }
+  // ---- TODAY: dim evening, paper piles, five clashing spreadsheet windows, head in hands ----
+  half(true, function () {
+    room(0, 600, '#DADDE8', '#CDD1DE', ['#BFC4D3', '#B5BACB'], '#C9CCD6', '#B8BCC8');
+    g.fillStyle = 'rgba(40,50,80,.10)'; g.fillRect(0, TOP, 600, 1440 - TOP);
+    clock(110, 690, 11, 40, '#8A90A6');
+    K.fillRR(g, 170, 660, 92, 70, 8, '#FFFFFF'); K.fillRR(g, 170, 660, 92, 20, 8, '#D9473F'); K.text(g, 'DAY 12', 216, 712, 20, 800, '#3A3F55', 'center');
+    H.person(g, H.who({ x: 300, y: 1240, s: .66, ph: .6, c: { skin: '#E6B48E', hair: '#1E1A1A', top: '#8A93AE', top2: '#737C99', low: '#3A4766' }, outfit: 'blazer', hairStyle: 'bun', glasses: true, sit: true, chairCol: '#4A5068', mood: 'wow', look: 0, hands: [[-92, -386], [92, -386]] }));
+    desk(300);
+    // paper piles
+    [[170, 6], [220, 9], [400, 7]].forEach(function (p) { for (var i = 0; i < p[1]; i++) K.fillRR(g, p[0] - 30 + (i % 2) * 4, 1110 - i * 7, 64, 8, 2, i % 3 ? '#FFFFFF' : '#EEF0F5'); });
+    // five clashing spreadsheet windows, tilted
+    [[120, 800, -8, '#D9473F'], [250, 760, 5, '#E9A23B'], [380, 810, -4, '#D9473F'], [190, 890, 7, '#7C86A3'], [420, 900, -9, '#E9A23B']].forEach(function (w, i) {
+      g.save(); g.translate(w[0], w[1]); g.rotate(w[2] * Math.PI / 180);
+      K.shadowed(g, 12, 5, .2, function () { K.fillRR(g, -62, -42, 124, 84, 8, '#FFFFFF'); });
+      K.fillRR(g, -62, -42, 124, 16, 8, '#2F7D5B'); g.fillStyle = '#E3E6EE';
+      for (var r = 0; r < 4; r++) for (var c = 0; c < 4; c++) g.fillRect(-54 + c * 28, -18 + r * 14, 24, 10);
+      g.fillStyle = w[3]; g.fillRect(-54 + (i % 4) * 28, -18 + ((i + 1) % 4) * 14, 24, 10); g.restore(); });
+    // sweat drops
+    [[384, 975], [396, 1000]].forEach(function (d) { g.fillStyle = '#9FD3F2'; g.beginPath(); g.moveTo(d[0], d[1] - 12); g.quadraticCurveTo(d[0] + 9, d[1] + 2, d[0], d[1] + 6); g.quadraticCurveTo(d[0] - 9, d[1] + 2, d[0], d[1] - 12); g.fill(); });
+  });
+  // ---- WITH ODOO: bright afternoon, one screen, everything matched ----
+  half(false, function () {
+    room(480, 1080, '#F2FAF6', '#E4F3EC', ['#CFEBDD', '#C3E5D4'], '#F1F6F3', '#DCE9E2');
+    var w = { x: 900, y: 600, w: 150, h: 170 }; K.windowFrame(g, w, 1150); K.windowSky(g, w, 3, 0, '#9ED8FA', '#E6F6FF'); K.windowGlass(g, w); K.windowMullions(g, w);
+    clock(830, 690, 4, 55, '#1F9D6B');
+    H.person(g, H.who({ x: 790, y: 1240, s: .66, ph: 1.4, c: { skin: '#E6B48E', hair: '#1E1A1A', top: '#1F9D6B', top2: '#167A53', low: '#3A4766' }, outfit: 'blazer', hairStyle: 'bun', glasses: true, sit: true, chairCol: '#2F3B52', mood: 'happy', look: .4, hands: [[-70, -210], [70, -210]] }));
+    desk(790);
+    // monitor beside her (not in front of the face): Odoo Accounting with a green reconciled list
+    K.fillRR(g, 890, 1000, 150, 104, 10, '#2A3550'); K.fillRR(g, 897, 1007, 136, 82, 6, '#FFFFFF'); K.fillRR(g, 958, 1104, 14, 16, 3, '#2A3550');
+    K.fillRR(g, 897, 1007, 136, 16, 6, '#E3F5EC');
+    for (var r = 0; r < 4; r++) { K.fillRR(g, 905, 1030 + r * 14, 80, 7, 3, '#D5E6DD'); K.fillE(g, 1020, 1033 + r * 14, 5, 5, '#1F9D6B'); }
+    K.fillRR(g, 660, 1104, 70, 16, 4, '#FFFFFF'); K.fillRR(g, 700, 1092, 26, 26, 6, '#FFFFFF'); K.fillRR(g, 704, 1096, 18, 8, 3, '#C98E55');
+    K.plant(g, { x: 560, y: 1250 }, '#F59A8B', '#F7AE9F');
+  });
+  // the seam
+  g.strokeStyle = '#FFFFFF'; g.lineWidth = 10; g.beginPath(); g.moveTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.stroke();
+  H.vignette(g, .07);
+  // a check-mark flow on the right: bank line -> invoice, matched
+  document.getElementById('flow').innerHTML =
+    '<path d="M640 760 C 700 700, 780 700, 840 760" fill="none" stroke="#1F9D6B" stroke-width="4" stroke-dasharray="2 11" stroke-linecap="round"/>' +
+    '<g transform="translate(600 772)"><rect x="-44" y="-20" width="88" height="40" rx="10" fill="#fff"/><rect x="-34" y="-8" width="44" height="6" rx="3" fill="#1F9D6B"/><rect x="-34" y="4" width="60" height="5" rx="2.5" fill="#CFE3D8"/></g>' +
+    '<g transform="translate(880 772)"><rect x="-44" y="-20" width="88" height="40" rx="10" fill="#fff"/><rect x="-34" y="-8" width="44" height="6" rx="3" fill="#3167CA"/><rect x="-34" y="4" width="60" height="5" rx="2.5" fill="#CFE3D8"/></g>' +
+    '<g transform="translate(740 712)"><circle r="20" fill="#1F9D6B"/><path d="M-9 0 L-2 7 L10 -7" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>';
+});
+</script>
+</body></html>

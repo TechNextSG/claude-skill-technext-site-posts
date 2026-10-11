@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>pain-approvals-in-chat</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<link rel="stylesheet" href="../assets/series.css">
+<link rel="stylesheet" href="../assets/pain.css">
+<style>
+/* 23 · Pain point: approvals in chat. Scenario: the operations manager scrolls an endless group chat for a purchase
+   request while the requester waits beside the desk. With Odoo Approvals the request moves Requested -> Manager ->
+   Approved, each step logged with who and when. */
+:root{--acc:#14A38B;--acc-l:#E0F5F1;--acc-d:#0D7C69}
+.l1{left:72px;top:560px}.l2{left:600px;top:560px}
+.vs{left:508px;top:860px}
+.n1{left:72px;top:1180px;width:250px}.n2{left:760px;top:1180px;width:248px}
+.note.good{color:var(--acc-d)}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <svg id="flow" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <div class="tp-chip pain" data-qa="chip"><i><img src="../assets/img/odoo/approvals.svg" alt=""></i>Pain point · <b>Approvals in chat</b></div>
+  <h1 class="tp-h" data-qa="headline">Approvals buried in<br><span class="pain">group chats?</span></h1>
+  <p class="tp-sub" data-qa="sub">Requests lost in WhatsApp. <b>Odoo Approvals routes and logs them.</b></p>
+
+  <span class="lab today l1" data-qa="lab-today"><i></i>Today</span>
+  <span class="lab fix l2" data-qa="lab-fix"><i></i>With Odoo</span>
+  <div class="vs" data-qa="vs">vs</div>
+  <div class="note bad n1" data-qa="note-bad">Day 4, still waiting<small>412 unread · sample</small></div>
+  <div class="note good n2" data-qa="note-good">Approved, with a log<small>who and when · sample</small></div>
+
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/odoo/apps/approvals</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var TOP = 540, FY = 1150, SEAM = function (y) { return 560 - (y - TOP) * 0.08; };
+  function half(left, fn) { g.save(); g.beginPath();
+    if (left) { g.moveTo(0, TOP); g.lineTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.lineTo(0, 1440); }
+    else { g.moveTo(SEAM(TOP), TOP); g.lineTo(1080, TOP); g.lineTo(1080, 1440); g.lineTo(SEAM(1440), 1440); }
+    g.closePath(); g.clip(); fn(); g.restore(); }
+  H.grad(g, 0, 0, 1080, TOP, '#F6F7FB', '#EEF1F7');
+  function room(x0, x1, wallA, wallB, wains, floorA, floorB) {
+    H.grad(g, x0, TOP, x1 - x0, FY - TOP, wallA, wallB);
+    H.grad(g, x0, FY - 190, x1 - x0, 190, wains[0], wains[1]); g.fillStyle = 'rgba(255,255,255,.7)'; g.fillRect(x0, FY - 196, x1 - x0, 6);
+    H.grad(g, x0, FY, x1 - x0, 1440 - FY, floorA, floorB);
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 2; g.beginPath(); for (var d = 1; d < 7; d++) { var yy = FY + Math.pow(d / 6, 1.6) * (1440 - FY); g.moveTo(x0, yy); g.lineTo(x1, yy); } g.stroke();
+  }
+  function desk(cx, w) { w = w || 170; K.shadowed(g, 18, 8, .18, function () { K.fillRR(g, cx - w, 1120, w * 2, 22, 10, '#C99A6B'); }); K.fillRR(g, cx - w + 14, 1142, 14, 120, 4, '#B5865A'); K.fillRR(g, cx + w - 28, 1142, 14, 120, 4, '#B5865A'); }
+  var MGR = { skin: '#D9A27A', hair: '#1B1717', low: '#2E3A55' };
+  // ---- TODAY: the requester waits, the manager drowns in a group chat ----
+  half(true, function () {
+    room(0, 600, '#DADDE8', '#CDD1DE', ['#BFC4D3', '#B5BACB'], '#C9CCD6', '#B8BCC8');
+    g.fillStyle = 'rgba(40,50,80,.10)'; g.fillRect(0, TOP, 600, 1440 - TOP);
+    // requester standing at the left, clipboard in hand, waiting
+    H.person(g, H.who({ x: 96, y: 1262, s: .58, ph: 2.1, c: { skin: '#E8B990', hair: '#221A18', top: '#9AA3BC', top2: '#848DA8', low: '#3E4A66' }, outfit: 'tee', hairStyle: 'pony', mood: 'calm', look: .8, hold: 'clipboard' }));
+    // manager seated, head in hands
+    H.person(g, H.who({ x: 340, y: 1240, s: .66, ph: .6, c: { skin: MGR.skin, hair: MGR.hair, top: '#8A93AE', top2: '#737C99', low: MGR.low }, outfit: 'blazer', hairStyle: 'short', sit: true, chairCol: '#4A5068', mood: 'wow', look: 0, hands: [[-92, -386], [92, -386]] }));
+    desk(340, 160);
+    // phone face-down on the desk, buzzing
+    K.fillRR(g, 210, 1106, 70, 14, 4, '#2A3045');
+    g.strokeStyle = 'rgba(58,63,85,.5)'; g.lineWidth = 3; g.lineCap = 'round';
+    [[196, 1100, 190, 1090], [294, 1100, 300, 1090]].forEach(function (l) { g.beginPath(); g.moveTo(l[0], l[1]); g.lineTo(l[2], l[3]); g.stroke(); });
+    // sweat drops
+    [[426, 975], [438, 1000]].forEach(function (d) { g.fillStyle = '#9FD3F2'; g.beginPath(); g.moveTo(d[0], d[1] - 12); g.quadraticCurveTo(d[0] + 9, d[1] + 2, d[0], d[1] + 6); g.quadraticCurveTo(d[0] - 9, d[1] + 2, d[0], d[1] - 12); g.fill(); });
+  });
+  // ---- WITH ODOO: one request card, one route, one log ----
+  half(false, function () {
+    room(480, 1080, '#F0FAF8', '#E1F3EF', ['#CCEBE4', '#BFE4DB'], '#F0F6F4', '#DAE9E5');
+    H.person(g, H.who({ x: 790, y: 1240, s: .66, ph: 1.4, c: { skin: MGR.skin, hair: MGR.hair, top: '#14A38B', top2: '#0F806D', low: MGR.low }, outfit: 'blazer', hairStyle: 'short', sit: true, chairCol: '#2F3B52', mood: 'happy', look: .4, hands: [[-70, -210], [70, -210]] }));
+    desk(790);
+    // monitor beside him: the approval request, green "Approved" badge
+    K.fillRR(g, 890, 1000, 150, 104, 10, '#2A3550'); K.fillRR(g, 897, 1007, 136, 82, 6, '#FFFFFF'); K.fillRR(g, 958, 1104, 14, 16, 3, '#2A3550');
+    K.fillRR(g, 905, 1016, 70, 8, 4, '#2A3550'); K.fillRR(g, 905, 1032, 100, 6, 3, '#D5E6E1'); K.fillRR(g, 905, 1044, 84, 6, 3, '#D5E6E1');
+    K.fillRR(g, 905, 1060, 64, 20, 10, '#14A38B'); K.text(g, 'Approved', 937, 1075, 11, 800, '#FFFFFF', 'center');
+    K.fillRR(g, 660, 1104, 70, 16, 4, '#FFFFFF'); K.fillRR(g, 700, 1092, 26, 26, 6, '#FFFFFF'); K.fillRR(g, 704, 1096, 18, 8, 3, '#C98E55');
+    K.plant(g, { x: 560, y: 1250 }, '#F59A8B', '#F7AE9F');
+  });
+  g.strokeStyle = '#FFFFFF'; g.lineWidth = 10; g.beginPath(); g.moveTo(SEAM(TOP), TOP); g.lineTo(SEAM(1440), 1440); g.stroke();
+  H.vignette(g, .07);
+
+  // ---- overlay: chat bubbles spilling out (left), the approval route (right) ----
+  var F = 'font-family="Inter, sans-serif"', FD = 'font-family="Plus Jakarta Sans, sans-serif"';
+  function bub(x, y, w, txt, rot, mine, op) {
+    var fill = mine ? '#DCF5D3' : '#FFFFFF';
+    return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')" opacity="' + (op || 1) + '">' +
+      '<rect x="0" y="0" width="' + w + '" height="38" rx="14" fill="' + fill + '" filter="url(#sh)"/>' +
+      '<text x="14" y="25" ' + F + ' font-size="17" font-weight="600" fill="#3A3F55">' + txt + '</text></g>';
+  }
+  var s = '<defs><filter id="sh" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#1F1F3D" flood-opacity=".16"/></filter></defs>';
+  // a phone on the wall-side, chat overflowing its top
+  s += '<g transform="translate(150 700) rotate(-6)"><rect x="0" y="0" width="150" height="250" rx="22" fill="#2A3045" filter="url(#sh)"/>' +
+       '<rect x="8" y="10" width="134" height="230" rx="16" fill="#ECE5DD"/><rect x="8" y="10" width="134" height="30" rx="16" fill="#5D7A70"/>' +
+       '<text x="22" y="31" ' + FD + ' font-size="12" font-weight="800" fill="#fff">Ops team (37)</text>' +
+       '<rect x="16" y="52" width="92" height="20" rx="8" fill="#fff"/><rect x="40" y="80" width="94" height="20" rx="8" fill="#DCF5D3"/>' +
+       '<rect x="16" y="108" width="80" height="20" rx="8" fill="#fff"/><rect x="16" y="136" width="104" height="20" rx="8" fill="#fff"/>' +
+       '<rect x="46" y="164" width="88" height="20" rx="8" fill="#DCF5D3"/><rect x="16" y="192" width="70" height="20" rx="8" fill="#fff"/>' +
+       '<circle cx="130" cy="16" r="15" fill="#D9473F"/><text x="130" y="21" text-anchor="middle" ' + FD + ' font-size="12" font-weight="800" fill="#fff">412</text></g>';
+  // bubbles flying up and out of it
+  s += bub(250, 640, 150, 'approve pls?', -4, false);
+  s += bub(330, 702, 168, 'who approved?', 5, false);
+  s += bub(72, 650, 116, 'pls check', 6, true, .95);
+  s += bub(320, 770, 180, 'resend the quote', -3, false);
+  s += bub(340, 840, 150, 'which one?', 4, true);
+  s += bub(22, 922, 132, 'any update?', -5, false, .92);
+  // dotted path showing the request getting lost in the pile
+
+  // right: Requested -> Manager -> Approved route with a travelling request card
+  var ys = 700, xs = [640, 800, 960], labs = ['Requested', 'Manager', 'Approved'];
+  s += '<path d="M640 ' + ys + ' L960 ' + ys + '" stroke="#BFE4DB" stroke-width="6" stroke-linecap="round"/>';
+  s += '<path d="M640 ' + ys + ' L960 ' + ys + '" stroke="#14A38B" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 10"/>';
+  xs.forEach(function (x, i) {
+    var last = i === 2;
+    s += '<circle cx="' + x + '" cy="' + ys + '" r="' + (last ? 24 : 18) + '" fill="' + (last ? '#14A38B' : '#fff') + '" stroke="#14A38B" stroke-width="4"/>';
+    if (last) s += '<path d="M' + (x - 10) + ' ' + ys + ' l7 7 l13 -14" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    else s += '<circle cx="' + x + '" cy="' + ys + '" r="7" fill="#14A38B"/>';
+    s += '<text x="' + x + '" y="' + (ys + 48) + '" text-anchor="middle" ' + FD + ' font-size="15" font-weight="800" fill="#0D7C69">' + labs[i] + '</text>';
+  });
+  // the request card riding the route (between Manager and Approved), with motion ticks
+  s += '<g transform="translate(822 616)"><rect x="0" y="0" width="140" height="54" rx="12" fill="#fff" filter="url(#sh)"/>' +
+       '<rect x="0" y="0" width="6" height="54" rx="3" fill="#14A38B"/>' +
+       '<text x="16" y="23" ' + FD + ' font-size="14" font-weight="800" fill="#1B1F3B">PR/0042</text>' +
+       '<text x="16" y="42" ' + F + ' font-size="12" font-weight="600" fill="#6A6E85">2 laptops · sample</text></g>';
+  s += '<path d="M792 632 h18 M786 646 h24 M796 660 h14" stroke="#14A38B" stroke-width="3" stroke-linecap="round" opacity=".55"/>';
+  // the log
+  s += '<g transform="translate(620 790)"><rect x="0" y="0" width="300" height="118" rx="14" fill="#fff" filter="url(#sh)"/>' +
+       '<text x="16" y="26" ' + FD + ' font-size="13" font-weight="800" fill="#0D7C69" letter-spacing="1.5">ACTIVITY LOG</text>';
+  [['Requested by Mei', '09:12'], ['Reviewed by Daniel', '10:05'], ['Approved by Daniel', '10:06']].forEach(function (r, i) {
+    var y = 52 + i * 24;
+    s += '<circle cx="22" cy="' + (y - 5) + '" r="5" fill="#14A38B"/><text x="36" y="' + y + '" ' + F + ' font-size="14" font-weight="600" fill="#3A3F55">' + r[0] + '</text>' +
+         '<text x="284" y="' + y + '" text-anchor="end" ' + F + ' font-size="13" font-weight="600" fill="#8A8EA3">' + r[1] + '</text>';
+  });
+  s += '</g>';
+  document.getElementById('flow').innerHTML = s;
+});
+</script>
+</body></html>

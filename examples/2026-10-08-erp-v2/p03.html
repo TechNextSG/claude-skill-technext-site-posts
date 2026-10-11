@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-enterprise-solution</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/brand.css">
+<style>
+/* 03 · Enterprise solution — "Four companies. One set of numbers."  An isometric group tower rises out of the
+   bottom edge (low, heroic), one coloured floor per company with its currency painted on the facade; coins climb
+   the lift shaft to a consolidated board on the roof. */
+.f{background:linear-gradient(180deg,#DCEEFC 0,#EEF6FD 46%,#F7FAFE 100%)}
+.iso-grid{position:absolute;inset:0;opacity:.5;background:
+  repeating-linear-gradient(30deg,rgba(30,58,110,.07) 0 2px,transparent 2px 60px),repeating-linear-gradient(150deg,rgba(30,58,110,.07) 0 2px,transparent 2px 60px);
+  -webkit-mask:linear-gradient(180deg,transparent 30%,#000 70%);mask:linear-gradient(180deg,transparent 30%,#000 70%)}
+#city{position:absolute;inset:0;z-index:1}
+.kick{position:absolute;z-index:6;left:76px;top:192px;font-size:44px;color:#2F6FD6;transform:rotate(-3deg)}
+.h{position:absolute;z-index:6;left:70px;top:274px;font-size:104px;color:#1E3A6E}
+.h span{color:var(--ink)}
+.h u{text-decoration:none;background:linear-gradient(transparent 62%,#F7D774 62%,#F7D774 92%,transparent 92%)}
+.face{position:absolute;z-index:3;transform-origin:0 100%;font:800 26px/1 var(--font-display);color:#fff;letter-spacing:.02em;white-space:nowrap}
+.face small{font:700 19px/1 var(--font-display);letter-spacing:.12em;opacity:.9;margin-left:10px}
+.board{position:absolute;z-index:5;right:72px;top:528px;width:340px;transform:rotate(3deg);background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:0 8px 0 var(--ink);overflow:hidden}
+.board .t{background:#1E3A6E;color:#fff;padding:12px 18px;font:800 20px/1.1 var(--font-display);letter-spacing:.06em;display:flex;justify-content:space-between;border-bottom:3px solid var(--ink)}
+.board .t small{font:700 15px/1.1 var(--font-body);letter-spacing:0;opacity:.85;align-self:center}
+.board .b{padding:14px 18px 16px}
+.row{display:grid;grid-template-columns:92px 1fr;align-items:center;gap:10px;margin:7px 0;font:700 17px/1 var(--font-body);color:var(--label)}
+.bar{height:16px;border-radius:9px;border:2px solid var(--ink);background:linear-gradient(90deg,var(--c1) 0 var(--a),var(--c2) var(--a) var(--b),var(--c3) var(--b) var(--d),var(--c4) var(--d) 100%)}
+.board .tot{display:flex;justify-content:space-between;align-items:baseline;border-top:2px dashed #C9D3DE;margin-top:10px;padding-top:10px;font:800 26px/1 var(--font-display);color:var(--ink)}
+.board .tot small{font:600 15px/1 var(--font-body);color:var(--label)}
+.hn{position:absolute;z-index:6;font-size:36px;color:var(--ink);transform:rotate(var(--r))}
+.legend{position:absolute;z-index:6;left:52px;top:1236px;display:flex;flex-direction:column;gap:10px}
+.legend span{display:inline-flex;align-items:center;gap:10px;background:#fff;border:2.5px solid var(--ink);border-radius:999px;box-shadow:0 4px 0 var(--ink);padding:8px 16px 9px 10px;font:800 19px/1 var(--font-display);width:max-content}
+.legend i{width:20px;height:20px;border-radius:50%;border:2px solid var(--ink);background:var(--c)}
+</style></head>
+<body><div class="f">
+  <div class="iso-grid"></div>
+  <svg id="city" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div id="faces"></div>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <p class="kick hand" data-qa="kicker">odoo for groups · multi-company</p>
+  <h1 class="h disp" data-qa="headline">Four companies.<br><span>One set of <u>numbers.</u></span></h1>
+
+  <div class="board" data-qa="board"><div class="t">GROUP P&amp;L <small>consolidated · sample</small></div><div class="b">
+    <div class="row">Revenue<div class="bar" style="--c1:#E5484D;--c2:#2F6FD6;--c3:#E99A12;--c4:#14A38B;--a:38%;--b:64%;--d:84%"></div></div>
+    <div class="row">Costs<div class="bar" style="--c1:#E5484D;--c2:#2F6FD6;--c3:#E99A12;--c4:#14A38B;--a:30%;--b:58%;--d:80%;width:74%"></div></div>
+    <div class="row">Inter-co<div class="bar" style="--c1:#C9D3DE;--c2:#C9D3DE;--c3:#C9D3DE;--c4:#C9D3DE;--a:0;--b:0;--d:0;width:30%;background:repeating-linear-gradient(45deg,#C9D3DE 0 6px,#fff 6px 12px)"></div></div>
+    <div class="tot">SGD <small>group currency</small></div></div></div>
+
+  <p class="hn hand" style="left:44px;top:1186px;--r:-4deg" data-qa="hn1">inter-company,<br>posted automatically</p>
+
+  <div class="sp-foot"><span class="sp-url" data-qa="url">technext.asia/solutions/enterprise</span></div>
+</div>
+<script>
+var c=Math.cos(Math.PI/6),s=.5,CX=640,CY=650,S=330,FH=150;
+function iso(x,y,z){return [CX+(x-y)*c, CY+(x+y)*s-z];}
+function poly(pts,fill,extra){return '<path d="M'+pts.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1)}).join(' L')+'Z" fill="'+fill+'" stroke="#1F1F3D" stroke-width="3" stroke-linejoin="round" '+(extra||'')+'/>';}
+var h='';
+// background skyline blocks (pale, behind)
+[[-300,60,140,300],[-140,-220,120,200],[430,-120,110,230],[540,120,90,320],[-460,280,150,220]].forEach(function(b){var x=b[0],y=b[1],w=b[2],z=b[3],
+  q=function(X,Y,Z){var p=[CX+(X-Y)*c, CY+330+(X+Y)*s-Z];return p;};
+  h+=poly([q(x,y+w,0),q(x+w,y+w,0),q(x+w,y+w,z),q(x,y+w,z)],'#C7DAEE','stroke-opacity=".35"')+poly([q(x+w,y,0),q(x+w,y+w,0),q(x+w,y+w,z),q(x+w,y,z)],'#B5CCE6','stroke-opacity=".35"')+poly([q(x,y,z),q(x+w,y,z),q(x+w,y+w,z),q(x,y+w,z)],'#DDE9F6','stroke-opacity=".35"');});
+// clouds
+[[150,600,1],[930,330,.8],[860,820,1.1]].forEach(function(k){var x=k[0],y=k[1],m=k[2];h+='<g transform="translate('+x+' '+y+') scale('+m+')" opacity=".95"><ellipse cx="0" cy="0" rx="70" ry="26" fill="#fff"/><circle cx="-22" cy="-18" r="28" fill="#fff"/><circle cx="20" cy="-24" r="34" fill="#fff"/></g>';});
+// tower floors, top (roof) down; floor i occupies z from base+i*FH
+var floors=[['MY','Malaysia','MYR','#14A38B','#0E7F6C'],['VN','Vietnam','VND','#E99A12','#B97408'],['PH','Philippines','PHP','#2F6FD6','#2354A8'],['SG','Holding','SGD','#E5484D','#B8343A']];
+var base=-4*FH, faces='';
+for(var f=floors.length-1;f>=0;f--){} // (draw bottom-up so upper floors overlap correctly)
+for(var i=3;i>=0;i--){var fl=floors[i],z0=-(i+1)*FH+FH*4-FH*4, zb=(3-i)*FH, zt=zb+FH; // SG at bottom (i=3)
+  zb=(3-i)*FH-480; zt=zb+FH;
+  // left face (y=S plane) and right face (x=S plane)
+  h+=poly([iso(0,S,zb),iso(S,S,zb),iso(S,S,zt),iso(0,S,zt)],'#F4F7FB');
+  h+=poly([iso(S,0,zb),iso(S,S,zb),iso(S,S,zt),iso(S,0,zt)],'#E3EAF3');
+  // colour band (top of each floor) on both faces
+  var bb=zt-38;
+  h+=poly([iso(0,S,bb),iso(S,S,bb),iso(S,S,zt),iso(0,S,zt)],fl[3]);
+  h+=poly([iso(S,0,bb),iso(S,S,bb),iso(S,S,zt),iso(S,0,zt)],fl[4]);
+  // windows on the left face
+  for(var w=0;w<4;w++){var x0=22+w*76;h+=poly([iso(x0,S,zb+22),iso(x0+56,S,zb+22),iso(x0+56,S,bb-14),iso(x0,S,bb-14)],'#BFE0FA');
+    h+='<path d="M'+iso(x0+8,S,bb-24).join(' ')+' L'+iso(x0+30,S,bb-24).join(' ')+'" stroke="#fff" stroke-width="5" stroke-linecap="round"/>';}
+  // tiny desks + screens on the right face windows
+  for(var w=0;w<3;w++){var y0=30+w*100;h+=poly([iso(S,y0,zb+22),iso(S,y0+74,zb+22),iso(S,y0+74,bb-14),iso(S,y0,bb-14)],'#CFE6F8');
+    h+=poly([iso(S,y0+18,zb+46),iso(S,y0+52,zb+46),iso(S,y0+52,zb+72),iso(S,y0+18,zb+72)],fl[3]);}
+  // facade lettering in the iso planes: country on the left band, currency on the right band
+  var o=iso(18,S,bb+5);
+  faces+='<div class="face" style="left:'+o[0].toFixed(0)+'px;top:'+(o[1]-31).toFixed(0)+'px;transform:matrix('+c+','+s+',0,1,0,0)">'+fl[0]+' · '+fl[1]+'</div>';
+  var q=iso(S,S-62,bb+5);
+  faces+='<div class="face" style="left:'+q[0].toFixed(0)+'px;top:'+(q[1]-31).toFixed(0)+'px;transform:matrix('+c+','+(-s)+',0,1,0,0)">'+fl[2]+'</div>';
+}
+// roof slab + lift shaft glass running up the front corner
+var zr=(3+1)*FH-480;
+h+=poly([iso(0,0,zr),iso(S,0,zr),iso(S,S,zr),iso(0,S,zr)],'#FFFFFF');
+h+=poly([iso(S-20,S-20,-480),iso(S+18,S-20,-480),iso(S+18,S-20,zr),iso(S-20,S-20,zr)],'rgba(255,255,255,.55)');
+// roof garden + antenna
+h+=poly([iso(40,40,zr),iso(150,40,zr),iso(150,150,zr),iso(40,150,zr)],'#8ED47B');
+var a=iso(240,90,zr);h+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+a[0]+'" y2="'+(a[1]-120)+'" stroke="#1F1F3D" stroke-width="5"/><circle cx="'+a[0]+'" cy="'+(a[1]-126)+'" r="10" fill="#E5484D" stroke="#1F1F3D" stroke-width="3"/>';
+// coins climbing up the left of the tower towards the board (dashed route)
+var r0=iso(0,S,-330), r1=[300,560], r2=[700,560];
+h+='<path d="M'+(r0[0]-40)+' '+r0[1]+' C '+(r0[0]-220)+' '+(r0[1]-260)+', 260 520, 700 600" fill="none" stroke="#1F1F3D" stroke-width="4" stroke-dasharray="4 14" stroke-linecap="round"/>';
+[['SGD','#E5484D',[338,990]],['PHP','#2F6FD6',[262,850]],['VND','#E99A12',[300,720]],['MYR','#14A38B',[470,600]]].forEach(function(k){var p=k[2];
+  h+='<g transform="translate('+p[0]+' '+p[1]+')"><ellipse cx="0" cy="9" rx="44" ry="15" fill="#1F1F3D"/><ellipse cx="0" cy="0" rx="44" ry="15" fill="'+k[1]+'" stroke="#1F1F3D" stroke-width="3"/>'+
+       '<rect x="-44" y="0" width="88" height="9" fill="'+k[1]+'"/><text x="0" y="-22" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="24" fill="#1F1F3D">'+k[0]+'</text></g>';});
+document.getElementById('city').innerHTML=h;
+document.getElementById('faces').innerHTML=faces;
+</script>
+</body></html>

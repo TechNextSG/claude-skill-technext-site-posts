@@ -1,0 +1,26 @@
+/* Hero-style industry posts: the soft flat look of the technext.asia hero scenes (pastel rooms, soft shadows, the
+   pill-flat cast) - NOT the outlined comic look. Text cards are clean: white, rounded, soft shadow, brand type. */
+@import url("brand.css");
+#scene{position:absolute;inset:0;width:1080px;height:1440px;z-index:0}
+.card{position:absolute;z-index:6;background:rgba(255,255,255,.94);border-radius:28px;padding:34px 38px 32px;
+  box-shadow:0 2px 6px rgba(31,31,61,.06),0 30px 60px -30px rgba(31,31,61,.38)}
+.card .k{font:700 38px/1 var(--font-hand);color:var(--acc,#3167CA);transform:rotate(-1.5deg);transform-origin:0 50%;display:block;margin-bottom:12px}
+.card h1{font:800 66px/1.0 var(--font-display);letter-spacing:-.03em;color:var(--ink)}
+.card h1 em{font-style:normal;color:var(--acc,#3167CA)}
+.card p{font:500 22px/1.45 var(--font-body);color:#45465F;margin-top:16px}
+.apps{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.apps span{display:inline-flex;align-items:center;gap:8px;background:#F4F6FA;border-radius:12px;padding:8px 13px 8px 9px;font:700 17px/1 var(--font-display);color:#2B2C47}
+.apps img{width:24px;height:24px}
+/* floating Odoo record card (soft, like the hero captions' sample record) */
+.rec{position:absolute;z-index:5;background:#fff;border-radius:18px;padding:16px 18px 15px;min-width:250px;
+  box-shadow:0 2px 6px rgba(31,31,61,.07),0 22px 44px -22px rgba(31,31,61,.42)}
+.rec .hd{display:flex;align-items:center;gap:10px;font:800 15px/1 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--label)}
+.rec .hd img{width:26px;height:26px}
+.rec b{display:block;font:800 23px/1.15 var(--font-display);color:var(--ink);margin-top:10px}
+.rec span{display:block;font:500 17px/1.35 var(--font-body);color:var(--label);margin-top:4px}
+.rec .tag{display:inline-block;margin-top:10px;font:700 15px/1 var(--font-display);padding:6px 10px;border-radius:8px;background:var(--tb,#E6F7F1);color:var(--tc,#137A4A)}
+.rec small{position:absolute;right:14px;top:14px;font:600 15px/1 var(--font-body);color:#9AA0B4}
+.rec::after{content:"";position:absolute;width:16px;height:16px;background:#fff;transform:rotate(45deg);left:var(--px,40px);top:var(--py,auto);bottom:var(--pb,-7px);border-radius:3px}
+.rec.no-tail::after{display:none}
+/* quiet URL chip for this series (no ink lip) */
+.sp-url.soft{border:0;box-shadow:0 2px 6px rgba(31,31,61,.08),0 18px 36px -18px rgba(31,31,61,.4);padding:15px 28px 16px}

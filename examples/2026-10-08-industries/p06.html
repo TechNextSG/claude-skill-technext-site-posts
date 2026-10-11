@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-for-retail</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/scene.css">
+<style>
+/* 06 · Retail — a warm homeware shop floor: tall stocked shelving climbs the left wall (a staffer restocks from a carton,
+   a low-stock tag on the shelf), the POS counter sits centre with the cashier, a shopper with paper bags steps up on
+   the right. POS order -> stock level / reorder. Text card top-right over the plain wall, URL centred. */
+.card{right:72px;top:184px;width:590px;--acc:#D2583A}
+.r1{left:340px;top:598px;width:270px;--px:200px}
+.r2{left:72px;top:196px;width:290px;--px:180px}
+</style></head>
+<body><div class="f">
+  <canvas id="scene" data-qa-skip></canvas>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+  <div class="card" data-qa="card"><span class="k">odoo for retail</span>
+    <h1>Every sale <em>updates stock.</em></h1>
+    <p>Stores, POS and stock in one place, with every sale posted to the books.</p>
+    <div class="apps"><span><img src="../assets/img/odoo/point_of_sale.svg" alt="">Point of Sale</span><span><img src="../assets/img/odoo/stock.svg" alt="">Inventory</span><span><img src="../assets/img/odoo/purchase.svg" alt="">Purchase</span></div>
+  </div>
+  <div class="rec r1" data-qa="rec1"><small>sample</small><div class="hd"><img src="../assets/img/odoo/point_of_sale.svg" alt="">POS order</div><b>Order 0042-018</b><span>3 items · paid by card</span><span class="tag">Paid</span></div>
+  <div class="rec r2" data-qa="rec2" style="--tb:#FDEBE4;--tc:#B2452A"><small>sample</small><div class="hd"><img src="../assets/img/odoo/stock.svg" alt="">Stock level</div><b>Stoneware mug · 6 left</b><span>Below minimum of 12</span><span class="tag">Reorder drafted</span></div>
+  <div class="sp-foot"><span class="sp-url soft" data-qa="url">technext.asia/industries/retail</span></div>
+</div>
+<script src="../assets/js/industry-world.js"></script>
+<script src="../assets/scene-post.js"></script>
+<script>
+SP.draw(function (g, K, H) {
+  var k = 1.5, sx = -60, sy = 375, F = 470;
+  K.room(g, 1080, 1440, k, sx, sy, { wall: ['#FFF7EF', '#FBEADB'], wains: ['#EBAA8E', '#E09878'], rail: '#FFF7EF', floor: ['#F3DEC2', '#E2BF98'],
+    base: '#C97A5D', floorKind: 'planks', floorLine: 'rgba(150,90,50,.16)', panelLine: 'rgba(140,60,30,.10)',
+    pattern: function (g2, W, ry) { g2.fillStyle = 'rgba(150,175,140,.16)'; for (var x = 10; x < W; x += 34) g2.fillRect(x, 0, 3, ry); } });
+  g.save(); g.translate(sx, sy); g.scale(k, k);
+
+  // ---- tall shelving on the left wall ----
+  var S = { x: 50, y: -50, w: 260, h: 520 };
+  K.shadowed(g, 22, 8, .16, function () { K.fillRR(g, S.x, S.y, S.w, S.h, 12, '#E7C39D'); });
+  K.fillRR(g, S.x + 10, S.y + 10, S.w - 20, S.h - 20, 6, '#F6E3CC');
+  var rows = [S.y + 130, S.y + 235, S.y + 340, S.y + 445];
+  rows.forEach(function (y) { K.fillRR(g, S.x + 4, y, S.w - 8, 12, 4, '#D9AE84'); g.fillStyle = 'rgba(120,70,30,.12)'; g.fillRect(S.x + 10, y + 12, S.w - 20, 6); });
+  // row 1: mugs
+  for (var i = 0; i < 6; i++) { var mx = S.x + 26 + i * 38, mc = ['#F2F2EE', '#7FB7A4', '#F2F2EE', '#E8896A', '#7FB7A4', '#F2F2EE'][i];
+    K.fillRR(g, mx, rows[0] - 40, 28, 40, 6, mc); g.strokeStyle = mc; g.lineWidth = 5; g.beginPath(); g.arc(mx + 30, rows[0] - 22, 8, -1.4, 1.4); g.stroke(); }
+  // row 2: folded throws
+  ['#E8896A', '#F4C978', '#9CC3B2', '#C7A3D9'].forEach(function (c, j) { for (var q = 0; q < 3; q++) K.fillRR(g, S.x + 22 + j * 58, rows[1] - 18 - q * 18, 50, 16, 5, q % 2 ? K.tone(c, -0.05) : c); });
+  // row 3: candles and jars
+  for (i = 0; i < 7; i++) { var cx = S.x + 30 + i * 33, h = [44, 56, 38, 50, 44, 60, 40][i];
+    K.fillRR(g, cx, rows[2] - h, 24, h, 6, ['#FBE7D0', '#F6C9B4', '#E2EFE6', '#FBE7D0', '#F6C9B4', '#F4DD9F', '#E2EFE6'][i]); K.fillRR(g, cx + 4, rows[2] - h - 6, 16, 8, 3, '#B78A63'); }
+  // row 4 (bottom): boxed goods
+  ['#E09878', '#FFFFFF', '#9CC3B2', '#F4C978'].forEach(function (c, j) { K.fillRR(g, S.x + 18 + j * 58, rows[3] - 64, 52, 64, 6, c); K.fillRR(g, S.x + 26 + j * 58, rows[3] - 44, 36, 16, 4, 'rgba(255,255,255,.65)'); });
+  // shelf price labels + the low-stock tag on the mug row
+  rows.forEach(function (y) { for (var l = 0; l < 4; l++) K.fillRR(g, S.x + 30 + l * 58, y + 2, 26, 8, 2, '#FFFFFF'); });
+  g.save(); g.translate(S.x + 200, rows[0] + 12); g.rotate(0.12);
+  g.strokeStyle = '#B78A63'; g.lineWidth = 2; g.beginPath(); g.moveTo(0, 0); g.lineTo(0, 12); g.stroke();
+  K.shadowed(g, 6, 3, .18, function () { K.fillRR(g, -26, 12, 52, 30, 6, '#D2583A'); }); K.fillE(g, -16, 20, 3, 3, '#FFF7EF');
+  K.text(g, 'LOW', 2, 33, 12, 800, '#FFFFFF', 'center'); g.restore();
+
+  // ---- cashier behind the POS counter ----
+  H.person(g, H.who({ x: 515, y: 452, s: .58, ph: .5, c: { skin: '#E6B48E', hair: '#231816', top: '#FFFFFF', top2: '#EDEDED', low: '#3A3A4A' },
+    outfit: 'tee', hairStyle: 'bun', apron: '#D2583A', short: true, glasses: true, feet: false, mood: 'happy', look: .8, talk: true, hands: [[-80, -170], [96, -186]] }));
+  K.shadowed(g, 22, 8, .18, function () { K.fillRR(g, 380, 340, 290, 132, 14, '#FFFFFF'); });
+  K.fillRR(g, 372, 330, 306, 20, 10, '#E7C39D'); K.fillRR(g, 396, 366, 258, 84, 10, '#F6E3CC');
+  K.text(g, 'HARBOUR GOODS', 490, 414, 15, 800, '#C06A4C', 'center'); K.text(g, 'sample homeware store', 490, 432, 10, 600, '#B98A6E', 'center');
+  // POS screen on a stand, card terminal, receipt, scanner
+  K.fillRR(g, 416, 300, 8, 32, 3, '#7A869C');
+  K.fillRR(g, 380, 246, 84, 60, 8, '#2A3550'); K.fillRR(g, 385, 251, 74, 50, 5, '#FFFFFF');
+  K.fillRR(g, 390, 256, 30, 18, 3, '#FDEBE4'); K.fillRR(g, 424, 256, 30, 18, 3, '#E2EFE6'); K.fillRR(g, 390, 278, 64, 5, 2, '#C9D3E3'); K.fillRR(g, 390, 288, 40, 8, 3, '#D2583A');
+  K.fillRR(g, 476, 304, 26, 36, 6, '#3A4458'); K.fillRR(g, 480, 309, 18, 10, 2, '#9FD8C0');
+  K.fillRR(g, 624, 310, 34, 22, 5, '#E9EDF3'); K.fillRR(g, 630, 290, 22, 24, 2, '#FFFFFF'); g.fillStyle = '#C9D3E3'; g.fillRect(633, 296, 16, 2); g.fillRect(633, 302, 12, 2);
+  // ---- staffer restocking at the shelving (holds a carton) ----
+  H.person(g, H.who({ x: 200, y: 540, s: .62, ph: 2.6, c: { skin: '#D7A07A', hair: '#1D1918', top: '#7FB7A4', top2: '#5E9A86', low: '#3F4A63', shoe: '#2A2F45' },
+    outfit: 'tee', hairStyle: 'short', apron: '#D2583A', mood: 'calm', look: .5, hands: [[-30, -190], [80, -190]], hold: 'box' }));
+  // ---- shopper with paper bags, right ----
+  H.person(g, H.who({ x: 660, y: 560, s: .68, ph: 1.4, c: { skin: '#EBC3A0', hair: '#2C1E1A', top: '#F4C978', top2: '#E0AE52', low: '#5A6B8C', shoe: '#F7F8FB' },
+    outfit: 'hoodie', hairStyle: 'long', mood: 'happy', look: -.8, talk: false, hands: [[-60, -120], [40, -150]], hold: 'bags' }));
+  g.restore();
+  H.pool(g, 640, 1150, 380, 64, .5);
+  H.vignette(g, .09);
+});
+</script>
+</body></html>

@@ -1,0 +1,27 @@
+/* Comic series (8 Oct 2026): "comical style, Nexi is the main character, exaggeration of the image, include Odoo logos".
+   Logo row + URL pill stay where brand.css puts them. One big comic panel; Nexi (3D render PNG) huge and breaking out
+   of the panel; ink outlines, halftone, speed lines, bursts, onomatopoeia in the brand display font. */
+@import url("brand.css");
+:root{--ink:#1B1F3B;--paper:#FFF7E6}
+html,body{background:var(--paper)}
+.f{background:var(--paper)}
+.panel{position:absolute;z-index:1;left:36px;right:36px;top:176px;bottom:120px;border:6px solid var(--ink);border-radius:22px;overflow:hidden;background:var(--pbg,#FFD84D)}
+.panel .rays{position:absolute;inset:-40%;background:repeating-conic-gradient(from 0deg at var(--rx,60%) var(--ry,55%),rgba(255,255,255,.55) 0 5deg,rgba(255,255,255,0) 5deg 12deg)}
+.panel .dots{position:absolute;inset:0;background:radial-gradient(rgba(27,31,59,.16) 2.4px,transparent 2.8px) 0 0/18px 18px;
+  -webkit-mask:radial-gradient(circle at var(--rx,60%) var(--ry,55%),transparent 0,transparent 30%,#000 75%);mask:radial-gradient(circle at var(--rx,60%) var(--ry,55%),transparent 0,transparent 30%,#000 75%)}
+#art{position:absolute;inset:0;z-index:3;pointer-events:none}
+.nexi-big{position:absolute;z-index:4;pointer-events:none;filter:drop-shadow(0 0 0 #1B1F3B) drop-shadow(10px 14px 0 rgba(27,31,59,.85))}
+/* comic lettering */
+.cap{position:absolute;z-index:6;background:#FFF3B0;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:12px 18px 13px;font:800 22px/1.15 var(--font-display);letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.title{position:absolute;z-index:6;font:800 84px/.92 var(--font-display);letter-spacing:-.02em;text-transform:uppercase;color:#fff;font-style:italic;
+  -webkit-text-stroke:5px var(--ink);paint-order:stroke fill;text-shadow:7px 7px 0 var(--ink)}
+.title em{font-style:italic;color:var(--hl,#FFD84D)}
+.sfx{position:absolute;z-index:7;font:800 96px/1 var(--font-display);font-style:italic;color:var(--sc,#FF5A3C);letter-spacing:-.02em;
+  -webkit-text-stroke:6px var(--ink);paint-order:stroke fill;text-shadow:6px 6px 0 var(--ink);transform:rotate(var(--r,-10deg))}
+.say{position:absolute;z-index:7;background:#fff;border:4px solid var(--ink);border-radius:28px;padding:16px 22px;font:800 26px/1.15 var(--font-display);color:var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.say::after{content:"";position:absolute;width:30px;height:30px;background:#fff;border-right:4px solid var(--ink);border-bottom:4px solid var(--ink);transform:rotate(var(--tr,45deg));left:var(--tx,40px);bottom:-19px}
+.app{position:absolute;z-index:5;width:var(--s,110px);height:var(--s,110px);border-radius:26%;background:#fff;border:5px solid var(--ink);box-shadow:6px 7px 0 var(--ink);display:grid;place-items:center;transform:rotate(var(--r,0deg))}
+.app img{width:64%;height:64%}
+.app b{position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:10px;padding:5px 10px 6px;font:800 16px/1 var(--font-display);white-space:nowrap}
+.foot-line{position:absolute;z-index:6;left:72px;right:72px;bottom:150px;text-align:center}
+.sp-url.comic{border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}

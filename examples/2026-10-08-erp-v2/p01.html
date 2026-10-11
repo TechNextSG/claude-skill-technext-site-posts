@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>odoo-erp-implementation</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="../assets/brand.css">
+<style>
+/* 01 · ERP implementation — "Every app. One score."  A perspective music staff sweeps out of the poster;
+   the notes are Odoo apps, Nexi conducts from the bottom-right, a go-live ticket is pinned on the left. */
+.f{background:radial-gradient(1200px 900px at 88% 92%,#FFF6DC 0,#FBEBD5 38%,#F4DDE8 100%)}
+.rays{position:absolute;inset:0;z-index:0;background:repeating-conic-gradient(from 200deg at 86% 84%,rgba(255,255,255,.55) 0 4deg,rgba(255,255,255,0) 4deg 11deg);
+  -webkit-mask:radial-gradient(1100px 1100px at 86% 84%,#000 0,rgba(0,0,0,.6) 45%,transparent 80%);mask:radial-gradient(1100px 1100px at 86% 84%,#000 0,rgba(0,0,0,.6) 45%,transparent 80%)}
+.dots{position:absolute;inset:0;z-index:0;background:radial-gradient(rgba(113,75,103,.13) 2px,transparent 2.5px) 0 0/30px 30px;
+  -webkit-mask:linear-gradient(180deg,#000 0,transparent 55%);mask:linear-gradient(180deg,#000 0,transparent 55%)}
+#staff{position:absolute;inset:0;z-index:2}
+.kick{position:absolute;left:76px;top:194px;font-size:46px;color:var(--odoo);transform:rotate(-3deg);transform-origin:0 50%}
+.h{position:absolute;left:70px;top:262px;font-size:132px;color:var(--ink)}
+.h .b{color:var(--odoo);position:relative;display:inline-block}
+.h .b::after{content:"";position:absolute;left:4px;right:-6px;bottom:-14px;height:22px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 22' preserveAspectRatio='none'%3E%3Cpath d='M4 14 C 90 2, 200 22, 396 6' fill='none' stroke='%23E2B23A' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.sub{position:absolute;left:76px;top:540px;width:600px;font:500 27px/1.38 var(--font-body);color:#3A3A58}
+.sub b{font-weight:700;color:var(--ink)}
+.note{position:absolute;z-index:4;transform:translate(-50%,-50%) rotate(var(--r,0deg))}
+.note .tile{width:var(--s);height:var(--s);border-radius:calc(var(--s)*.26);background:#fff;border:3px solid var(--ink);box-shadow:0 calc(var(--s)*.09) 0 var(--ink);
+  display:grid;place-items:center}
+.note .tile img{width:66%;height:66%}
+.note .stem{position:absolute;right:-3px;bottom:calc(var(--s)*.55);width:5px;height:calc(var(--s)*1.05);background:var(--ink);border-radius:3px}
+.note .stem::after{content:"";position:absolute;top:0;left:0;width:calc(var(--s)*.42);height:calc(var(--s)*.34);border:5px solid var(--ink);border-left:0;border-bottom:0;border-radius:0 30px 0 0;transform:skewY(18deg);transform-origin:0 0}
+.note .lab{position:absolute;left:50%;top:calc(100% + 16px);transform:translateX(-50%);font:800 var(--ls,22px)/1 var(--font-display);color:var(--ink);white-space:nowrap;background:#fff;border:2.5px solid var(--ink);border-radius:999px;padding:7px 14px 8px}
+.nexi{position:absolute;z-index:5;right:-20px;bottom:120px;width:430px}
+.baton{position:absolute;z-index:6;left:620px;top:1004px;width:200px;height:8px;background:var(--ink);border-radius:6px;transform:rotate(-28deg);transform-origin:100% 50%}
+.baton::before{content:"";position:absolute;left:-10px;top:-6px;width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid var(--ink)}
+.ticket{position:absolute;z-index:7;left:52px;top:1108px;width:430px;transform:rotate(-6deg);display:flex;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:0 7px 0 var(--ink);overflow:hidden}
+.ticket .l{flex:1;padding:20px 22px 20px}
+.ticket .l small{display:block;font:800 16px/1 var(--font-display);letter-spacing:.16em;color:var(--odoo)}
+.ticket .l b{display:block;font:800 46px/1 var(--font-display);letter-spacing:-.02em;margin-top:8px}
+.ticket .l span{display:block;font:600 17px/1.3 var(--font-body);color:var(--label);margin-top:8px}
+.ticket .r{width:104px;border-left:3px dashed var(--ink);background:var(--odoo);color:#fff;display:grid;place-items:center;font:800 18px/1.1 var(--font-display);letter-spacing:.1em;text-align:center;writing-mode:vertical-rl;transform:rotate(180deg)}
+.hn{position:absolute;z-index:6;font-size:38px;color:var(--ink);transform:rotate(var(--r))}
+</style></head>
+<body><div class="f">
+  <div class="rays"></div><div class="dots"></div>
+  <div class="sp-logos"><img class="sp-tn" src="../assets/sp/technext-horizontal-blue.svg" alt="TechNext"><img class="sp-odoo" src="../assets/sp/odoo-logo.png" alt="Odoo"></div>
+
+  <p class="kick hand" data-qa="kicker">odoo erp implementation</p>
+  <h1 class="h disp" data-qa="headline">Every app.<br><span class="b">One score.</span></h1>
+  <p class="sub" data-qa="sub">One database for orders, stock and money, <b>configured around how your company runs.</b></p>
+
+  <svg id="staff" viewBox="0 0 1080 1440" data-qa-skip></svg>
+  <div id="notes"></div>
+
+  <img class="nexi" src="../assets/sp/nexi/nexi-point-left.png" alt="">
+  <p class="hn hand" style="left:790px;top:440px;--r:-5deg" data-qa="hn1">one record,<br>quote to cash</p>
+
+  <div class="ticket" data-qa="ticket"><div class="l"><small>OPENING NIGHT</small><b>Go-live</b><span>rehearsed with every team,<br>supported after</span></div><div class="r">ADMIT ALL</div></div>
+  <div class="sp-foot"><span class="sp-url" data-qa="url">technext.asia/solutions/odoo-erp</span></div>
+</div>
+<script>
+// perspective staff: five quadratic curves converging to the upper right
+var P0=[-80,800],P1=[520,770],P2=[1160,560],G0=74,G1=40,G2=16;
+function pt(i,t){var a=(1-t)*(1-t),b=2*(1-t)*t,c=t*t;
+  return [a*P0[0]+b*P1[0]+c*P2[0], a*(P0[1]+i*G0)+b*(P1[1]+i*G1)+c*(P2[1]+i*G2)];}
+function gap(t){return (1-t)*(1-t)*G0+2*(1-t)*t*G1+t*t*G2}
+var svg=document.getElementById('staff'),h='';
+// soft ribbon under the staff
+var up=[],bot=[];for(var t=0;t<=1.0001;t+=.02){up.push(pt(-1.2,t));bot.unshift(pt(5.2,t));}
+h+='<path d="M'+up.concat(bot).map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1)}).join(' L')+'Z" fill="#fff" fill-opacity=".72" stroke="#1F1F3D" stroke-width="3"/>';
+for(var i=0;i<5;i++){var d='M';for(var t=0;t<=1.0001;t+=.02){var p=pt(i,t);d+=p[0].toFixed(1)+' '+p[1].toFixed(1)+' L';}
+  h+='<path d="'+d.slice(0,-2)+'" fill="none" stroke="#1F1F3D" stroke-width="'+(3.2-i*.15)+'" stroke-linecap="round" opacity=".85"/>';}
+// bar lines
+[.2,.42,.62,.8].forEach(function(t){var a=pt(0,t),b=pt(4,t);h+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#1F1F3D" stroke-width="3"/>';});
+// small note heads in between (the rest of the melody)
+[[.29,1.5],[.355,3],[.52,.5],[.57,2],[.705,3.5],[.755,1],[.86,2.5],[.9,.5],[.94,3]].forEach(function(n){var p=pt(n[1],n[0]),g=gap(n[0]);
+  h+='<ellipse cx="'+p[0]+'" cy="'+p[1]+'" rx="'+(g*.62)+'" ry="'+(g*.45)+'" transform="rotate(-24 '+p[0]+' '+p[1]+')" fill="#1F1F3D"/>'+
+     '<line x1="'+(p[0]+g*.55)+'" y1="'+p[1]+'" x2="'+(p[0]+g*.55)+'" y2="'+(p[1]-g*2.6)+'" stroke="#1F1F3D" stroke-width="'+Math.max(2,g*.12)+'"/>';});
+svg.innerHTML=h;
+// the app notes (official Odoo icons), big near, small far
+var apps=[['Accounting','accountant',.165,2.2,-8],['Sales','sale',.34,.6,6],['Inventory','stock',.5,2.8,-5],['Purchase','purchase',.66,1.2,7],['CRM','crm',.82,3,-6]];
+var out='';apps.forEach(function(a){var p=pt(a[3],a[2]),g=gap(a[2]),s=Math.round(g*1.9+18);
+  out+='<div class="note" data-qa="note-'+a[1]+'" style="left:'+p[0].toFixed(0)+'px;top:'+p[1].toFixed(0)+'px;--s:'+s+'px;--r:'+a[4]+'deg;--ls:'+Math.max(17,Math.round(s*.2))+'px">'+
+       '<div class="tile"><img src="../assets/img/odoo/'+a[1]+'.svg" alt=""></div>'+(a[2]<.55?'<span class="lab">'+a[0]+'</span>':'')+'</div>';});
+document.getElementById('notes').innerHTML=out;
+</script>
+</body></html>
